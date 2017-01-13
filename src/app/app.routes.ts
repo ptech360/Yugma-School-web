@@ -6,11 +6,14 @@ import { RepoBrowserComponent } from './github/repo-browser/repo-browser.compone
 import { RepoListComponent } from './github/repo-list/repo-list.component';
 import { RepoDetailComponent } from './github/repo-detail/repo-detail.component';
 import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
+import { LoggedInGuard } from './login/logged-in.guard';
 
 export const rootRouterConfig: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
+  { path: '', redirectTo: 'about', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [LoggedInGuard] },
+  { path: 'login', component: LoginComponent },
   { path: 'github', component: RepoBrowserComponent,
     children: [
       { path: '', component: RepoListComponent },
@@ -23,4 +26,3 @@ export const rootRouterConfig: Routes = [
   },
   { path: 'contact', component: ContactComponent }
 ];
-

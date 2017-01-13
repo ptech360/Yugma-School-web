@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 // import service
 import { ChartService } from '../services/chart.service';
+import { UserService } from '../services/user.service';
 
 declare let google;
 
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   public pie_ChartData;
   public pie_ChartOptions;
 
-  constructor(public c: ChartService) {
+  constructor(public c: ChartService, public userService: UserService) {
 
   }
 
