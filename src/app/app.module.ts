@@ -15,8 +15,15 @@ import { RepoDetailComponent } from './github/repo-detail/repo-detail.component'
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { ContactComponent } from './contact/contact.component';
 
+// custom component
+import { GoogleChart } from './customComponent/chart.directive';
+
+// import service
+import { ChartService } from './services/chart.service';
+
 @NgModule({
   declarations: [
+    GoogleChart,
     AppComponent,
     AboutComponent,
     RepoBrowserComponent,
@@ -33,7 +40,8 @@ import { ContactComponent } from './contact/contact.component';
     RouterModule.forRoot(rootRouterConfig, { useHash: true })
   ],
   providers: [
-    GithubService
+    GithubService,
+    ChartService
   ],
   bootstrap: [ AppComponent ]
 })
