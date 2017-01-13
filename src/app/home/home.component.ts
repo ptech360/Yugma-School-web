@@ -21,10 +21,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => { this.chartByStatus() }, 2000);
+    setTimeout(() => { this.complaintByStatus() }, 2000);
   }
 
-  chartByStatus() {
+  complaintByStatus() {
     var data = new google.visualization.DataTable();
     this.c.getComplaintReport().subscribe((res) => {
       data.addColumn('string','status');

@@ -40,6 +40,12 @@ export class GoogleChart {
         containerId: ele.id
       });
       wrapper.draw();
+      google.visualization.events.addListener(wrapper, 'select', selectHandler);
+
+      function selectHandler() {
+        let selectedRow = wrapper.getChart().getSelection()[0].row;
+        console.log("DSAD", wrapper.getDataTable().getValue(selectedRow, 2));
+      }
     }
   }
 
