@@ -1,0 +1,16 @@
+.visible {
+  display: inherit !important;
+}
+
+.tb-grey {
+  background-color: #424242 !important;
+}
+
+.background {
+  background-color: #424242;
+}
+
+.side-nav .userView .circle {
+    height: 150px;
+    width: 150px;
+}

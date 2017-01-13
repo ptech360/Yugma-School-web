@@ -1,28 +1,40 @@
 <nav class="tb-grey" role="navigation">
-  <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+  <div class="nav-wrapper container">
+    <a href="#" id="logo-container" data-activates="slide-out" class="button-collapse visible">
+      <i class="material-icons">menu</i>
+    </a>
     <ul id="slide-out" class="side-nav">
-      <li><div class="userView">
-        <div class="background">
-          <img src="images/office.jpg">
+      <li>
+        <div class="userView">
+          <div class="background"></div>
+          <a href="#!user">
+            <img class="circle" src="https://pbs.twimg.com/profile_images/481231649128980480/9hpv14pc.jpeg">
+          </a>
+          <a href="#!name"><span class="white-text name">Tushar Balar</span></a>
+          <a href="#!email"><span class="white-text email">tushar@nxtlife.com</span></a>
         </div>
-        <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
-        <a href="#!name"><span class="white-text name">John Doe</span></a>
-        <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
-        </div>
-    </li>
-    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li><a href="#!">Second Link</a></li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-  </ul>
+      </li>
+      <li><a [routerLink]="['/']" class="waves-effect"><i class="material-icons">home</i>Home</a></li>
+      <li><div class="divider"></div></li>
+      <li><a class="subheader">Complaints</a></li>
+      <li><a class="waves-effect" [routerLink]="['/about']">All Complaints</a></li>
+      <li><a class="waves-effect" [routerLink]="['/github']">Assigned Complaints</a></li>
+    </ul>
+    <ul id='dropdown1' class='dropdown-content'>
+      <li><a href="#!">one</a></li>
+      <li><a href="#!">two</a></li>
+      <li class="divider"></li>
+      <li><a href="#!">Logout</a></li>
+    </ul>
+    <a class='dropdown-button btn' href='#' data-activates='dropdown1'>
+      Tushar Balar <i class="material-icons right" style="margin-top: -14px;">arrow_drop_down</i>
+    </a>
   </div>
 </nav>
-<a href="#" id="logo-container" data-activates="slide-out" class="btn button-collapse">Side nav demo</a>
 <main style="min-height:650px">
 	<router-outlet></router-outlet>
 </main>
-<footer class="page-footer" style="padding-top:0px">
+<footer class="page-footer tb-grey" style="padding-top:0px">
   <div class="footer-copyright">
     <div class="container">
     Made by <a class="orange-text text-lighten-3" target="_blank" href="http://nxtlifetechnologies.com">NxtLife Team</a>
