@@ -25,6 +25,7 @@ export class UserService {
     //     return res.success;
     //   });
     localStorage.setItem("auth_token", "loggedIn");
+    this.loggedIn = true;
   }
 
   logout() {

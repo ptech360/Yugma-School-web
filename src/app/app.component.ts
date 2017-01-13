@@ -1,5 +1,6 @@
 import {Component, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
 import { UserService } from './services/user.service';
+import { Router } from '@angular/router';
 
 declare var $;
 
@@ -10,7 +11,7 @@ declare var $;
 })
 export class AppComponent implements AfterViewInit {
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService, private router: Router) {
   }
 
   ngAfterViewInit() {
@@ -24,8 +25,8 @@ export class AppComponent implements AfterViewInit {
   }
 
   logout() {
-    console.log("DASDAS")
     this.userService.logout();
+    this.router.navigateByUrl("/login");
   }
 
   isLoggedIn() {

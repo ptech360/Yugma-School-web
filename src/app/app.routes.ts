@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { LoggedInGuard } from './login/logged-in.guard';
 
 export const rootRouterConfig: Routes = [
-  { path: '', redirectTo: 'about', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard] },
   { path: 'about', component: AboutComponent, canActivate: [LoggedInGuard] },
   { path: 'login', component: LoginComponent },
