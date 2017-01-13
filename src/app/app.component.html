@@ -1,6 +1,6 @@
 <nav class="tb-grey" role="navigation">
   <div class="nav-wrapper container">
-    <a href="#" id="logo-container" data-activates="slide-out" class="button-collapse visible">
+    <a href="#" id="logo-container" *ngIf="isLoggedIn()" data-activates="slide-out" class="button-collapse visible">
       <i class="material-icons">menu</i>
     </a>
     <ul id="slide-out" class="side-nav">
