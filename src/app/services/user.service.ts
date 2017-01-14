@@ -12,18 +12,6 @@ export class UserService {
   }
 
   login(email, password) {
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    //
-    // return this.http.post('/login', JSON.stringify({ email, password }), { headers })
-    //   .map(res => res.json())
-    //   .map((res) => {
-    //     if (res.success) {
-    //       localStorage.setItem('auth_token', res.auth_token);
-    //       this.loggedIn = true;
-    //     }
-    //     return res.success;
-    //   });
     localStorage.setItem("auth_token", "loggedIn");
     this.loggedIn = true;
   }
