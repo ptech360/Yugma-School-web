@@ -18,6 +18,7 @@ import { ContactComponent } from './contact/contact.component';
 // custom component
 import { GoogleChart } from './customComponent/chart.directive';
 import { LoginComponent } from './login/login.component';
+import { ForgetPasswordComponent } from './login/forget.password.component';
 
 // import service
 import { ChartService } from './services/chart.service';
@@ -34,7 +35,8 @@ import { LoggedInGuard } from './login/logged-in.guard';
     RepoDetailComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
