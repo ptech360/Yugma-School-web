@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { AboutComponent } from './about/about.component';
+import { ComplaintComponent } from './complaints/complaint.component';
 import { HomeComponent } from './home/home.component';
 import { RepoBrowserComponent } from './github/repo-browser/repo-browser.component';
 import { RepoListComponent } from './github/repo-list/repo-list.component';
@@ -14,7 +14,7 @@ import { LoggedInGuard } from './login/logged-in.guard';
 export const rootRouterConfig: Routes = [
   { path: '', redirectTo: 'parent/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard] },
-  { path: 'about', component: AboutComponent, canActivate: [LoggedInGuard] },
+  { path: 'complaints', component: ComplaintComponent, canActivate: [LoggedInGuard] },
   { path: 'parent', component: ParentComponent,
     children: [
       { path: 'login', component: LoginComponent },

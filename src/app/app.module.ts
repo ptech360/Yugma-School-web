@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
-import { AboutComponent } from './about/about.component';
+import { ComplaintComponent } from './complaints/complaint.component';
 import { HomeComponent } from './home/home.component';
 import { RepoBrowserComponent } from './github/repo-browser/repo-browser.component';
 import { RepoListComponent } from './github/repo-list/repo-list.component';
@@ -31,7 +31,7 @@ import { Configuration } from './services/app.constant';
   declarations: [
     GoogleChart,
     AppComponent,
-    AboutComponent,
+    ComplaintComponent,
     RepoBrowserComponent,
     RepoListComponent,
     RepoDetailComponent,

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
@@ -47,17 +47,20 @@ declare var $;
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  public _element:any;
 
   constructor(private userService: UserService,
               private router: Router,
-              public element: ElementRef,
               private formBuilder: FormBuilder) {
     if (this.userService.isLoggedIn()) {
       this.router.navigateByUrl("/home");
     }
-    this._element = this.element.nativeElement;
-    console.log(this._element)
+  }
+
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required]]
+    });
   }
 
   onSubmit(email, password) {
@@ -75,16 +78,8 @@ export class LoginComponent implements OnInit {
         if (err.status === 400) {
           Materialize.toast('Invalid username or password', 4000);
         }
-        console.log("err", err);
       });
     }
-  }
-
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', [Validators.required]]
-    });
   }
 
 }
