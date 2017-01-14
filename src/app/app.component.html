@@ -3,7 +3,7 @@
     <a href="#" id="logo-container" *ngIf="isLoggedIn()" data-activates="slide-out" class="button-collapse">
       <i class="material-icons">menu</i>
     </a>
-    <ul id="slide-out" class="side-nav fixed">
+    <ul id="slide-out" class="side-nav fixed" *ngIf="isLoggedIn()">
       <li>
         <div class="userView">
             <img class="circle align-center" src="https://pbs.twimg.com/profile_images/481231649128980480/9hpv14pc.jpeg" />
@@ -11,7 +11,7 @@
             <span class="white-text email center-align">tushar@nxtlife.com</span>
         </div>
       </li>
-      <li><a [routerLink]="['/']" class="waves-effect"><i class="material-icons">home</i>Home</a></li>
+      <li><a [routerLink]="['/']" class="waves-effect waves-teal"><i class="material-icons">home</i>Home</a></li>
       <li><div class="divider"></div></li>
       <li><a class="subheader">Complaints</a></li>
       <li><a class="waves-effect" [routerLink]="['/about']">All Complaints</a></li>
