@@ -11,10 +11,20 @@ declare var $;
 })
 export class AppComponent implements AfterViewInit {
 
-  constructor(public userService: UserService, private router: Router) {
+  private user;
+
+  constructor(public userService: UserService,
+              private router: Router) {
+
+
+    this.user = {
+      username: localStorage.getItem("name"),
+      email: localStorage.getItem("email")
+    }
   }
 
   ngAfterViewInit() {
+
     $('.dropdown-button').dropdown();
     if ($( window ).width() < 376) {
       $('.button-collapse').sideNav({

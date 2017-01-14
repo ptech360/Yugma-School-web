@@ -40,7 +40,6 @@ export class UserService {
     return this.http.get(this.url + "/management/info", options)
     .toPromise()
     .then((res) => {
-      this.loggedIn = true;
       return Promise.resolve(res);
     }).catch(err => { return Promise.reject(err); });
   }

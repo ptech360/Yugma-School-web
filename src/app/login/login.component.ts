@@ -62,7 +62,8 @@ export class LoginComponent implements OnInit {
         this.userService.getManagementInfo().then((data) => {
           this.userService.storeManagementData(data.json());
           // setTimeout(function() {
-            this.router.navigateByUrl("/home");
+          location.reload();
+            // this.router.navigateByUrl("/home");
           // }, 1000);
         });
       }, (err) => {
