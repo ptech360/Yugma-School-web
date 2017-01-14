@@ -20,9 +20,9 @@
     <ul id='dropdown1' class='dropdown-content'>
       <li><a href="#!">two</a></li>
       <li class="divider"></li>
-      <li *ngIf="isLoggedIn()"><a href="#" (click)="logout()">Logout</a></li>
+      <li><a href="#" (click)="logout()">Logout</a></li>
     </ul>
-    <a class='dropdown-button btn' href='#' data-activates='dropdown1'>
+    <a class='dropdown-button btn' href='#' data-activates='dropdown1' *ngIf="isLoggedIn()">
       Tushar Balar <i class="material-icons right" style="margin-top: -14px;">arrow_drop_down</i>
     </a>
   </div>

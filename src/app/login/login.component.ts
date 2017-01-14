@@ -56,9 +56,16 @@ export class LoginComponent implements OnInit {
   onSubmit(email, password) {
     console.log(this.loginForm.value);
     if (this.loginForm.invalid) {
+
     } else {
-      this.userService.login(email, password);
-      this.router.navigateByUrl("/home");
+      this.userService.login(this.loginForm.value).then((res) => {
+        if (res) {
+          console.log("DS", res)
+          this.router.navigateByUrl("/home");
+        }
+      }, (err) => {
+        console.log("err", err);
+      });
     }
   }
 

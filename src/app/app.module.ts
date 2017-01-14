@@ -25,6 +25,7 @@ import { ForgetPasswordComponent } from './login/forget.password.component';
 import { ChartService } from './services/chart.service';
 import { UserService } from './services/user.service';
 import { LoggedInGuard } from './login/logged-in.guard';
+import { Configuration } from './services/app.constant';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { LoggedInGuard } from './login/logged-in.guard';
     GithubService,
     ChartService,
     UserService,
-    LoggedInGuard
+    LoggedInGuard,
+    Configuration
   ],
   bootstrap: [ AppComponent ]
 })
