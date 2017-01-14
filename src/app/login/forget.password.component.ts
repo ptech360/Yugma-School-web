@@ -18,10 +18,11 @@ import { UserService } from '../services/user.service';
             <div class="form-content">
               <label>
                 <input type="text" formControlName="username" class="sd-form-control" placeholder="username">
-                <div *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username'].touched">required field</div>
+                <div style="margin-bottom:16px" *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username'].touched">required field</div>
               </label>
               <div class="form-submit">
                 <button class="btn waves-effect waves-light bcolor" type="submit">Submit</button>
+                <a class="right underline" style="padding: 15px 0px 0px 0px;" [routerLink]="['/']">Back To Login</a>
               </div>
             </div>
           </form>

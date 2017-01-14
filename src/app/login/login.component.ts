@@ -26,7 +26,7 @@ import { UserService } from '../services/user.service';
               </label>
               <div class="form-submit">
                 <button class="btn waves-effect waves-light bcolor" type="submit">Login</button>
-                <a class="right underline" style="padding: 15px 0px 0px 0px;" [routerLink]="['forgot-password']">Forget Password</a>
+                <a class="right underline" style="padding: 15px 0px 0px 0px;" [routerLink]="['/parent/forget-password']">Forget Password</a>
               </div>
             </div>
           </form>
