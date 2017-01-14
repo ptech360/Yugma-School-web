@@ -5,9 +5,9 @@ Login footer: #495a72
 */
 
 .valign{
-  display:block;
-  margin-left:auto;
-  margin-right:auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .heading-margin{
@@ -26,5 +26,16 @@ Login footer: #495a72
 }
 
 .underline{
-      text-decoration: underline;
+  text-decoration: underline;
+}
+
+.valign-wrapper {
+  padding-right: 340px;
+}
+
+
+@media only screen and (max-width : 992px) {
+  .valign-wrapper {
+    padding-right: 0px;
+  }
 }
