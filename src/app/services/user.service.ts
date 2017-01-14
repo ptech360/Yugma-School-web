@@ -15,7 +15,6 @@ export class UserService {
               private config: Configuration) {
     this.url = this.config.getUrl();
     this.loggedIn = !!localStorage.getItem('access_token');
-    console.log("DASd", this.url)
   }
 
   login(data) {
@@ -28,15 +27,7 @@ export class UserService {
   }
 
   getManagementInfo() {
-    this.headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-    });
-
-
-    var options = new RequestOptions({
-      headers: this.headers
-    });
+    let options = this.config.getHeader();
     return this.http.get(this.url + "/management/info", options)
     .toPromise()
     .then((res) => {
@@ -45,6 +36,7 @@ export class UserService {
   }
 
   storeManagementData(management) {
+    localStorage.setItem("access_token", management.access_token);
     localStorage.setItem("id", management.id);
     localStorage.setItem("name", management.name);
     localStorage.setItem("email", management.email);

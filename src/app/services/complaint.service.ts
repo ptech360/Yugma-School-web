@@ -17,8 +17,8 @@ export class ComplaintService {
   }
 
   getComplaints() {
-
-    return this.http.get(this.url + "/complaint", this.config.getHeader())
+    let options = this.config.getHeader();
+    return this.http.get(this.url + "/complaint", options)
     .toPromise()
     .then(response => {
       return Promise.resolve(response);

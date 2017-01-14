@@ -2,27 +2,26 @@
 <table class="bordered">
   <thead>
     <tr>
-      <th data-field="id">Name</th>
-      <th data-field="name">Item Name</th>
-      <th data-field="price">Item Price</th>
+      <th data-field="id">Title</th>
+      <th data-field="name">Status</th>
+      <th data-field="price">Priority</th>
     </tr>
   </thead>
-
   <tbody>
-    <tr>
-      <td>Alvin</td>
-      <td>Eclair</td>
-      <td>$0.87</td>
-    </tr>
-    <tr>
-      <td>Alan</td>
-      <td>Jellybean</td>
-      <td>$3.76</td>
-    </tr>
-    <tr>
-      <td>Jonathan</td>
-      <td>Lollipop</td>
-      <td>$7.00</td>
+    <tr *ngFor="let c of complaints">
+      <td><button data-target="modal1" class="btn">Modal</button></td>
+      <td>{{c.title}}</td>
+      <td>{{c.statusName}}</td>
+      <td>{{c.priorityName}}</td>
     </tr>
   </tbody>
 </table>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
