@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers,RequestOptions } from '@angular/http';
 
 @Injectable()
 export class Configuration {
+
+  private headers;
 
   constructor() {
 
@@ -12,6 +14,19 @@ export class Configuration {
 
   getUrl() {
     return this.url;
+  }
+
+  getHeader() {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+    });
+
+    var options = new RequestOptions({
+      headers: this.headers
+    });
+
+    return options;
   }
 
 

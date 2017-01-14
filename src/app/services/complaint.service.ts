@@ -17,16 +17,8 @@ export class ComplaintService {
   }
 
   getComplaints() {
-    this.headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-    });
 
-
-    var options = new RequestOptions({
-      headers: this.headers
-    });
-    return this.http.get(this.url + "/complaint", options)
+    return this.http.get(this.url + "/complaint", this.config.getHeader())
     .toPromise()
     .then(response => {
       return Promise.resolve(response);
