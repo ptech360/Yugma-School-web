@@ -18,9 +18,11 @@ import { UserService } from '../services/user.service';
             <div class="form-content">
               <label>
                 <input type="text" formControlName="username" class="sd-form-control" placeholder="username">
+                <div *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username'].touched">required field</div>
               </label>
               <label>
                 <input type="password" formControlName="password" class="sd-form-control" placeholder="password">
+                <div style="margin-bottom:16px" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">required field</div>
               </label>
               <div class="form-submit">
                 <button class="btn waves-effect waves-light bcolor" type="submit">Login</button>
@@ -54,8 +56,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit(email, password) {
     console.log(this.loginForm.value);
-    this.userService.login(email, password);
-    this.router.navigateByUrl("/home");
+    if (this.loginForm.invalid) {
+
+    } else {
+      this.userService.login(email, password);
+      this.router.navigateByUrl("/home");
+    }
   }
 
   ngOnInit() {
