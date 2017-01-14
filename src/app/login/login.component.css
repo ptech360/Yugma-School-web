@@ -1,0 +1,30 @@
+/*
+Colors:
+Login heading: #495a72
+Login footer: #495a72
+*/
+
+.valign{
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.heading-margin{
+  margin-top: 3vh;
+  color:#495a72;
+  font-size:30px;
+  font-weight:300;
+}
+
+.bcolor{
+  background:#428bca;
+}
+
+.login-footer{
+  background:#495a72;
+}
+
+.underline{
+      text-decoration: underline;
+}

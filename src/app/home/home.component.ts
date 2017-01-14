@@ -2,6 +2,7 @@ import {Component, OnInit,ViewChild} from '@angular/core';
 
 // import service
 import { ChartService } from '../services/chart.service';
+import { UserService } from '../services/user.service';
 
 // import directive
 import { GoogleChart} from '../customComponent/chart.directive';
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
   public categoryAndStatusChartOptions;
   public plansChartOptions;
 
-  constructor(public c: ChartService) {
+  constructor(public c: ChartService, public userService: UserService) {
 
   }
 

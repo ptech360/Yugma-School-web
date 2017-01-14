@@ -17,9 +17,12 @@ import { ContactComponent } from './contact/contact.component';
 
 // custom component
 import { GoogleChart } from './customComponent/chart.directive';
+import { LoginComponent } from './login/login.component';
 
 // import service
 import { ChartService } from './services/chart.service';
+import { UserService } from './services/user.service';
+import { LoggedInGuard } from './login/logged-in.guard';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { ChartService } from './services/chart.service';
     RepoListComponent,
     RepoDetailComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,9 @@ import { ChartService } from './services/chart.service';
   ],
   providers: [
     GithubService,
-    ChartService
+    ChartService,
+    UserService,
+    LoggedInGuard
   ],
   bootstrap: [ AppComponent ]
 })
