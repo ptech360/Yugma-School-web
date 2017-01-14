@@ -26,6 +26,7 @@ import { ChartService } from './services/chart.service';
 import { UserService } from './services/user.service';
 import { LoggedInGuard } from './login/logged-in.guard';
 import { Configuration } from './services/app.constant';
+import { ComplaintService } from './services/complaint.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { Configuration } from './services/app.constant';
     ChartService,
     UserService,
     LoggedInGuard,
-    Configuration
+    Configuration,
+    ComplaintService
   ],
   bootstrap: [ AppComponent ]
 })
