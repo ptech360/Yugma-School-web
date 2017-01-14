@@ -18,6 +18,7 @@ import { ContactComponent } from './contact/contact.component';
 // custom component
 import { GoogleChart } from './customComponent/chart.directive';
 import { LoginComponent } from './login/login.component';
+import { ParentComponent } from './login/parent'
 import { ForgetPasswordComponent } from './login/forget.password.component';
 
 // import service
@@ -36,7 +37,8 @@ import { LoggedInGuard } from './login/logged-in.guard';
     HomeComponent,
     ContactComponent,
     LoginComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    ParentComponent
   ],
   imports: [
     BrowserModule,
