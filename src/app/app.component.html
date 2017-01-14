@@ -20,7 +20,6 @@
     <ul id='dropdown1' class='dropdown-content'>
       <li><a href="#!">two</a></li>
       <li class="divider"></li>
-      <li *ngIf="!isLoggedIn()"><a [routerLink]="['/login']">Login</a></li>
       <li *ngIf="isLoggedIn()"><a href="#" (click)="logout()">Logout</a></li>
     </ul>
     <a class='dropdown-button btn' href='#' data-activates='dropdown1'>

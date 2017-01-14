@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit {
 
   logout() {
     this.userService.logout();
-    this.router.navigateByUrl("/login");
+    this.router.navigateByUrl("/");
   }
 
   isLoggedIn() {

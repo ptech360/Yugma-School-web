@@ -45,8 +45,9 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
-    console.log("DASDAS");
+  constructor(private userService: UserService,
+              private router: Router,
+              private formBuilder: FormBuilder) {
     if (this.userService.isLoggedIn()) {
       this.router.navigateByUrl("/home");
     }
@@ -55,7 +56,6 @@ export class LoginComponent implements OnInit {
   onSubmit(email, password) {
     console.log(this.loginForm.value);
     if (this.loginForm.invalid) {
-
     } else {
       this.userService.login(email, password);
       this.router.navigateByUrl("/home");
