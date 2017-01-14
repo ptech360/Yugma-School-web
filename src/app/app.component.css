@@ -6,11 +6,26 @@
   background-color: #424242 !important;
 }
 
-.background {
+.userView {
   background-color: #424242;
 }
 
-.side-nav .userView .circle {
-    height: 150px;
-    width: 150px;
+.userView .circle{
+  width:150px !important;
+  height:150px !important;
+}
+
+.align-center{
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.userView .email{
+  font-size:12px;
+}
+
+.userView .name{
+  font-size:14px;
+  font-weight:bold;
 }
