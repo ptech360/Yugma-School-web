@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
+
+declare let Materialize;
+declare var $;
 
 @Component({
   selector: 'login',
@@ -44,13 +47,17 @@ import { UserService } from '../services/user.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  public _element:any;
 
   constructor(private userService: UserService,
               private router: Router,
+              public element: ElementRef,
               private formBuilder: FormBuilder) {
     if (this.userService.isLoggedIn()) {
       this.router.navigateByUrl("/home");
     }
+    this._element = this.element.nativeElement;
+    console.log(this._element)
   }
 
   onSubmit(email, password) {
@@ -59,14 +66,15 @@ export class LoginComponent implements OnInit {
     } else {
       this.userService.login(this.loginForm.value)
       .then((res) => {
-        this.userService.getManagementInfo().then((data) => {
+        this.userService.getManagementInfo()
+        .then((data) => {
           this.userService.storeManagementData(data.json());
-          // setTimeout(function() {
           location.reload();
-            // this.router.navigateByUrl("/home");
-          // }, 1000);
         });
       }, (err) => {
+        if (err.status === 400) {
+          Materialize.toast('Invalid username or password', 4000);
+        }
         console.log("err", err);
       });
     }

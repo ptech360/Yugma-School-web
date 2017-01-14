@@ -19,7 +19,8 @@ export class AppComponent implements AfterViewInit {
 
     this.user = {
       username: localStorage.getItem("name"),
-      email: localStorage.getItem("email")
+      email: localStorage.getItem("email"),
+      role: localStorage.getItem("role")
     }
   }
 
