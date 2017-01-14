@@ -23,13 +23,41 @@ export class UserService {
     .toPromise()
     .then(response => {
       localStorage.setItem('access_token', response.json().access_token);
-      this.loggedIn = true;
       return Promise.resolve(response);
     }).catch(err => { return Promise.reject(err); });
   }
 
+  getManagementInfo() {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+    });
+
+
+    var options = new RequestOptions({
+      headers: this.headers
+    });
+    return this.http.get(this.url + "/management/info", options)
+    .toPromise()
+    .then((res) => {
+      this.loggedIn = true;
+      return Promise.resolve(res);
+    }).catch(err => { return Promise.reject(err); });
+  }
+
+  storeManagementData(management) {
+    localStorage.setItem("id", management.id);
+    localStorage.setItem("name", management.name);
+    localStorage.setItem("email", management.email);
+    localStorage.setItem("contactNo", management.contactNo);
+    localStorage.setItem("classTeacher", management.classTeacher);
+    localStorage.setItem("username", management.username);
+    localStorage.setItem("nickName", management.nickName);
+    localStorage.setItem('role', management.role);
+  }
+
   logout() {
-    localStorage.removeItem('access_token');
+    localStorage.clear();
     this.loggedIn = false;
   }
 
