@@ -1,15 +1,33 @@
+/*Side nav :
+background-color: #493d55
+hover-back: #3a3144
+font-color: #a49eaa
+
+*/
+
 .visible {
   display: inherit !important;
 }
 
 .tb-grey {
-  background-color: #424242 !important;
+  background-color: #493d55;
+}
+.side-nav{
+  background:#493d55;
 }
 
-.userView {
-  background-color: #424242;
+.side-nav li a{
+  color:#a49eaa;
+}
+.side-nav li a:hover{
+  color:white;
+  background:#3a3144;
+}
+.side-nav li a i{
+  color:inherit;
 }
 
+          
 .userView .circle{
   width:150px !important;
   height:150px !important;
@@ -28,4 +46,4 @@
 .userView .name{
   font-size:14px;
   font-weight:bold;
-}
+} 
