@@ -26,7 +26,7 @@ export class GoogleChart {
   @Input() set chartData(data) {
     setTimeout(() => {
       this.drawGraph(this.chartOptions, this.chartType, data,  this._element);
-    }, 2000);
+    });
   }
 
   drawGraph (chartOptions,chartType,chartData,ele) {
@@ -40,13 +40,18 @@ export class GoogleChart {
         containerId: ele.id
       });
       wrapper.draw();
-      google.visualization.events.addListener(wrapper, 'select', selectHandler);
+      // google.visualization.events.addListener(wrapper.getChart(), 'click', selectHandler);
 
-      function selectHandler() {
-        let selectedRow = wrapper.getChart().getSelection()[0].row;
-        console.log("DSAD", wrapper.getDataTable().getValue(selectedRow, 2));
-      }
+      // function selectHandler(e) {
+      //   console.log(e);
+      //   // let selectedRow = wrapper.getChart().getSelection()[0].row;
+      //   // console.log("DSAD", wrapper.getDataTable().getValue(selectedRow, 2));
+      //   // wrapper.getChart().setSelection([]);
+      // }
     }
+  }
+  onResize(){
+    console.log("resize :"+this._element);
   }
 
 }
