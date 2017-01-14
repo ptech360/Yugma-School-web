@@ -8,8 +8,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let c of complaints">
-      <td><button data-target="modal1" class="btn">Modal</button></td>
+    <tr *ngFor="let c of complaints; let i = index;">
+      <td><button (click)="openModal(c)" class="btn">View</button></td>
       <td>{{c.title}}</td>
       <td>{{c.statusName}}</td>
       <td>{{c.priorityName}}</td>
@@ -17,11 +17,7 @@
   </tbody>
 </table>
 <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
+  <div class="modal-content">
+    <h4>{{complaint.title}}</h4>
   </div>
+</div>

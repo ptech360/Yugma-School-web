@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 declare let $;
 
@@ -11,12 +11,19 @@ import { ComplaintService } from '../services/complaint.service';
   templateUrl: './complaint.component.html'
 })
 
-export class ComplaintComponent implements AfterViewInit {
+export class ComplaintComponent implements OnInit {
 
   private complaints;
+  private complaint = {
+    title: ""
+  }
 
-  constructor(private complaint: ComplaintService) {
-    this.complaint.getComplaints().then((res) => {
+  constructor(private c: ComplaintService) {
+  }
+
+  ngOnInit() {
+    $('.modal').modal();
+    this.c.getComplaints().then((res) => {
       console.log("DSADAS", res.json());
       this.complaints = res.json();
     }, (err) => {
@@ -24,18 +31,9 @@ export class ComplaintComponent implements AfterViewInit {
     })
   }
 
-  ngAfterViewInit() {
-    $('.modal').modal();
+  openModal(complaint) {
+    this.complaint = complaint;
+    $('#modal1').modal('open');
   }
-
-  // ngOnInit() {
-  //   $('.modal').modal();
-  //   this.complaint.getComplaints().then((res) => {
-  //     console.log("DSADAS", res.json());
-  //     this.complaints = res.json();
-  //   }, (err) => {
-  //     console.log("err", err);
-  //   })
-  // }
 
 }
