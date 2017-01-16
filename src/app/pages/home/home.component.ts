@@ -5,7 +5,7 @@ import { ChartService } from '../../services/chart.service';
 import { UserService } from '../../services/user.service';
 
 // import directive
-import { GoogleChart} from '../customComponent/chart.directive';
+import { GoogleChart} from '../../customComponent/chart.directive';
 
 declare let google;
 
