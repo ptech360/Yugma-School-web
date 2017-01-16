@@ -12,20 +12,11 @@
         </div>
       </li>
       <li><a [routerLink]="['/']" class="waves-effect waves-teal"><i class="material-icons">home</i>Home</a></li>
-      <li class="no-padding">
-        <ul class="collapsible collapsible-accordion">
-          <li>
-            <a class="collapsible-header waves-effect waves-teal"> Complaints
-              <i class="material-icons">thumb_down</i>
-            </a>
-            <div class="collapsible-body">
-              <ul>
-                <li><a [routerLink]="['/complaints']">All Complaints</a></li>
-                <li><a [routerLink]="['/github']">Assigned Complaints</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+      <li><a [routerLink]="['/complaints']" class="waves-effect waves-teal"><i class="material-icons">thumb_down</i>
+        All Complaints</a>
+      </li>
+      <li><a [routerLink]="['/github']" class="waves-effect waves-teal">
+        <i class="material-icons">call_received</i>Assigned Complaints</a>
       </li>
     </ul>
     <ul id='dropdown1' class='dropdown-content'>

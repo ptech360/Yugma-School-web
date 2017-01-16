@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
 
-import { ComplaintComponent } from './complaints/complaint.component';
-import { HomeComponent } from './home/home.component';
-import { RepoBrowserComponent } from './github/repo-browser/repo-browser.component';
-import { RepoListComponent } from './github/repo-list/repo-list.component';
-import { RepoDetailComponent } from './github/repo-detail/repo-detail.component';
-import { AccountComponent } from './account/account.component';
-import { ParentComponent } from './login/parent'
-import { LoginComponent } from './login/login.component';
-import { ForgetPasswordComponent } from './login/forget.password.component';
-import { LoggedInGuard } from './login/logged-in.guard';
+import { ComplaintComponent } from './pages/complaints/complaint.component';
+import { HomeComponent } from './pages/home/home.component';
+import { RepoBrowserComponent } from './pages/github/repo-browser/repo-browser.component';
+import { RepoListComponent } from './pages/github/repo-list/repo-list.component';
+import { RepoDetailComponent } from './pages/github/repo-detail/repo-detail.component';
+import { AccountComponent } from './pages/account/account.component';
+import { ParentComponent } from './pages/login/parent'
+import { LoginComponent } from './pages/login/login.component';
+import { ForgetPasswordComponent } from './pages/login/forget.password.component';
+import { LoggedInGuard } from './pages/login/logged-in.guard';
 
 export const rootRouterConfig: Routes = [
   { path: '', redirectTo: 'parent/login', pathMatch: 'full' },

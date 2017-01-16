@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 declare let $;
 
 // import service
-import { ComplaintService } from '../services/complaint.service';
+import { ComplaintService } from '../../services/complaint.service';
 
 @Component({
   selector: 'complaints',
