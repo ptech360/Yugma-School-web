@@ -1,5 +1,7 @@
 <h3>All Complaints</h3>
 <loader [condition]="!complaints"></loader>
+<button (click)="previousComplaint()" class="btn" [disabled]="currentPage === 1">Previous</button>
+<button (click)="nextComplaint()" class="btn"  [disabled]="EmptyComplaints">Next</button>
 <table class="bordered">
   <thead>
     <tr>
@@ -22,6 +24,7 @@
     </tr>
   </tbody>
 </table>
+
 <div id="modal1" class="modal">
   <div class="modal-content">
     <h4>{{complaint.title}}</h4>

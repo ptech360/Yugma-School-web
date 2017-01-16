@@ -19,11 +19,24 @@ export class Configuration {
     return this.url;
   }
 
-  getHeader() {
+  getHeaderWithWeb() {
     this.headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
       'isWeb': true
+    });
+
+    var options = new RequestOptions({
+      headers: this.headers
+    });
+
+    return options;
+  }
+
+  getHeaderWithoutWeb() {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     });
 
     var options = new RequestOptions({

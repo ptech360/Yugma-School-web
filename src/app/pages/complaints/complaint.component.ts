@@ -15,6 +15,7 @@ import { ComplaintService } from '../../services/complaint.service';
 export class ComplaintComponent implements OnInit {
 
   private complaints;
+  private EmptyComplaints: boolean = false;
   private complaint = {
     title: ""
   }
@@ -27,8 +28,18 @@ export class ComplaintComponent implements OnInit {
 
   ngOnInit() {
     $('.modal').modal();
+    this.getComplaints();
+  }
+
+  getComplaints() {
+    this.complaints = [];
     this.c.getComplaints(this.currentPage).then((res) => {
-      this.complaints = res.json();
+      if (res.status === 204) {
+        this.EmptyComplaints = true;
+      } else {
+        this.EmptyComplaints = false;
+        this.complaints = res.json();
+      }
     }, (err) => {
       this.complaints = [];
       this.config.showToast("Internal server error.. Try again later");
@@ -39,6 +50,16 @@ export class ComplaintComponent implements OnInit {
   openModal(complaint) {
     this.complaint = complaint;
     $('#modal1').modal('open');
+  }
+
+  previousComplaint() {
+    this.currentPage -= 1;
+    this.getComplaints();
+  }
+
+  nextComplaint() {
+    this.currentPage += 1;
+    this.getComplaints();
   }
 
 }
