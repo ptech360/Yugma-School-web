@@ -1,4 +1,4 @@
-import {Component, OnInit,ViewChild} from '@angular/core';
+import {Component, OnInit,ViewChild,AfterViewInit} from '@angular/core';
 
 // import service
 import { ChartService } from '../../services/chart.service';
@@ -8,6 +8,7 @@ import { UserService } from '../../services/user.service';
 import { GoogleChart} from '../../customComponent/chart.directive';
 
 declare let google;
+declare let $;
 
 @Component({
   selector: 'home',
@@ -15,7 +16,7 @@ declare let google;
   templateUrl: './home.component.html',
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild(GoogleChart) vc:GoogleChart;
   public dataTable;
   public complaintByStatus;
@@ -43,7 +44,13 @@ export class HomeComponent implements OnInit {
       this.chartByCategoryAndStatus();
       this.chartByPlans();
     }, 1000);
+
   }
+
+   ngAfterViewInit(){
+    $('.modal').modal();
+   }
+
   onSelected(data){
     var dataTable = data.wrapper.getDataTable();    
     var parts = data.e.targetID.split('#');
@@ -209,4 +216,9 @@ export class HomeComponent implements OnInit {
     });
      
   }
+
+
+
+
+  
 }
