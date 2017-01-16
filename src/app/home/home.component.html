@@ -1,14 +1,15 @@
-<div class="container">
-  <div class="row" >
+<div >
+  <div class="row" >    
     <div class="col l12">
       <div style='height: 400px; width: 100%;' GoogleChart id="pie_chart" [chartData]="complaintByStatus" [chartOptions] = "pie_ChartOptions" chartType="PieChart" > </div>
     </div>
     <div class="col l12">
+      <div style='height: 400px; width: 100%;' GoogleChart id="chart_of_below_permance" [chartData]="belowPerformance" [chartOptions] = "belowPerformanceChartOptions" chartType="PieChart" > </div>
+    </div> 
+    <div class="col l12">
       <div style='height: 400px; width: 100%;' GoogleChart id="chart_by_program_standard" [chartData]="complaintByProgramAndStandard" [chartOptions] = "ProgramAndStandardChartOptions" chartType="BarChart" > </div>
     </div>
-    <div class="col l12">
-      <div style='height: 400px; width: 100%;' GoogleChart id="chart_of_below_permance" [chartData]="belowPerformance" [chartOptions] = "belowPerformanceChartOptions" chartType="PieChart" > </div>
-    </div>    
+       
     <div class="col l12">
       <div style='height: 400px; width: 100%;' GoogleChart id="chart_by_category_status" [chartData]="complaintByCategoryAndStatus" [chartOptions] = "categoryAndStatusChartOptions" chartType="BarChart" > </div>
     </div>
