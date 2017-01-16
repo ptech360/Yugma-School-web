@@ -1,19 +1,24 @@
 <h3>All Complaints</h3>
+<loader [condition]="!complaints"></loader>
 <table class="bordered">
   <thead>
     <tr>
       <th></th>
+      <th></th>
       <th data-field="id">Title</th>
       <th data-field="name">Status</th>
       <th data-field="price">Priority</th>
+      <th data-field="price">StudentName</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let c of complaints; let i = index;">
       <td><button (click)="openModal(c)" class="btn">View</button></td>
+      <td><button (click)="openModal(c)" class="btn">Edit</button></td>
       <td>{{c.title}}</td>
       <td>{{c.statusName}}</td>
       <td>{{c.priorityName}}</td>
+      <td>{{c.studentName}}</td>
     </tr>
   </tbody>
 </table>

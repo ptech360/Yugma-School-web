@@ -10,15 +10,25 @@ export class ComplaintService {
   private url: string = "";
   private loggedIn = false;
   private headers;
+  private role: string;
+  private userId: string;
+  private complaintUrl: string;
 
   constructor(private http: Http,
               private config: Configuration) {
-    this.url = this.config.getUrl();
+    this.buildUrl();
   }
 
-  getComplaints() {
+  buildUrl() {
+    this.url = this.config.getUrl();
+    this.role = this.config.getRole();
+    this.userId = this.config.getUserId();
+    this.complaintUrl = this.url + "/" + this.role + "/" + this.userId + "/complaint/page/";
+  }
+
+  getComplaints(pageNo) {
     let options = this.config.getHeader();
-    return this.http.get(this.url + "/complaint", options)
+    return this.http.get(this.complaintUrl + pageNo, options)
     .toPromise()
     .then(response => {
       return Promise.resolve(response);
