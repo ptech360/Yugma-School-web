@@ -39,3 +39,7 @@ Login footer: #495a72
     padding-right: 0px;
   }
 }
+
+.login-card .valign .card{
+      margin: 4.5rem 0 1rem 0;
+}
