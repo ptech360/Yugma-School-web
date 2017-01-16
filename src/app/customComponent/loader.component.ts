@@ -5,7 +5,7 @@ declare let Materialize;
 @Component({
   selector: 'loader',
   templateUrl: `
-    <div class="preloader-wrapper small active">
+    <div class="preloader-wrapper small active" *ngIf="condition">
       <div class="spinner-layer spinner-green-only">
        <div class="circle-clipper left">
          <div class="circle"></div>
@@ -20,6 +20,7 @@ declare let Materialize;
 })
 export class CustomLoader {
 
+  @Input() condition: boolean;
 
   constructor() {
 
