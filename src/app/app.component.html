@@ -1,5 +1,5 @@
 <nav class="tb-grey" role="navigation">
-  <div class="nav-wrapper container">
+  <div class="nav-wrapper">
     <a href="#" id="logo-container" *ngIf="isLoggedIn()" data-activates="slide-out" class="button-collapse">
       <i class="material-icons">menu</i>
     </a>
@@ -12,19 +12,39 @@
         </div>
       </li>
       <li><a [routerLink]="['/']" class="waves-effect waves-teal"><i class="material-icons">home</i>Home</a></li>
-      <li><div class="divider"></div></li>
-      <li><a class="subheader">Complaints</a></li>
-      <li><a class="waves-effect" [routerLink]="['/complaints']">All Complaints</a></li>
-      <li><a class="waves-effect" [routerLink]="['/github']">Assigned Complaints</a></li>
+      <li><a [routerLink]="['/complaints']" class="waves-effect waves-teal"><i class="material-icons">thumb_down</i>
+        All Complaints</a>
+      </li>
+      <li><a [routerLink]="['/github']" class="waves-effect waves-teal">
+        <i class="material-icons">call_received</i>Assigned Complaints</a>
+      </li>
     </ul>
-    <ul id='dropdown1' class='dropdown-content'>
-      <li><a href="#!">two</a></li>
-      <li class="divider"></li>
-      <li><a href="#" (click)="logout()">Logout</a></li>
+    <ul id='dropdown1' class='dropdown-content user-account z-depth-3 hide-on-med-and-down' *ngIf="isLoggedIn()">
+      <li>
+        <a [routerLink]="['/account']" class="waves-effect white-text">Account
+          <i class="material-icons right">visibility_off</i> 
+        </a>
+      </li>
+      <li>
+        <a href="#!" class="white-text">Link 2<i class="material-icons right">visibility_off</i> 
+        </a>
+      </li>
+      <li>
+        <a href="#!" class="white-text">Link 3<i class="material-icons right">visibility_off</i> 
+        </a>
+      </li>
+      <li class="white-text">
+        <a href="#" class="grey darken-2" (click)="logout()" class="white-text">Logout <i class="material-icons right">power_settings_new</i> 
+        </a>
+      </li>
     </ul>
-    <a class='dropdown-button btn' href='#' data-activates='dropdown1' *ngIf="isLoggedIn()">
-      Tushar Balar <i class="material-icons right" style="margin-top: -14px;">arrow_drop_down</i>
-    </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          <a href="#" class='dropdown-button' data-beloworigin="true" data-activates='dropdown1' *ngIf="isLoggedIn()">
+            {{user.username}}<i class="material-icons right">perm_identity</i>
+          </a>
+        </li>
+    </ul>
   </div>
 </nav>
 <main style="min-height:650px;">

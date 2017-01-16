@@ -2,6 +2,7 @@
 <table class="bordered">
   <thead>
     <tr>
+      <th></th>
       <th data-field="id">Title</th>
       <th data-field="name">Status</th>
       <th data-field="price">Priority</th>
@@ -19,5 +20,11 @@
 <div id="modal1" class="modal">
   <div class="modal-content">
     <h4>{{complaint.title}}</h4>
+    <h2>{{complaint.description}}</h2>
+  </div>
+  <div class="modal-footer">
+    <button  class="waves-effect waves-light btn"><i class="material-icons left">clear</i>Close</button>&nbsp;
+    <button  class="waves-effect waves-light btn"><i class="material-icons left">create</i>Edit</button>&nbsp;
+    <button  class="waves-effect waves-light btn"><i class="material-icons left">comment</i>Comment</button>
   </div>
 </div>

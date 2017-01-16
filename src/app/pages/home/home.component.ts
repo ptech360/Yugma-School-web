@@ -1,8 +1,8 @@
 import {Component, OnInit,ViewChild} from '@angular/core';
 
 // import service
-import { ChartService } from '../services/chart.service';
-import { UserService } from '../services/user.service';
+import { ChartService } from '../../services/chart.service';
+import { UserService } from '../../services/user.service';
 
 // import directive
 import { GoogleChart} from '../customComponent/chart.directive';

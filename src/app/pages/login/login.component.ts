@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 
 declare let Materialize;
 declare var $;
@@ -10,7 +10,7 @@ declare var $;
   selector: 'login',
   styleUrls: ['./login.component.css'],
   template: `
-  <div class="row valign-wrapper">
+  <div class="row valign-wrapper login-card">
     <div class="col valign">
       <div class="card">
         <span class="card-title valign-wrapper">

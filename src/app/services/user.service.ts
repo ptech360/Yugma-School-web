@@ -36,7 +36,6 @@ export class UserService {
   }
 
   storeManagementData(management) {
-    localStorage.setItem("access_token", management.access_token);
     localStorage.setItem("id", management.id);
     localStorage.setItem("name", management.name);
     localStorage.setItem("email", management.email);
@@ -55,4 +54,23 @@ export class UserService {
   isLoggedIn() {
     return this.loggedIn;
   }
+
+  forgetPassword(data) {
+    return this.http.put(this.url + "/forgot-password", data)
+    .toPromise()
+    .then((res) => {
+      return Promise.resolve(res);
+    }).catch(err => { return Promise.reject(err); });
+  }
+
+  resetPassword(data) {
+    let options = this.config.getHeader();
+    let userId = this.config.getUserId();
+    return this.http.put(this.url + "/management/" + userId + "/password", data, options)
+    .toPromise()
+    .then((res) => {
+      return Promise.resolve(res);
+    }).catch(err => { return Promise.reject(err); });
+  }
+
 }

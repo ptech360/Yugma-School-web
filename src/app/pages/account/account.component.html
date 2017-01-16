@@ -1,0 +1,21 @@
+<h4>Update password</h4>
+
+<form (ngSubmit)="submitForm()" [formGroup]="resetPasswordForm" novalidate>
+  <div class="form-content">
+    <label>
+      Enter Old Password:
+      <input type="text" formControlName="oldPassword" class="sd-form-control">
+    </label>
+    <label>
+      Enter New Password:
+      <input type="text" formControlName="newPassword" class="sd-form-control">
+    </label>
+    <label>
+      Confirm New Password:
+      <input type="text" formControlName="confirmPassword" class="sd-form-control">
+    </label>
+    <div class="form-submit">
+      <button class="btn waves-effect waves-light bcolor" type="submit">Submit</button>
+    </div>
+  </div>
+</form>
