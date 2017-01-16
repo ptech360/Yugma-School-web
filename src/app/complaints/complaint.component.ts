@@ -24,7 +24,6 @@ export class ComplaintComponent implements OnInit {
   ngOnInit() {
     $('.modal').modal();
     this.c.getComplaints().then((res) => {
-      console.log("DSADAS", res.json());
       this.complaints = res.json();
     }, (err) => {
       console.log("err", err);

@@ -55,4 +55,13 @@ export class UserService {
   isLoggedIn() {
     return this.loggedIn;
   }
+
+  forgetPassword(data) {
+    return this.http.put(this.url + "/forgot-password", data)
+    .toPromise()
+    .then((res) => {
+      return Promise.resolve(res);
+    }).catch(err => { return Promise.reject(err); });
+  }
+
 }
