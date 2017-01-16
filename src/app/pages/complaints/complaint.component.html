@@ -20,7 +20,16 @@
 <div id="modal1" class="modal">
   <div class="modal-content">
     <h4>{{complaint.title}}</h4>
-    <h2>{{complaint.description}}</h2>
+    <p>Status: {{complaint.statusName}}</p>
+    <p *ngIf="!complaint.anonymous">Anonymous: {{complaint.anonymous}}</p>
+    <p *ngIf="complaint.assignedEmployeeName">Assigned To: {{complaint.assignedEmployeeName}}</p>
+    <p *ngIf="complaint.againstEmployeeName">Against Employee Name: {{complaint.againstEmployeeName}}</p>
+    <p *ngIf="complaint.againstCategoryName && !complaint.againstEmployeeName">Against Category Name: {{complaint.againstCategoryName}}</p>
+    <p>Priority: {{complaint.priorityName}}</p>
+    <p>Root Cause: {{complaint.rca}}</p>
+    <p *ngIf="!complaint.anonymous">Student Name: {{complaint.studentName}}</p>
+    <p *ngIf="!complaint.anonymous">Standard: {{complaint.studentStandardName}}</p>
+    <p>{{complaint.description}}</p>
   </div>
   <div class="modal-footer">
     <button  class="waves-effect waves-light btn"><i class="material-icons left">clear</i>Close</button>&nbsp;
