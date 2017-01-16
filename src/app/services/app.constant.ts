@@ -22,7 +22,8 @@ export class Configuration {
   getHeader() {
     this.headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+      'isWeb': true
     });
 
     var options = new RequestOptions({
@@ -30,6 +31,10 @@ export class Configuration {
     });
 
     return options;
+  }
+
+  getRole() {
+    return localStorage.getItem("role");
   }
 
   getUserId() {

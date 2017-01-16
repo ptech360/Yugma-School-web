@@ -19,13 +19,15 @@ export class ComplaintComponent implements OnInit {
     title: ""
   }
 
+  private currentPage = 1;
+
   constructor(private c: ComplaintService,
               private config: Configuration) {
   }
 
   ngOnInit() {
     $('.modal').modal();
-    this.c.getComplaints().then((res) => {
+    this.c.getComplaints(this.currentPage).then((res) => {
       this.complaints = res.json();
     }, (err) => {
       this.complaints = [];

@@ -76,7 +76,6 @@ export class LoginComponent implements OnInit {
       .then((res) => {
         this.userService.getManagementInfo()
         .then((data) => {
-          this.hasSubmit = false;
           this.userService.storeManagementData(data.json());
           location.reload();
         });
