@@ -26,7 +26,11 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
 
-    $('.dropdown-button').dropdown();
+    $('.dropdown-button').dropdown({
+      inDuration: 300,
+      hover: true,
+      alignment: 'left'
+    });
     if ($( window ).width() < 376) {
       $('.button-collapse').sideNav({
         menuWidth: 300,
