@@ -29,6 +29,10 @@ export class Configuration {
     return options;
   }
 
+  getUserId() {
+    return localStorage.getItem("id");
+  }
+
 
 
 }

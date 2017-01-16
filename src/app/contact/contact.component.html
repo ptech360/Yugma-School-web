@@ -1,36 +1,21 @@
-<h2>Contact Reactive Form</h2>
+<h2>Update new password</h2>
 
-<form (ngSubmit)="submitForm()" [formGroup]="contactForm" novalidate>
+<form (ngSubmit)="submitForm()" [formGroup]="resetPasswordForm" novalidate>
   <div class="form-content">
     <label>
-      Name:
-      <input type="text" formControlName="name" class="sd-form-control" placeholder="Enter your name.">
+      Enter Old Password:
+      <input type="text" formControlName="oldPassword" class="sd-form-control">
     </label>
     <label>
-      Email:
-      <input type="email" formControlName="email" class="sd-form-control" placeholder="Enter your email.">
+      Enter New Password:
+      <input type="text" formControlName="newPassword" class="sd-form-control">
     </label>
     <label>
-      Content:
-      <textarea formControlName="content" class="sd-form-control" placeholder="Content here."></textarea>
+      Confirm New Password:
+      <input type="text" formControlName="confirmPassword" class="sd-form-control">
     </label>
     <div class="form-submit">
-      <button type="submit">Submit</button>
+      <button class="btn waves-effect waves-light bcolor" type="submit">Submit</button>
     </div>
   </div>
 </form>
-
-<div class="form-value">
-  Form value:
-  <pre>
-    {{contactForm.value | json}}
-  </pre>
-  <p>
-    Status: {{contactForm.status}}
-  </p>
-  <p>
-    Valid: {{contactForm.valid}}
-  </p>
-  <p>Submit then open console to see full form.</p>
-</div>
-

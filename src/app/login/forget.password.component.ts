@@ -16,11 +16,11 @@ declare let Materialize;
           <span class="valign heading-margin">Forget Password</span>
         </span>
         <div class="card-content">
-          <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" novalidate>
+          <form (ngSubmit)="onSubmit()" [formGroup]="forgetPasswordForm" novalidate>
             <div class="form-content">
               <label>
                 <input type="text" formControlName="username" class="sd-form-control" placeholder="username">
-                <div style="margin-bottom:16px" *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username'].touched">required field</div>
+                <div style="margin-bottom:16px" *ngIf="!forgetPasswordForm.controls['username'].valid && forgetPasswordForm.controls['username'].touched">required field</div>
               </label>
               <div class="form-submit">
                 <button class="btn waves-effect waves-light bcolor" type="submit">Submit</button>
@@ -32,13 +32,11 @@ declare let Materialize;
       </div>
     </div>
   </div>
-
-
   `
 })
 export class ForgetPasswordComponent implements OnInit {
 
-  loginForm: FormGroup;
+  forgetPasswordForm: FormGroup;
 
   constructor(private userService: UserService,
               private router: Router,
@@ -47,22 +45,21 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
+    this.forgetPasswordForm = this.formBuilder.group({
       username: ['', Validators.required]
     });
   }
 
   onSubmit() {
-    if (this.loginForm.invalid) {
+    if (this.forgetPasswordForm.invalid) {
 
     } else {
-      this.userService.forgetPassword(this.loginForm.value)
+      this.userService.forgetPassword(this.forgetPasswordForm.value)
       .then((res) => {
+        this.router.navigate(["/"]);
         Materialize.toast('New password successfully sent to your registered contact number', 4000);
       }, (err) => {
-        if (err.status === 400) {
-          Materialize.toast('Username not matched', 4000);
-        }
+        Materialize.toast('Username not matched', 4000);
       });
     }
   }
