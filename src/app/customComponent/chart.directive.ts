@@ -1,4 +1,4 @@
-import { Component, Directive, Input, ElementRef } from '@angular/core';
+import { Component, Directive, Input, ElementRef, EventEmitter, Output } from '@angular/core';
 
 declare var google:any;
 declare var googleLoaded:any;
@@ -10,6 +10,7 @@ declare var googleLoaded:any;
 export class GoogleChart {
 
   public _element:any;
+  public selectedData:any;
 
   @Input('chartType') public chartType;
   @Input('chartOptions') public chartOptions: Object;
@@ -28,9 +29,12 @@ export class GoogleChart {
       this.drawGraph(this.chartOptions, this.chartType, data,  this._element);
     });
   }
+  
+  @Output() onSelected = new EventEmitter<boolean>();
 
   drawGraph (chartOptions,chartType,chartData,ele) {
     google.charts.setOnLoadCallback(drawChart);
+    var that = this;
     function drawChart() {
       var wrapper;
       wrapper = new google.visualization.ChartWrapper({
@@ -39,17 +43,33 @@ export class GoogleChart {
         options: chartOptions || {},
         containerId: ele.id
       });
+      google.visualization.events.addListener(wrapper, 'ready', onReady);
       wrapper.draw();
-      // google.visualization.events.addListener(wrapper.getChart(), 'click', selectHandler);
 
-      // function selectHandler(e) {
-      //   console.log(e);
-      //   // let selectedRow = wrapper.getChart().getSelection()[0].row;
-      //   // console.log("DSAD", wrapper.getDataTable().getValue(selectedRow, 2));
-      //   // wrapper.getChart().setSelection([]);
-      // }
+      function onReady() {
+        google.visualization.events.addListener(wrapper.getChart(), 'click', selectHandler);
+      }
+      
+      function selectHandler(e) {
+        console.log(e);
+        that.selectedData={};
+        that.selectedData = {
+          wrapper:wrapper,
+          chartId:ele.id,
+          e:e
+        }
+        that.onSelected.emit(that.selectedData);
+        // console.log("DSAD", wrapper.getDataTable().getValue(selectedRow, 2));
+        // wrapper.getChart().setSelection([]);
+      }
     }
   }
+  
+  getChart(){
+    console.log("getChart");
+    return this.selectedData;
+  }
+  
   onResize(){
     console.log("resize :"+this._element);
   }

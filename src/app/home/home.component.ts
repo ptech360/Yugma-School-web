@@ -16,6 +16,7 @@ declare let google;
 })
 
 export class HomeComponent implements OnInit {
+  @ViewChild(GoogleChart) vc:GoogleChart;
   public dataTable;
   public complaintByStatus;
   public pie_ChartOptions;
@@ -43,7 +44,51 @@ export class HomeComponent implements OnInit {
       this.chartByPlans();
     }, 1000);
   }
+  onSelected(data){
+    var dataTable = data.wrapper.getDataTable();    
+    var parts = data.e.targetID.split('#');
 
+    switch(data.chartId){
+      case "complaint_chart_by_status":
+        if(parts[0] == "slice")
+          console.log("id :"+dataTable.getValue(parseInt(parts[1]), 2));
+        else if(parts[0] == "legendentry")
+          console.log("legendentry : "+parts[1]);
+      break;
+      case "chart_of_below_permance":
+        if(parts[0] == "slice")
+          console.log("id"+dataTable.getValue(parseInt(parts[1]), 2));
+        else if(parts[0] == "legendentry")
+          console.log("legendentry : "+parts[1]);
+      break;
+      case "chart_by_program_standard":
+        if (parts[0] == "vAxis") {
+          var programId = dataTable.getValue(parseInt(parts[2]), 1);
+          console.log("ProgramId :"+programId);
+        }
+        else if (parts[0] == "bar") {
+          var programId = dataTable.getValue(parseInt(parts[2]), 1);
+          var standardId = dataTable.getValue(parseInt(parts[2]), (parseInt(parts[1]) + 1) * 2 + 1);
+          console.log("programId :"+programId+",standardId :"+ standardId);
+        }
+      break;
+      case "chart_by_category_status":
+        if (parts[0] == "vAxis") {
+          var categoryId = dataTable.getValue(parseInt(parts[2]), 1);
+          console.log("categoryId :"+categoryId);
+        }
+        else if (parts[0] == "bar") {
+          var categoryId = dataTable.getValue(parseInt(parts[2]), 1);
+          var statusId = dataTable.getValue(parseInt(parts[2]), (parseInt(parts[1]) + 1) * 2 + 1);
+          console.log("programId :"+categoryId+",statusId :"+ statusId);
+        }
+      break;
+      case "plan_chart":
+        console.log("row :"+parts[2]+", col:"+parts[1]);
+      break;
+      
+    }
+  }
   chartByStatus() {
     this.c.getComplaintByStatus().subscribe((responce) => {
       // var data = this.dataTable;
