@@ -1,0 +1,23 @@
+<h3>All Complaints</h3>
+<table class="bordered">
+  <thead>
+    <tr>
+      <th data-field="id">Title</th>
+      <th data-field="name">Status</th>
+      <th data-field="price">Priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of complaints; let i = index;">
+      <td><button (click)="openModal(c)" class="btn">View</button></td>
+      <td>{{c.title}}</td>
+      <td>{{c.statusName}}</td>
+      <td>{{c.priorityName}}</td>
+    </tr>
+  </tbody>
+</table>
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>{{complaint.title}}</h4>
+  </div>
+</div>

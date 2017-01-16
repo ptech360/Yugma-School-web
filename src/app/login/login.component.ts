@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 
+declare let Materialize;
+declare var $;
+
 @Component({
   selector: 'login',
   styleUrls: ['./login.component.css'],
@@ -18,13 +21,15 @@ import { UserService } from '../services/user.service';
             <div class="form-content">
               <label>
                 <input type="text" formControlName="username" class="sd-form-control" placeholder="username">
+                <div *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username'].touched">required field</div>
               </label>
               <label>
                 <input type="password" formControlName="password" class="sd-form-control" placeholder="password">
+                <div style="margin-bottom:16px" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">required field</div>
               </label>
               <div class="form-submit">
                 <button class="btn waves-effect waves-light bcolor" type="submit">Login</button>
-                <a class="right underline" style="padding: 15px 0px 0px 0px;" href="#">Forget Passowrd</a>
+                <a class="right underline" style="padding: 15px 0px 0px 0px;" [routerLink]="['/parent/forget-password']">Forget Password</a>
               </div>
             </div>
           </form>
@@ -37,25 +42,18 @@ import { UserService } from '../services/user.service';
       </div>
     </div>
   </div>
-
-    
   `
 })
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
-    console.log("DASDAS");
+  constructor(private userService: UserService,
+              private router: Router,
+              private formBuilder: FormBuilder) {
     if (this.userService.isLoggedIn()) {
       this.router.navigateByUrl("/home");
     }
-  }
-
-  onSubmit(email, password) {
-    console.log(this.loginForm.value);
-    this.userService.login(email, password);
-    this.router.navigateByUrl("/home");
   }
 
   ngOnInit() {
@@ -64,4 +62,24 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]]
     });
   }
+
+  onSubmit(email, password) {
+    if (this.loginForm.invalid) {
+
+    } else {
+      this.userService.login(this.loginForm.value)
+      .then((res) => {
+        this.userService.getManagementInfo()
+        .then((data) => {
+          this.userService.storeManagementData(data.json());
+          location.reload();
+        });
+      }, (err) => {
+        if (err.status === 400) {
+          Materialize.toast('Invalid username or password', 4000);
+        }
+      });
+    }
+  }
+
 }

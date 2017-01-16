@@ -11,22 +11,42 @@ declare var $;
 })
 export class AppComponent implements AfterViewInit {
 
-  constructor(public userService: UserService, private router: Router) {
+  private user;
+
+  constructor(public userService: UserService,
+              private router: Router) {
+
+
+    this.user = {
+      username: localStorage.getItem("name"),
+      email: localStorage.getItem("email"),
+      role: localStorage.getItem("role")
+    }
   }
 
   ngAfterViewInit() {
+
     $('.dropdown-button').dropdown();
-    $('.button-collapse').sideNav({
-      menuWidth: 300, // Default is 240
-      edge: 'left', // Choose the horizontal origin
-      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-      draggable: true // Choose whether you can drag to open on touch screens
-    });
+    if ($( window ).width() < 376) {
+      $('.button-collapse').sideNav({
+        menuWidth: 300,
+        edge: 'left',
+        closeOnClick: true,
+        draggable: true
+      });
+    } else {
+      $('.button-collapse').sideNav({
+        menuWidth: 300,
+        edge: 'left',
+        closeOnClick: false,
+        draggable: true
+      });
+    }
   }
 
   logout() {
     this.userService.logout();
-    this.router.navigateByUrl("/login");
+    this.router.navigateByUrl("/");
   }
 
   isLoggedIn() {

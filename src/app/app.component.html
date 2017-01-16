@@ -1,34 +1,33 @@
 <nav class="tb-grey" role="navigation">
   <div class="nav-wrapper container">
-    <a href="#" id="logo-container" *ngIf="isLoggedIn()" data-activates="slide-out" class="button-collapse visible">
+    <a href="#" id="logo-container" *ngIf="isLoggedIn()" data-activates="slide-out" class="button-collapse">
       <i class="material-icons">menu</i>
     </a>
-    <ul id="slide-out" class="side-nav fixed">
+    <ul id="slide-out" class="side-nav fixed" *ngIf="isLoggedIn()">
       <li>
         <div class="userView">
-            <img class="circle align-center" src="https://pbs.twimg.com/profile_images/481231649128980480/9hpv14pc.jpeg" />
-            <span class="white-text name center-align">Tushar Balar</span>
-            <span class="white-text email center-align">tushar@nxtlife.com</span>
+          <img class="circle align-center" src="https://pbs.twimg.com/profile_images/481231649128980480/9hpv14pc.jpeg"/>
+          <span class="white-text name center-align">{{user.username}}</span>
+          <span class="white-text email center-align">{{user.email}}</span>
         </div>
       </li>
       <li><a [routerLink]="['/']" class="waves-effect waves-teal"><i class="material-icons">home</i>Home</a></li>
       <li><div class="divider"></div></li>
       <li><a class="subheader">Complaints</a></li>
-      <li><a class="waves-effect" [routerLink]="['/about']">All Complaints</a></li>
+      <li><a class="waves-effect" [routerLink]="['/complaints']">All Complaints</a></li>
       <li><a class="waves-effect" [routerLink]="['/github']">Assigned Complaints</a></li>
     </ul>
     <ul id='dropdown1' class='dropdown-content'>
       <li><a href="#!">two</a></li>
       <li class="divider"></li>
-      <li *ngIf="!isLoggedIn()"><a [routerLink]="['/login']">Login</a></li>
-      <li *ngIf="isLoggedIn()"><a href="#" (click)="logout()">Logout</a></li>
+      <li><a href="#" (click)="logout()">Logout</a></li>
     </ul>
-    <a class='dropdown-button btn' href='#' data-activates='dropdown1'>
+    <a class='dropdown-button btn' href='#' data-activates='dropdown1' *ngIf="isLoggedIn()">
       Tushar Balar <i class="material-icons right" style="margin-top: -14px;">arrow_drop_down</i>
     </a>
   </div>
 </nav>
-<main style="min-height:650px; background:#3f4e62">
+<main style="min-height:650px;">
 	<router-outlet></router-outlet>
 </main>
 <footer class="page-footer tb-grey">
