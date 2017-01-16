@@ -18,14 +18,18 @@ export class ComplaintComponent implements OnInit {
     title: ""
   }
 
+  hasData = false;
+
   constructor(private c: ComplaintService) {
   }
 
   ngOnInit() {
     $('.modal').modal();
     this.c.getComplaints().then((res) => {
+      this.hasData = true;
       this.complaints = res.json();
     }, (err) => {
+      this.hasData = true;
       console.log("err", err);
     })
   }

@@ -50,25 +50,24 @@
   </div>
 
   <h3 class="text-grey">Update Password</h3>
-  `
-  <div class="row container ">
+  <div class="row container">
     <div class="card form hoverable">
-      <form (ngSubmit)="submitForm() " [formGroup]="resetPasswordForm " novalidate>
-        <div class="form-content ">
+      <form (ngSubmit)="submitForm() " [formGroup]="resetPasswordForm" novalidate>
+        <div class="form-content">
           <label>
             Enter Old Password:
-            <input type="text " formControlName="oldPassword " class="sd-form-control ">
+            <input type="text" formControlName="oldPassword" class="sd-form-control">
           </label>
           <label>
             Enter New Password:
-            <input type="text " formControlName="newPassword " class="sd-form-control ">
+            <input type="text" formControlName="newPassword" class="sd-form-control">
           </label>
           <label>
             Confirm New Password:
-            <input type="text " formControlName="confirmPassword " class="sd-form-control ">
+            <input type="text" formControlName="confirmPassword" class="sd-form-control">
           </label>
-          <div class="form-submit ">
-            <button class="center-align btn waves-effect waves-light " type="submit ">
+          <div class="form-submit">
+            <button class="center-align btn waves-effect waves-light" type="submit ">
               Update Password
             </button>
           </div>
