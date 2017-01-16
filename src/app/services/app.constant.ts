@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers,RequestOptions } from '@angular/http';
 
+declare let Materialize;
+
 @Injectable()
 export class Configuration {
 
@@ -34,6 +36,8 @@ export class Configuration {
     return localStorage.getItem("id");
   }
 
-
+  showToast(msg) {
+    Materialize.toast(msg, 4000);
+  }
 
 }

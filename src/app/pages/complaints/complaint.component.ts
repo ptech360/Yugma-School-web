@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Configuration } from '../../services/app.constant';
 
 declare let $;
 
@@ -18,7 +19,8 @@ export class ComplaintComponent implements OnInit {
     title: ""
   }
 
-  constructor(private c: ComplaintService) {
+  constructor(private c: ComplaintService,
+              private config: Configuration) {
   }
 
   ngOnInit() {
@@ -27,6 +29,7 @@ export class ComplaintComponent implements OnInit {
       this.complaints = res.json();
     }, (err) => {
       this.complaints = [];
+      this.config.showToast("Internal server error.. Try again later");
       console.log("err", err);
     });
   }

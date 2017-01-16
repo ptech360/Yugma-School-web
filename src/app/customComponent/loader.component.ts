@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 
-declare let Materialize;
-
 @Component({
   selector: 'loader',
   templateUrl: `
@@ -18,6 +16,7 @@ declare let Materialize;
     </div>
   `
 })
+
 export class CustomLoader {
 
   @Input() condition: boolean;
