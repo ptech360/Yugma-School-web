@@ -10,7 +10,6 @@ declare var $;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
-
   private user;
 
   constructor(public userService: UserService,
@@ -28,6 +27,7 @@ export class AppComponent implements AfterViewInit {
 
     $('.dropdown-button').dropdown({
       inDuration: 300,
+      outDuration:300,
       hover: true,
       alignment: 'left'
     });

@@ -5,7 +5,7 @@
     </a>
     <ul id="slide-out" class="side-nav fixed" *ngIf="isLoggedIn()">
       <li>
-        <div class="userView">
+        <div class="userView" [routerLink]="['/account']">
           <img class="circle align-center" src="https://pbs.twimg.com/profile_images/481231649128980480/9hpv14pc.jpeg"/>
           <span class="white-text name center-align">{{user.username}}</span>
           <span class="white-text email center-align">{{user.email}}</span>
@@ -18,11 +18,16 @@
       <li><a [routerLink]="['/github']" class="waves-effect waves-teal">
         <i class="material-icons">call_received</i>Assigned Complaints</a>
       </li>
+       
+       
+       <li class="hide-on-large-only"><a (click)="logout()" class="waves-effect waves-teal"><i class="material-icons">power_settings_new</i>
+       Logout</a>
+      </li>
     </ul>
     <ul id='dropdown1' class='dropdown-content user-account z-depth-3 hide-on-med-and-down' *ngIf="isLoggedIn()">
       <li>
         <a [routerLink]="['/account']" class="waves-effect white-text">Account
-          <i class="material-icons right">visibility_off</i> 
+          <i class="material-icons right">contacts</i> 
         </a>
       </li>
       <li>

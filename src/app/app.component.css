@@ -28,7 +28,9 @@ User Dropdown (black):#42374d
 .side-nav li a i{
   color:inherit;
 }
-
+.userView:hover{
+  background:#3a3144;
+}
 
 .userView .circle{
   width:150px !important;
@@ -76,13 +78,9 @@ header, main, footer {
     right: 0;
     z-index: 100;
     position: absolute;
-    border-radius: 4px 0px 4px 4px;
     background-color: #42374d;
 }
-.user-account li:hover{
-  font-size:12px;
-  height:70%;
-}
+
 .user-account li:hover{
   background:rgba(51, 51, 51, 0.1);
 }
