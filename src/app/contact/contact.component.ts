@@ -37,8 +37,7 @@ export class ContactComponent implements OnInit {
       this.userService.resetPassword(this.resetPasswordForm.value)
       .then((res) => {
         this.router.navigate(["/home"]);
-        this.commonToast("Password reset successfully");
-        console.log("reset password", res);
+        this.commonToast("Update password successfully");
       }, (err) => {
         if(err.status === 401) {
           this.commonToast("You have entered wrong old password");
