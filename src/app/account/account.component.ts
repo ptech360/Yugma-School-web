@@ -6,12 +6,12 @@ import { UserService } from '../services/user.service';
 declare let Materialize;
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact-component.css']
+  selector: 'app-account',
+  templateUrl: './account.component.html',
+  styleUrls: ['./account-component.css']
 })
 
-export class ContactComponent implements OnInit {
+export class AccountComponent implements OnInit {
 
   resetPasswordForm: FormGroup;
 

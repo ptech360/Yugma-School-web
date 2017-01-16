@@ -12,13 +12,24 @@
         </div>
       </li>
       <li><a [routerLink]="['/']" class="waves-effect waves-teal"><i class="material-icons">home</i>Home</a></li>
-      <li><div class="divider"></div></li>
-      <li><a class="subheader">Complaints</a></li>
-      <li><a class="waves-effect" [routerLink]="['/complaints']">All Complaints</a></li>
-      <li><a class="waves-effect" [routerLink]="['/github']">Assigned Complaints</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header waves-effect waves-teal"> Complaints
+              <i class="material-icons">thumb_down</i>
+            </a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a [routerLink]="['/complaints']">All Complaints</a></li>
+                <li><a [routerLink]="['/github']">Assigned Complaints</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
     </ul>
     <ul id='dropdown1' class='dropdown-content'>
-      <li><a href="#!">two</a></li>
+      <li><a class="waves-effect" [routerLink]="['/account']">Account</a></li>
       <li class="divider"></li>
       <li><a href="#" (click)="logout()">Logout</a></li>
     </ul>

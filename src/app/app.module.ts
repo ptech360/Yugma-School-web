@@ -13,7 +13,7 @@ import { RepoBrowserComponent } from './github/repo-browser/repo-browser.compone
 import { RepoListComponent } from './github/repo-list/repo-list.component';
 import { RepoDetailComponent } from './github/repo-detail/repo-detail.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { ContactComponent } from './contact/contact.component';
+import { AccountComponent } from './account/account.component';
 
 // custom component
 import { GoogleChart } from './customComponent/chart.directive';
@@ -37,7 +37,7 @@ import { ComplaintService } from './services/complaint.service';
     RepoListComponent,
     RepoDetailComponent,
     HomeComponent,
-    ContactComponent,
+    AccountComponent,
     LoginComponent,
     ForgetPasswordComponent,
     ParentComponent
