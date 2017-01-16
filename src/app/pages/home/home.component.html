@@ -1,8 +1,22 @@
 <div class="container">
-  <div class="row">
-    <div class="col l6">
-      <div style='height: 400px; width: 400px;' GoogleChart id="pie_chart" [chartData]="pie_ChartData" [chartOptions] = "pie_ChartOptions" chartType="PieChart"> </div>
+  <div class="row" >    
+    <div class="col l12">
+      <div style='height: 400px; width: 100%;' GoogleChart id="complaint_chart_by_status" [chartData]="complaintByStatus" [chartOptions] = "pie_ChartOptions" chartType="PieChart"  (onSelected) = "onSelected($event)"> </div>
     </div>
-    <div class="col l6"></div>
+    <div class="col l12">
+      <div style='height: 400px; width: 100%;' GoogleChart id="chart_of_below_permance" [chartData]="belowPerformance" [chartOptions] = "belowPerformanceChartOptions" chartType="PieChart" (onSelected) = "onSelected($event)"> </div>
+    </div> 
+    <div class="col l12">
+      <div style='height: 400px; width: 100%;' GoogleChart id="chart_by_program_standard" [chartData]="complaintByProgramAndStandard" [chartOptions] = "ProgramAndStandardChartOptions" chartType="BarChart" (onSelected) = "onSelected($event)"> </div>
+    </div>       
+    <div class="col l12">
+      <div style='height: 600px; width: 100%;' GoogleChart id="chart_by_category_status" [chartData]="complaintByCategoryAndStatus" [chartOptions] = "categoryAndStatusChartOptions" chartType="BarChart" (onSelected) = "onSelected($event)"> </div>
+    </div>
+    <div class="col l12">
+      <div style='height: 400px; width: 100%;' GoogleChart id="plan_chart" [chartData]="plansOfBelowPerformer" [chartOptions] = "plansChartOptions" chartType="ColumnChart" (onSelected) = "onSelected($event)" > </div>
+    </div>    
   </div>
 </div>
+<button class="btn waves-effect waves-light" (click)="logout()">Logout
+  <i class="material-icons right">send</i>
+</button>
