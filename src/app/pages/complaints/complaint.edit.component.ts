@@ -25,7 +25,10 @@ declare let Materialize;
               <input type="text" name="name" [(ngModel)]="assignedEmployeeName" (focus)="employeesList()" class="sd-form-control validate">
             </label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s6" *ngIf="employees">
+            <div class="input-field col s6 l4 right">
+              <input placeholder="Search" type="text" class="validate searchBox" (keyup)="searchEmployees($event)">
+            </div>
             <ul class="collection" *ngFor="let e of employees">
               <li class="collection-item dismissable" (click)="selectEmployee(e)"><div>{{e.name}}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
             </ul>
@@ -56,6 +59,7 @@ declare let Materialize;
 export class EditComplaint {
 
   employees;
+  employeesCOPY;
   assignedEmployeeName: string;
 
   constructor(private location: Location,
@@ -71,6 +75,7 @@ export class EditComplaint {
     this.c.editInfo()
     .then((res) => {
       this.employees = res.json().employees;
+      this.employeesCOPY = res.json().employees;
       console.log("DSDSD", this.employees);
     }, (err) => {
       console.log("errr", err)
@@ -84,6 +89,27 @@ export class EditComplaint {
   }
 
   editComplaint() {
+
+  }
+
+  loadEmployees() {
+    this.employees = this.employeesCOPY;
+  }
+
+  searchEmployees(ev: any) {
+    console.log("DASDASD", ev.target.value)
+
+    this.loadEmployees();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.employees = this.employeesCOPY.filter((item) => {
+        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
 
   }
 
