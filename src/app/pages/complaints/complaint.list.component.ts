@@ -60,18 +60,9 @@ export class ComplaintListComponent implements OnInit, AfterContentInit {
   }
 
   openEditModal(complaint) {
-    // this.complaint = complaint;
-    // $('#editModal').modal('open');
-    // $('select').material_select();
+    this.complaint = complaint;
     this.router.navigate(["/complaints/edit"]);
-    this.c.editInfo()
-    .then((res) => {
-      console.log("DSDSD", res.json().employees);
-      let employees = res.json().employees;
 
-    }, (err) => {
-      console.log("errr", err)
-    });
   }
 
   previousComplaint() {
