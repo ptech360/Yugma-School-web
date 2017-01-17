@@ -32,7 +32,6 @@ export class ComplaintComponent implements OnInit {
   }
 
   getComplaints() {
-    this.complaints = [];
     this.c.getComplaints(this.currentPage).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
@@ -53,11 +52,13 @@ export class ComplaintComponent implements OnInit {
   }
 
   previousComplaint() {
+    delete this.complaints;
     this.currentPage -= 1;
     this.getComplaints();
   }
 
   nextComplaint() {
+    delete this.complaints;
     this.currentPage += 1;
     this.getComplaints();
   }
