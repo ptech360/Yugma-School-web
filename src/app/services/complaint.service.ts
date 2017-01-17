@@ -20,19 +20,21 @@ export class ComplaintService {
   }
 
   getComplaints(pageNo) {
-
     let options = this.config.getHeaderWithWeb();
     return this.http.get(this.baseUrl + "/complaint/page/" + pageNo, options)
     .toPromise()
-    .then(response => {
+    .then((response) => {
       return Promise.resolve(response);
-    }).catch(err => { return Promise.reject(err); });
+    }).catch((err) => { return Promise.reject(err); });
   }
 
-  // editInfo() {
-  //   return this.http.get(this.baseUrl + "/edit-info", this.options).map((res: Response) => {
-  //     return res;
-  //   }).catch((error: any) => Observable.throw(error || 'server error'));
-  // }
+  editInfo() {
+    let options = this.config.getHeaderWithoutWeb();
+    return this.http.get(this.baseUrl + "/complaint/edit-info", options)
+    .toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
+  }
 
 }

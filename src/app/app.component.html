@@ -12,14 +12,14 @@
         </div>
       </li>
       <li><a [routerLink]="['/']" class="waves-effect waves-teal"><i class="material-icons">home</i>Home</a></li>
-      <li><a [routerLink]="['/complaints']" class="waves-effect waves-teal"><i class="material-icons">thumb_down</i>
+      <li><a [routerLink]="['/complaints/list']" class="waves-effect waves-teal"><i class="material-icons">thumb_down</i>
         All Complaints</a>
       </li>
       <li><a [routerLink]="['/github']" class="waves-effect waves-teal">
         <i class="material-icons">call_received</i>Assigned Complaints</a>
       </li>
-       
-       
+
+
        <li class="hide-on-large-only"><a (click)="logout()" class="waves-effect waves-teal"><i class="material-icons">power_settings_new</i>
        Logout</a>
       </li>
@@ -27,7 +27,7 @@
     <ul id='dropdown1' class='dropdown-content user-account z-depth-3 hide-on-med-and-down' *ngIf="isLoggedIn()">
       <li>
         <a [routerLink]="['/account']" class="waves-effect white-text">Account
-          <i class="material-icons right">contacts</i> 
+          <i class="material-icons right">contacts</i>
         </a>
       </li>
       <li>

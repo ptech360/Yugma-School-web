@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterContentInit} from '@angular/core';
 import { Configuration } from '../../services/app.constant';
+import { Router } from '@angular/router';
 
 declare let $;
 
@@ -7,12 +8,12 @@ declare let $;
 import { ComplaintService } from '../../services/complaint.service';
 
 @Component({
-  selector: 'complaints',
+  selector: 'complaint-list',
   styleUrls: ['./complaint.component.css'],
   templateUrl: './complaint.component.html'
 })
 
-export class ComplaintComponent implements OnInit {
+export class ComplaintListComponent implements OnInit, AfterContentInit {
 
   private complaints;
   private EmptyComplaints: boolean = false;
@@ -23,19 +24,19 @@ export class ComplaintComponent implements OnInit {
   private currentPage = 1;
 
   constructor(private c: ComplaintService,
+              private router: Router,
               private config: Configuration) {
+                console.log("DASD11111")
   }
 
   ngOnInit() {
+    console.log("DASD")
     $('.modal').modal();
-    $('input.autocomplete').autocomplete({
-      data: {
-        "Apple": null,
-        "Microsoft": null,
-        "Google": 'http://placehold.it/250x250'
-      }
-    });
     this.getComplaints();
+  }
+
+  ngAfterContentInit() {
+    console.log("2222")
   }
 
   getComplaints() {
@@ -59,8 +60,18 @@ export class ComplaintComponent implements OnInit {
   }
 
   openEditModal(complaint) {
-    this.complaint = complaint;
-    $('#editModal').modal('open');
+    // this.complaint = complaint;
+    // $('#editModal').modal('open');
+    // $('select').material_select();
+    this.router.navigate(["/complaints/edit"]);
+    this.c.editInfo()
+    .then((res) => {
+      console.log("DSDSD", res.json().employees);
+      let employees = res.json().employees;
+
+    }, (err) => {
+      console.log("errr", err)
+    });
   }
 
   previousComplaint() {
