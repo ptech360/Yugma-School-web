@@ -20,6 +20,7 @@ import { GoogleChart } from './customComponent/chart.directive';
 import { LoginComponent } from './pages/login/login.component';
 import { ParentComponent } from './pages/login/parent'
 import { ForgetPasswordComponent } from './pages/login/forget.password.component';
+import { CustomLoader } from './customComponent/loader.component';
 
 // import service
 import { ChartService } from './services/chart.service';
@@ -40,7 +41,8 @@ import { ComplaintService } from './services/complaint.service';
     AccountComponent,
     LoginComponent,
     ForgetPasswordComponent,
-    ParentComponent
+    ParentComponent,
+    CustomLoader
   ],
   imports: [
     BrowserModule,

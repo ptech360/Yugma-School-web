@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Configuration } from '../../services/app.constant';
 
 declare let $;
 
@@ -14,25 +15,52 @@ import { ComplaintService } from '../../services/complaint.service';
 export class ComplaintComponent implements OnInit {
 
   private complaints;
+  private EmptyComplaints: boolean = false;
   private complaint = {
     title: ""
   }
 
-  constructor(private c: ComplaintService) {
+  private currentPage = 1;
+
+  constructor(private c: ComplaintService,
+              private config: Configuration) {
   }
 
   ngOnInit() {
     $('.modal').modal();
-    this.c.getComplaints().then((res) => {
-      this.complaints = res.json();
+    this.getComplaints();
+  }
+
+  getComplaints() {
+    this.c.getComplaints(this.currentPage).then((res) => {
+      if (res.status === 204) {
+        this.EmptyComplaints = true;
+      } else {
+        this.EmptyComplaints = false;
+        this.complaints = res.json();
+      }
     }, (err) => {
+      this.complaints = [];
+      this.config.showToast("Internal server error.. Try again later");
       console.log("err", err);
-    })
+    });
   }
 
   openModal(complaint) {
     this.complaint = complaint;
     $('#modal1').modal('open');
+  }
+
+  previousComplaint() {
+    delete this.complaints;
+    this.currentPage -= 1;
+    this.getComplaints();
+  }
+
+  nextComplaint() {
+    delete this.complaints;
+    this.currentPage += 1;
+    this.getComplaints();
   }
 
 }

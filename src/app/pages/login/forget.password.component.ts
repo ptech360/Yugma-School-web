@@ -3,12 +3,15 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 
+import { Configuration } from '../../services/app.constant';
+
 declare let Materialize;
 
 @Component({
   selector: 'forget-password',
   styleUrls: ['./login.component.css'],
   template: `
+  <loader [condition]="otpSent"></loader>
   <div class="row valign-wrapper">
     <div class="col valign">
       <div class="card">
@@ -37,9 +40,11 @@ declare let Materialize;
 export class ForgetPasswordComponent implements OnInit {
 
   forgetPasswordForm: FormGroup;
+  otpSent: boolean = false;
 
   constructor(private userService: UserService,
               private router: Router,
+              private config: Configuration,
               private formBuilder: FormBuilder) {
 
   }
@@ -54,12 +59,15 @@ export class ForgetPasswordComponent implements OnInit {
     if (this.forgetPasswordForm.invalid) {
 
     } else {
+      this.otpSent = true;
       this.userService.forgetPassword(this.forgetPasswordForm.value)
       .then((res) => {
+        this.otpSent = false;
         this.router.navigate(["/"]);
-        Materialize.toast('New password successfully sent to your registered contact number', 4000);
+        this.config.showToast("New password successfully sent to your registered contact number");
       }, (err) => {
-        Materialize.toast('Username not matched', 4000);
+        this.otpSent = false;
+        this.config.showToast("Username not matched");
       });
     }
   }

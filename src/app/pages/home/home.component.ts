@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {Component, OnInit, ViewChild} from '@angular/core';
+=======
+import {Component, OnInit,ViewChild,AfterViewInit} from '@angular/core';
+>>>>>>> 1ab0a407c95bb7f64206a03d9d66626056ada52a
 
 // import service
 import { ChartService } from '../../services/chart.service';
@@ -8,6 +12,7 @@ import { UserService } from '../../services/user.service';
 import { GoogleChart} from '../../customComponent/chart.directive';
 
 declare let google;
+declare let $;
 
 @Component({
   selector: 'home',
@@ -15,8 +20,13 @@ declare let google;
   templateUrl: './home.component.html',
 })
 
+<<<<<<< HEAD
 export class HomeComponent implements OnInit {
   @ViewChild(GoogleChart) vc: GoogleChart;
+=======
+export class HomeComponent implements OnInit, AfterViewInit {
+  @ViewChild(GoogleChart) vc:GoogleChart;
+>>>>>>> 1ab0a407c95bb7f64206a03d9d66626056ada52a
   public dataTable;
   public complaintByStatus;
   public pie_ChartOptions;
@@ -44,9 +54,20 @@ export class HomeComponent implements OnInit {
       this.chartByCategoryAndStatus();
       this.chartByPlans();
     }, 1000);
+
   }
+<<<<<<< HEAD
   onSelected(data) {
     var dataTable = data.wrapper.getDataTable();
+=======
+
+   ngAfterViewInit(){
+    $('.modal').modal();
+   }
+
+  onSelected(data){
+    var dataTable = data.wrapper.getDataTable();    
+>>>>>>> 1ab0a407c95bb7f64206a03d9d66626056ada52a
     var parts = data.e.targetID.split('#');
 
     switch (data.chartId.id) {
@@ -240,4 +261,9 @@ export class HomeComponent implements OnInit {
     });
 
   }
+
+
+
+
+  
 }
