@@ -61,3 +61,6 @@ thead{
 .col-l{
   border-left:1px solid #d0d0d0;
 }
+.loader{
+  margin-top:10px;
+}
