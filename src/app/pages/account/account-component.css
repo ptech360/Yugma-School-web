@@ -23,3 +23,19 @@
   margin-left:auto;
   margin-right:auto;
 }
+.title{
+  font-size: 30px;
+    padding: 28px !important;
+    font-weight: bold !important;
+    color: #616161 !important;
+}
+.profile-card{
+      width: 400px;
+          display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-card tr td{
+      padding-left:20px;
+}
