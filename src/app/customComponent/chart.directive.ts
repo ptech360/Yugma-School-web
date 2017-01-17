@@ -51,16 +51,13 @@ export class GoogleChart {
       }
       
       function selectHandler(e) {
-        console.log(e);
         that.selectedData={};
         that.selectedData = {
           wrapper:wrapper,
-          chartId:ele.id,
+          chartId:ele,
           e:e
         }
         that.onSelected.emit(that.selectedData);
-        // console.log("DSAD", wrapper.getDataTable().getValue(selectedRow, 2));
-        // wrapper.getChart().setSelection([]);
       }
     }
   }

@@ -4,6 +4,7 @@
       <div style='height: 400px; width: 100%;' GoogleChart id="complaint_chart_by_status" [chartData]="complaintByStatus" [chartOptions] = "pie_ChartOptions" chartType="PieChart"  (onSelected) = "onSelected($event)"> </div>
     </div>
     <div class="col l12">
+      <button *ngIf="drilled" (click)="back()">Prev</button>
       <div style='height: 400px; width: 100%;' GoogleChart id="chart_of_below_permance" [chartData]="belowPerformance" [chartOptions] = "belowPerformanceChartOptions" chartType="PieChart" (onSelected) = "onSelected($event)"> </div>
     </div> 
     <div class="col l12">
