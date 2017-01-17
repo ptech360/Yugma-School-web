@@ -1,14 +1,16 @@
 <h3>All Complaints</h3>
 <loader [condition]="!complaints"></loader>
+<button (click)="previousComplaint()" class="btn" [disabled]="currentPage === 1">Previous</button>
+<button (click)="nextComplaint()" class="btn"  [disabled]="EmptyComplaints">Next</button>
 <table class="bordered">
   <thead>
     <tr>
       <th></th>
       <th></th>
       <th data-field="id">Title</th>
+      <th data-field="price">StudentName</th>
       <th data-field="name">Status</th>
       <th data-field="price">Priority</th>
-      <th data-field="price">StudentName</th>
     </tr>
   </thead>
   <tbody>
@@ -16,12 +18,13 @@
       <td><button (click)="openModal(c)" class="btn">View</button></td>
       <td><button (click)="openModal(c)" class="btn">Edit</button></td>
       <td>{{c.title}}</td>
+      <td>{{c.studentName}}</td>
       <td>{{c.statusName}}</td>
       <td>{{c.priorityName}}</td>
-      <td>{{c.studentName}}</td>
     </tr>
   </tbody>
 </table>
+
 <div id="modal1" class="modal">
   <div class="modal-content">
     <h4>{{complaint.title}}</h4>

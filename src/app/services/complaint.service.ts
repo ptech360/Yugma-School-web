@@ -27,7 +27,7 @@ export class ComplaintService {
   }
 
   getComplaints(pageNo) {
-    let options = this.config.getHeader();
+    let options = this.config.getHeaderWithWeb();
     return this.http.get(this.complaintUrl + pageNo, options)
     .toPromise()
     .then(response => {

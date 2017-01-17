@@ -27,7 +27,7 @@ export class UserService {
   }
 
   getManagementInfo() {
-    let options = this.config.getHeader();
+    let options = this.config.getHeaderWithoutWeb();
     return this.http.get(this.url + "/management/info", options)
     .toPromise()
     .then((res) => {
@@ -64,7 +64,7 @@ export class UserService {
   }
 
   resetPassword(data) {
-    let options = this.config.getHeader();
+    let options = this.config.getHeaderWithoutWeb ();
     let userId = this.config.getUserId();
     return this.http.put(this.url + "/management/" + userId + "/password", data, options)
     .toPromise()
