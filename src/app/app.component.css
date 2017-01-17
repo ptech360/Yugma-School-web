@@ -53,7 +53,7 @@ User Dropdown (black):#42374d
 }
 
 header, main, footer {
-  padding-left: 340px;
+  padding-left: 300px;
 }
 
 @media only screen and (max-width : 992px) {
