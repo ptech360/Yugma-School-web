@@ -67,67 +67,89 @@
       </div>
     </div>
   </div>
-
 </div>
 
 
-<div>
+<div (window:resize)="onResize($event)">
   <div class="row">
     <div class="col l6 s12">
       <div class="card hoverable ">
-        <i data-target="graph4" class="material-icons icon-button">aspect_ratio</i>
-        <div class="graph-table-cell" GoogleChart id="complaint_chart_by_status" [chartData]="complaintByStatus" [chartOptions]="pie_ChartOptions"
-          chartType="PieChart" (onSelected)="onSelected($event)"> </div>
+        <i data-target="graph1" class="material-icons icon-button" (click)="expand(1)">aspect_ratio</i>
+        <div class="graph-table-cell" GoogleChart id="complaint_chart_by_status" [chartData]="complaintByStatus" [chartOptions]="pie_ChartOptions" chartType="PieChart" (onSelected)="onSelected($event)" > </div>
       </div>
     </div>
 
     <div class="col l6 s12">
       <div class="card hoverable ">
-        <i data-target="graph4" class="material-icons icon-button">aspect_ratio</i>
-        <div class="graph-table-cell" GoogleChart id="chart_of_below_permance" [chartData]="belowPerformance" [chartOptions]="belowPerformanceChartOptions"
-          chartType="PieChart" (onSelected)="onSelected($event)"> </div>
+        <i data-target="graph2" class="material-icons icon-button" (click)="expand(2)">aspect_ratio</i>
+        <button *ngIf="drilled" (click)="back()">Prev</button>
+        <div class="graph-table-cell" GoogleChart id="chart_of_below_permance" [chartData]="belowPerformance" [chartOptions]="belowPerformanceChartOptions" chartType="PieChart" (onSelected)="onSelected($event)"> </div>
       </div>
     </div>
 
     <div class="col l6 s12">
       <div class="card hoverable ">
-        <i data-target="graph4" class="material-icons icon-button">aspect_ratio</i>
-        <div class="graph-table-cell" GoogleChart id="chart_by_program_standard" [chartData]="complaintByProgramAndStandard"
-          [chartOptions]="ProgramAndStandardChartOptions" chartType="BarChart" (onSelected)="onSelected($event)"> </div>
+        <i data-target="graph3" class="material-icons icon-button" (click)="expand(3)">aspect_ratio</i>
+        <div class="graph-table-cell" GoogleChart id="chart_by_program_standard" [chartData]="complaintByProgramAndStandard" [chartOptions]="ProgramAndStandardChartOptions"
+        chartType="BarChart" (onSelected)="onSelected($event)"> </div>
       </div>
     </div>
 
     <div class="col l6 s12">
       <div class="card hoverable">
-        <i data-target="graph3" class="material-icons icon-button">aspect_ratio</i>
+        <i data-target="graph4" class="material-icons icon-button" (click)="expand(4)">aspect_ratio</i>
         <div class=" graph-table-cell" GoogleChart id="chart_by_category_status" [chartData]="complaintByCategoryAndStatus" [chartOptions]="categoryAndStatusChartOptions"
-          chartType="BarChart" (onSelected)="onSelected($event)"> </div>
+        chartType="BarChart" (onSelected)="onSelected($event)"> </div>
       </div>
     </div>
 
     <div class="col l6 s12">
       <div class="card hoverable ">
-        <i data-target="graph4" (click)="openModal(plan_chart)" class="material-icons icon-button">aspect_ratio</i>
+        <i data-target="graph5" class="material-icons icon-button" (click)="expand(5)">aspect_ratio</i>
         <div class="graph-table-cell" GoogleChart id="plan_chart" [chartData]="plansOfBelowPerformer" [chartOptions]="plansChartOptions" chartType="ColumnChart" (onSelected)="onSelected($event)"> </div>
       </div>
     </div>
-
   </div>
 </div>
 
 
+
+
+<div id="graph1" class="modal" style="height:500px">
+  <i class="material-icons modal-close right icon-button">call_received</i>
+  <div class="modal-content">
+    <h4>Graph Name</h4>
+    <div class="graph-table-cell" GoogleChart id="complaint_chart_by_status1" [chartData]="complaintByStatus" [chartOptions]="pie_ChartOptions" chartType="PieChart" (onSelected)="onSelected($event)" > </div>
+  </div>
+</div>
+<div id="graph2" class="modal" style="height:500px">
+  <i class="material-icons modal-close right icon-button">call_received</i>
+  <div class="modal-content">
+    <h4>Graph Name</h4>
+    <button *ngIf="drilled" (click)="back()">Prev</button>
+    <div class="graph-table-cell" GoogleChart id="chart_of_below_permance1" [chartData]="belowPerformance" [chartOptions]="belowPerformanceChartOptions" chartType="PieChart" (onSelected)="onSelected($event)"> </div>
+  </div>
+</div>
 <div id="graph3" class="modal" style="height:500px">
   <i class="material-icons modal-close right icon-button">call_received</i>
   <div class="modal-content">
     <h4>Graph Name</h4>
-    <div class=" graph-table-cell" GoogleChart id="chart_by_category_status1" [chartData]="complaintByCategoryAndStatus" [chartOptions]="categoryAndStatusChartOptions"
-      chartType="BarChart" (onSelected)="onSelected($event)"> </div>
+    <div class="graph-table-cell" GoogleChart id="chart_by_program_standard1" [chartData]="complaintByProgramAndStandard" [chartOptions]="ProgramAndStandardChartOptions"
+        chartType="BarChart" (onSelected)="onSelected($event)"> </div>
   </div>
 </div>
 <div id="graph4" class="modal" style="height:500px">
   <i class="material-icons modal-close right icon-button">call_received</i>
   <div class="modal-content">
     <h4>Graph Name</h4>
-    <div class="graph-table-cell" GoogleChart id="plan_chart1" [chartData]="plansOfBelowPerformer" [chartOptions]="plansChartOptions" chartType="ColumnChart" (onSelected)="onSelected($event)"> </div>
+    <div class=" graph-table-cell" GoogleChart id="chart_by_category_status1" [chartData]="complaintByCategoryAndStatus" [chartOptions]="categoryAndStatusChartOptions"
+        chartType="BarChart" (onSelected)="onSelected($event)"> </div>
+  </div>
+</div>
+<div id="graph5" class="modal" style="height:500px">
+  <i class="material-icons modal-close right icon-button">call_received</i>
+  <div class="modal-content">
+    <h4>Graph Name</h4>
+    <div class="graph graph-table-cell" GoogleChart id="plan_chart1" name="modal" [chartData]="plansOfBelowPerformer" [chartOptions]="plansChartOptions" chartType="ColumnChart" (onSelected)="onSelected($event)"> </div>
   </div>
 </div>
