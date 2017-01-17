@@ -3,7 +3,7 @@ Colors:
 Login heading: #495a72
 Login footer: #495a72
 */
-
+@import url('../../../style.css'); 
 .valign{
   display: block;
   margin-left: auto;

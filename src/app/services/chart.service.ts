@@ -14,7 +14,7 @@ export class ChartService {
   }
 
   public getComplaintByStatus() {
-    return this.http.get("https://yugmasrgstesting.appspot.com/director/3718285666/complaint/status").map(res => {
+    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/complaint/status").map(res => {
       return res;
     });
   }
