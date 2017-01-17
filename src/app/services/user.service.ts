@@ -44,6 +44,7 @@ export class UserService {
     localStorage.setItem("username", management.username);
     localStorage.setItem("nickName", management.nickName);
     localStorage.setItem('role', management.role);
+    this.config.buildUrl();
   }
 
   logout() {

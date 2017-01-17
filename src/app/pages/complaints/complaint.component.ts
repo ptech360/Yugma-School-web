@@ -28,6 +28,13 @@ export class ComplaintComponent implements OnInit {
 
   ngOnInit() {
     $('.modal').modal();
+    $('input.autocomplete').autocomplete({
+      data: {
+        "Apple": null,
+        "Microsoft": null,
+        "Google": 'http://placehold.it/250x250'
+      }
+    });
     this.getComplaints();
   }
 
@@ -49,6 +56,11 @@ export class ComplaintComponent implements OnInit {
   openModal(complaint) {
     this.complaint = complaint;
     $('#modal1').modal('open');
+  }
+
+  openEditModal(complaint) {
+    this.complaint = complaint;
+    $('#editModal').modal('open');
   }
 
   previousComplaint() {

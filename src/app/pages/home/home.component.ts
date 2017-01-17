@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
    }
 
   onSelected(data){
-    var dataTable = data.wrapper.getDataTable();    
+    var dataTable = data.wrapper.getDataTable();
     var parts = data.e.targetID.split('#');
 
     switch(data.chartId){
@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       case "plan_chart":
         console.log("row :"+parts[2]+", col:"+parts[1]);
       break;
-      
+
     }
   }
   chartByStatus() {
@@ -214,11 +214,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.plansOfBelowPerformer = data;
       this.plansChartOptions = {};
     });
-     
+
+  }
+
+  openModal(whichId) {
+    console.log("SASASASASA",whichId, document.getElementById(whichId));
+    $('#modal1').modal('open');
   }
 
 
 
 
-  
+
 }

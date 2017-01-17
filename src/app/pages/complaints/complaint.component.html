@@ -16,7 +16,7 @@
   <tbody>
     <tr *ngFor="let c of complaints; let i = index;">
       <td><button (click)="openModal(c)" class="btn">View</button></td>
-      <td><button (click)="openModal(c)" class="btn">Edit</button></td>
+      <td><button (click)="openEditModal(c)" class="btn">Edit</button></td>
       <td>{{c.title}}</td>
       <td>{{c.studentName}}</td>
       <td>{{c.statusName}}</td>
@@ -43,5 +43,25 @@
     <button  class="waves-effect waves-light btn"><i class="material-icons left">clear</i>Close</button>&nbsp;
     <button  class="waves-effect waves-light btn"><i class="material-icons left">create</i>Edit</button>&nbsp;
     <button  class="waves-effect waves-light btn"><i class="material-icons left">comment</i>Comment</button>
+  </div>
+</div>
+
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <h4>Modal Header</h4>
+    <div class="row">
+      <div class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">textsms</i>
+            <input type="text" id="autocomplete-input" class="autocomplete">
+            <label for="autocomplete-input">Autocomplete</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
   </div>
 </div>

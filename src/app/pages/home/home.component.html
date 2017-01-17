@@ -99,7 +99,7 @@
 
     <div class="col l6 s12">
       <div class="card hoverable">
-        <i data-target="graph4" class="material-icons icon-button">aspect_ratio</i>
+        <i data-target="graph3" class="material-icons icon-button">aspect_ratio</i>
         <div class=" graph-table-cell" GoogleChart id="chart_by_category_status" [chartData]="complaintByCategoryAndStatus" [chartOptions]="categoryAndStatusChartOptions"
           chartType="BarChart" (onSelected)="onSelected($event)"> </div>
       </div>
@@ -107,9 +107,8 @@
 
     <div class="col l6 s12">
       <div class="card hoverable ">
-        <i data-target="graph4" class="material-icons icon-button">aspect_ratio</i>
-        <div class="graph-table-cell" GoogleChart id="plan_chart" [chartData]="plansOfBelowPerformer" [chartOptions]="plansChartOptions"
-          chartType="ColumnChart" (onSelected)="onSelected($event)"> </div>
+        <i data-target="graph4" (click)="openModal(plan_chart)" class="material-icons icon-button">aspect_ratio</i>
+        <div class="graph-table-cell" GoogleChart id="plan_chart" [chartData]="plansOfBelowPerformer" [chartOptions]="plansChartOptions" chartType="ColumnChart" (onSelected)="onSelected($event)"> </div>
       </div>
     </div>
 
@@ -117,12 +116,18 @@
 </div>
 
 
-
+<div id="graph3" class="modal" style="height:500px">
+  <i class="material-icons modal-close right icon-button">call_received</i>
+  <div class="modal-content">
+    <h4>Graph Name</h4>
+    <div class=" graph-table-cell" GoogleChart id="chart_by_category_status1" [chartData]="complaintByCategoryAndStatus" [chartOptions]="categoryAndStatusChartOptions"
+      chartType="BarChart" (onSelected)="onSelected($event)"> </div>
+  </div>
+</div>
 <div id="graph4" class="modal" style="height:500px">
   <i class="material-icons modal-close right icon-button">call_received</i>
   <div class="modal-content">
     <h4>Graph Name</h4>
-    <div GoogleChart [chartData]="complaintByCategoryAndStatus" [chartOptions]="categoryAndStatusChartOptions" chartType="BarChart"
-      (onSelected)="onSelected($event)"> </div>
+    <div class="graph-table-cell" GoogleChart id="plan_chart1" [chartData]="plansOfBelowPerformer" [chartOptions]="plansChartOptions" chartType="ColumnChart" (onSelected)="onSelected($event)"> </div>
   </div>
 </div>
