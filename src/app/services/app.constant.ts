@@ -7,6 +7,10 @@ declare let Materialize;
 export class Configuration {
 
   private headers;
+  private loggedInUser = {
+    role: '',
+    userId: ''
+  }
 
   constructor() {
 
@@ -15,9 +19,9 @@ export class Configuration {
   private url: string = "https://yugmasrgstesting.appspot.com";
   // private url: string = "http://desktop-nj52npk:8080/YUGMASRGSUT";
 
-  getUrl() {
-    return this.url;
-  }
+  // getUrl() {
+  //   return this.url;
+  // }
 
   getHeaderWithWeb() {
     this.headers = new Headers({
@@ -52,6 +56,18 @@ export class Configuration {
 
   getUserId() {
     return localStorage.getItem("id");
+  }
+
+  public baseUrl;
+
+  buildUrl() {
+    this.loggedInUser.role = this.getRole();
+    this.loggedInUser.userId = this.getUserId();
+    this.baseUrl = this.url + "/" + this.loggedInUser.role + "/" + this.loggedInUser.userId;
+  }
+
+  getUrl() {
+    return this.baseUrl;
   }
 
   showToast(msg) {

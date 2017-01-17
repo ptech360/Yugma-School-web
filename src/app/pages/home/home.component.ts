@@ -282,8 +282,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   }
 
-
-
-
-
+  openModal(whichId) {
+    console.log("SASASASASA",whichId, document.getElementById(whichId));
+    $('#modal1').modal('open');
+  }
 }
