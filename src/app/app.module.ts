@@ -7,7 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
-import { ComplaintComponent } from './pages/complaints/complaint.component';
+import { ComplaintComponent } from './pages/complaints/complaint';
+import { ComplaintListComponent } from './pages/complaints/complaint.list.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RepoBrowserComponent } from './pages/github/repo-browser/repo-browser.component';
 import { RepoListComponent } from './pages/github/repo-list/repo-list.component';
@@ -21,6 +22,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ParentComponent } from './pages/login/parent'
 import { ForgetPasswordComponent } from './pages/login/forget.password.component';
 import { CustomLoader } from './customComponent/loader.component';
+import { EditComplaint } from './pages/complaints/complaint.edit.component';
 
 // import service
 import { ChartService } from './services/chart.service';
@@ -31,9 +33,11 @@ import { ComplaintService } from './services/complaint.service';
 
 @NgModule({
   declarations: [
+    EditComplaint,
     GoogleChart,
     AppComponent,
     ComplaintComponent,
+    ComplaintListComponent,
     RepoBrowserComponent,
     RepoListComponent,
     RepoDetailComponent,

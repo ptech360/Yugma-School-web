@@ -1,12 +1,12 @@
 
 <div class="table-content">
-  
+
   <div class="row table-title-box">
     <div class="col l10 s6 col1">
       All <span class="table-title-text">Complaints</span>
     </div>
     <div class="col l2 s6 col-l">
-      <a class="col2"> 
+      <a class="col2">
       <b> + </b> add Complain
       </a>
     </div>
@@ -43,7 +43,7 @@
         <td>{{c.studentName}}</td>
         <td><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
         <td>{{c.priorityName}}</td>
-        <td><a (click)="openModal(c)" class="action">EDIT</a></td>
+        <td><a (click)="openEditModal(c)" class="action">EDIT</a></td>
         <td><a class="action">COMMENT</a></td>
       </tr>
     </tbody>
@@ -58,6 +58,7 @@
     </div>
   </div>
 </div>
+
 <div id="modal1" class="modal">
   <div class="modal-content">
     <h4>{{complaint.title}}</h4>

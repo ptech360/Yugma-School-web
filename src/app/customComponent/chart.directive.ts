@@ -51,27 +51,17 @@ export class GoogleChart {
       }
       
       function selectHandler(e) {
-        console.log(e);
         that.selectedData={};
         that.selectedData = {
           wrapper:wrapper,
-          chartId:ele.id,
+          chartId:ele,
           e:e
         }
         that.onSelected.emit(that.selectedData);
-        // console.log("DSAD", wrapper.getDataTable().getValue(selectedRow, 2));
-        // wrapper.getChart().setSelection([]);
       }
     }
   }
-  
-  getChart(){
-    console.log("getChart");
-    return this.selectedData;
+  reDrawGraph(){
+    this.drawGraph(this.chartOptions, this.chartType, this.chartData,  this._element);
   }
-  
-  onResize(){
-    console.log("resize :"+this._element);
-  }
-
 }

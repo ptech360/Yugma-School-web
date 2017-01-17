@@ -1,4 +1,5 @@
-import {Component, OnInit,ViewChild,AfterViewInit} from '@angular/core';
+
+import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 
 // import service
 import { ChartService } from '../../services/chart.service';
@@ -16,20 +17,23 @@ declare let $;
   templateUrl: './home.component.html',
 })
 
+
 export class HomeComponent implements OnInit, AfterViewInit {
-  @ViewChild(GoogleChart) vc:GoogleChart;
+  @ViewChild(GoogleChart) vc: GoogleChart;
   public dataTable;
-  public complaintByStatus;
-  public pie_ChartOptions;
+  public complaintByStatus;  
   public plansOfBelowPerformer;
   public complaintByCategoryAndStatus;
   public belowPerformance;
   public complaintByProgramAndStandard;
+  
+  public drilled;
 
   public ProgramAndStandardChartOptions;
   public belowPerformanceChartOptions;
   public categoryAndStatusChartOptions;
   public plansChartOptions;
+  public pie_ChartOptions;
 
   constructor(public c: ChartService, public userService: UserService) {
 
@@ -46,61 +50,96 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }, 1000);
 
   }
-
-   ngAfterViewInit(){
+  ngAfterViewInit() {
     $('.modal').modal();
-   }
-
-  onSelected(data){
-    var dataTable = data.wrapper.getDataTable();    
+  }
+  onResize(event) {
+    this.chartByStatus();
+    this.chartByCategoryAndStatus();
+    this.chartByProgramAndStandard();
+    this.chartOfBelowPerformance();
+    this.chartByPlans();
+  }
+  expand(chartId){
+    switch (chartId) {
+      case 1:
+        this.chartByStatus();
+        break;
+      case 2:
+        this.chartOfBelowPerformance();        
+        break;
+      case 3:
+        this.chartByProgramAndStandard();
+        break;
+      case 4:
+        this.chartByCategoryAndStatus();        
+        break;
+      case 5:
+        this.chartByPlans();
+        break;    
+      default:
+        console.log("id nahi mili");
+        break;
+    }
+    this.chartByPlans();
+  }
+  onSelected(data) {
+    var dataTable = data.wrapper.getDataTable();
     var parts = data.e.targetID.split('#');
-
-    switch(data.chartId){
+    switch (data.chartId.id) {
       case "complaint_chart_by_status":
-        if(parts[0] == "slice")
-          console.log("id :"+dataTable.getValue(parseInt(parts[1]), 2));
-        else if(parts[0] == "legendentry")
-          console.log("legendentry : "+parts[1]);
-      break;
+      case "complaint_chart_by_status1":
+        if (parts[0] == "slice")
+          console.log("id :" + dataTable.getValue(parseInt(parts[1]), 2));
+        else if (parts[0] == "legendentry")
+          console.log("legendentry : " + parts[1]);
+        break;
       case "chart_of_below_permance":
-        if(parts[0] == "slice")
-          console.log("id"+dataTable.getValue(parseInt(parts[1]), 2));
-        else if(parts[0] == "legendentry")
-          console.log("legendentry : "+parts[1]);
-      break;
+      case "chart_of_below_permance1":
+        if (parts[0] == "slice") {
+          var programId = dataTable.getValue(parseInt(parts[1]), 2);
+          this.chartByProgramId(programId, data.chartId);
+          console.log("id" + programId, 2);
+        }
+
+        else if (parts[0] == "legendentry")
+          console.log("legendentry : " + parts[1]);
+        break;
       case "chart_by_program_standard":
+      case "chart_by_program_standard1":
         if (parts[0] == "vAxis") {
           var programId = dataTable.getValue(parseInt(parts[2]), 1);
-          console.log("ProgramId :"+programId);
+          console.log("ProgramId :" + programId);
         }
         else if (parts[0] == "bar") {
           var programId = dataTable.getValue(parseInt(parts[2]), 1);
           var standardId = dataTable.getValue(parseInt(parts[2]), (parseInt(parts[1]) + 1) * 2 + 1);
-          console.log("programId :"+programId+",standardId :"+ standardId);
+          console.log("programId :" + programId + ",standardId :" + standardId);
         }
-      break;
+        break;
       case "chart_by_category_status":
+      case "chart_by_category_status1":
         if (parts[0] == "vAxis") {
           var categoryId = dataTable.getValue(parseInt(parts[2]), 1);
-          console.log("categoryId :"+categoryId);
+          console.log("categoryId :" + categoryId);
         }
         else if (parts[0] == "bar") {
           var categoryId = dataTable.getValue(parseInt(parts[2]), 1);
           var statusId = dataTable.getValue(parseInt(parts[2]), (parseInt(parts[1]) + 1) * 2 + 1);
-          console.log("programId :"+categoryId+",statusId :"+ statusId);
+          console.log("programId :" + categoryId + ",statusId :" + statusId);
         }
-      break;
+        break;
       case "plan_chart":
-        console.log("row :"+parts[2]+", col:"+parts[1]);
-      break;
-      
+      case "plan_chart1":
+        console.log("row :" + parts[2] + ", col:" + parts[1]);
+        break;
+
     }
   }
   chartByStatus() {
-    this.c.getComplaintByStatus().subscribe((responce) => {
-      // var data = this.dataTable;
+    this.c.getComplaintByStatus().subscribe((response) => {
       var data = new google.visualization.DataTable();
-      var res = responce.json();
+      var res = response.json();
       data.addColumn('string', 'status');
       data.addColumn('number', 'complaints');
       data.addColumn({ type: 'number', role: 'scope' });
@@ -117,10 +156,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
   chartByProgramAndStandard() {
-    this.c.getComplaintOfProgramAndStandard().subscribe((responce) => {
+    this.c.getComplaintOfProgramAndStandard().subscribe((response) => {
       // var data = this.dataTable;
       var data = new google.visualization.DataTable();
-      var res = responce.json();
+      var res = response.json();
       data.addColumn('string', 'ProgramName');
       data.addColumn({ type: 'number', role: 'scope' });
       for (let i = 0; i < res[0].standardResults.length; i++) {
@@ -143,9 +182,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   }
   chartOfBelowPerformance() {
-    this.c.getBelowPerfomanceOfProgram().subscribe((responce) => {
+    this.drilled = false;
+    this.c.getBelowPerfomanceOfProgram().subscribe((response) => {
       var data = new google.visualization.DataTable();
-      var res = responce.json();
+      var res = response.json();
       data.addColumn('string', 'Program');
       data.addColumn('number', 'Performance');
       data.addColumn({ type: 'number', role: 'scope' });
@@ -159,10 +199,35 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.belowPerformanceChartOptions = { is3D: true };
     });
   }
-  chartByCategoryAndStatus() {
-    this.c.getComplaintByCategoryAndStatus().subscribe((responce) => {
+
+  chartByProgramId(programId, containerId) {
+    this.drilled = true;
+    this.c.getBelowPerfomanceOfProgramById(programId).subscribe(response => {
       var data = new google.visualization.DataTable();
-      var res = responce.json();
+      var res = response.json();
+      data.addColumn('string', 'Standard');
+      data.addColumn('number', 'Performance');
+      data.addColumn({ type: 'number', role: 'scope' });
+      data.addRows(res.length);
+      for (let i = 0; i < res.length; i++) {
+        data.setCell(i, 0, res[i].standardName);
+        data.setCell(i, 1, res[i].count);
+        data.setCell(i, 2, res[i].standardId);
+      }
+      var options = { is3D: true };
+      var chartType = "PieChart";
+      this.vc.drawGraph(options, chartType, data, containerId);
+    });
+  }
+
+  back() {
+    this.chartOfBelowPerformance();
+  }
+
+  chartByCategoryAndStatus() {
+    this.c.getComplaintByCategoryAndStatus().subscribe((response) => {
+      var data = new google.visualization.DataTable();
+      var res = response.json();
       data.addColumn('string', 'categoryName');
       data.addColumn({ type: 'number', role: 'scope' });
       for (let i = 0; i < res[0].statusResults.length; i++) {
@@ -187,38 +252,38 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.categoryAndStatusChartOptions = { isStacked: 'true', chartArea: {}, };
     });
   }
-  chartByPlans(){
-    this.c.getPlansForBelowPerformer().subscribe(responce => {
+  chartByPlans() {
+    this.c.getPlansForBelowPerformer().subscribe(response => {
       var data = new google.visualization.DataTable();
-      var res = responce.json();
+      var res = response.json();
       data.addColumn('string', 'programName');
       data.addColumn('number', 'True');
       data.addColumn('number', 'False');
 
       data.addRows(res.length);
       var pipCountLength;
-      for(let i = 0; i < res.length; i++ ){
-        data.setCell(i,0,res[i].programName);
+      for (let i = 0; i < res.length; i++) {
+        data.setCell(i, 0, res[i].programName);
         pipCountLength = res[i].pipCount.length;
-        if(pipCountLength==1 && res[i].pipCount[0].pip==true){
-          data.setCell(i,1,res[i].pipCount[0].count);
-          data.setCell(i,2,0);
-        }else if(pipCountLength==1 && res[i].pipCount[0].pip==false){
-           data.setCell(i,2,res[i].pipCount[0].count);
-          data.setCell(i,1,0);
-        }else{
-           data.setCell(i,1,res[i].pipCount[1].count);
-          data.setCell(i,2,res[i].pipCount[0].count);
+        if (pipCountLength == 1 && res[i].pipCount[0].pip == true) {
+          data.setCell(i, 1, res[i].pipCount[0].count);
+          data.setCell(i, 2, 0);
+        } else if (pipCountLength == 1 && res[i].pipCount[0].pip == false) {
+          data.setCell(i, 2, res[i].pipCount[0].count);
+          data.setCell(i, 1, 0);
+        } else {
+          data.setCell(i, 1, res[i].pipCount[1].count);
+          data.setCell(i, 2, res[i].pipCount[0].count);
         }
       }
       this.plansOfBelowPerformer = data;
       this.plansChartOptions = {};
     });
-     
+
   }
 
-
-
-
-  
+  openModal(whichId) {
+    console.log("SASASASASA",whichId, document.getElementById(whichId));
+    $('#modal1').modal('open');
+  }
 }

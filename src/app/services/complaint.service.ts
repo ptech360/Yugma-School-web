@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ComplaintService {
 
-  private url: string = "";
+  private baseUrl: string = "";
   private loggedIn = false;
   private headers;
   private role: string;
@@ -16,23 +16,25 @@ export class ComplaintService {
 
   constructor(private http: Http,
               private config: Configuration) {
-    this.buildUrl();
-  }
-
-  buildUrl() {
-    this.url = this.config.getUrl();
-    this.role = this.config.getRole();
-    this.userId = this.config.getUserId();
-    this.complaintUrl = this.url + "/" + this.role + "/" + this.userId + "/complaint/page/";
+    this.baseUrl = this.config.getUrl();
   }
 
   getComplaints(pageNo) {
     let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.complaintUrl + pageNo, options)
+    return this.http.get(this.baseUrl + "/complaint/page/" + pageNo, options)
     .toPromise()
-    .then(response => {
+    .then((response) => {
       return Promise.resolve(response);
-    }).catch(err => { return Promise.reject(err); });
+    }).catch((err) => { return Promise.reject(err); });
+  }
+
+  editInfo() {
+    let options = this.config.getHeaderWithoutWeb();
+    return this.http.get(this.baseUrl + "/complaint/edit-info", options)
+    .toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
 }
