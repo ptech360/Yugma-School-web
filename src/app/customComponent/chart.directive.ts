@@ -61,14 +61,7 @@ export class GoogleChart {
       }
     }
   }
-  
-  getChart(){
-    console.log("getChart");
-    return this.selectedData;
+  reDrawGraph(){
+    this.drawGraph(this.chartOptions, this.chartType, this.chartData,  this._element);
   }
-  
-  onResize(){
-    console.log("resize :"+this._element);
-  }
-
 }

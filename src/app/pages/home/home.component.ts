@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-import {Component, OnInit, ViewChild} from '@angular/core';
-=======
-import {Component, OnInit,ViewChild,AfterViewInit} from '@angular/core';
->>>>>>> 1ab0a407c95bb7f64206a03d9d66626056ada52a
+
+import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 
 // import service
 import { ChartService } from '../../services/chart.service';
@@ -20,26 +17,23 @@ declare let $;
   templateUrl: './home.component.html',
 })
 
-<<<<<<< HEAD
-export class HomeComponent implements OnInit {
-  @ViewChild(GoogleChart) vc: GoogleChart;
-=======
+
 export class HomeComponent implements OnInit, AfterViewInit {
-  @ViewChild(GoogleChart) vc:GoogleChart;
->>>>>>> 1ab0a407c95bb7f64206a03d9d66626056ada52a
+  @ViewChild(GoogleChart) vc: GoogleChart;
   public dataTable;
-  public complaintByStatus;
-  public pie_ChartOptions;
+  public complaintByStatus;  
   public plansOfBelowPerformer;
   public complaintByCategoryAndStatus;
   public belowPerformance;
   public complaintByProgramAndStandard;
+  
   public drilled;
 
   public ProgramAndStandardChartOptions;
   public belowPerformanceChartOptions;
   public categoryAndStatusChartOptions;
   public plansChartOptions;
+  public pie_ChartOptions;
 
   constructor(public c: ChartService, public userService: UserService) {
 
@@ -56,38 +50,63 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }, 1000);
 
   }
-<<<<<<< HEAD
+  ngAfterViewInit() {
+    $('.modal').modal();
+  }
+  onResize(event) {
+    this.chartByStatus();
+    this.chartByCategoryAndStatus();
+    this.chartByProgramAndStandard();
+    this.chartOfBelowPerformance();
+    this.chartByPlans();
+  }
+  expand(chartId){
+    switch (chartId) {
+      case 1:
+        this.chartByStatus();
+        break;
+      case 2:
+        this.chartOfBelowPerformance();        
+        break;
+      case 3:
+        this.chartByProgramAndStandard();
+        break;
+      case 4:
+        this.chartByCategoryAndStatus();        
+        break;
+      case 5:
+        this.chartByPlans();
+        break;    
+      default:
+        console.log("id nahi mili");
+        break;
+    }
+    this.chartByPlans();
+  }
   onSelected(data) {
     var dataTable = data.wrapper.getDataTable();
-=======
-
-   ngAfterViewInit(){
-    $('.modal').modal();
-   }
-
-  onSelected(data){
-    var dataTable = data.wrapper.getDataTable();    
->>>>>>> 1ab0a407c95bb7f64206a03d9d66626056ada52a
     var parts = data.e.targetID.split('#');
-
     switch (data.chartId.id) {
       case "complaint_chart_by_status":
+      case "complaint_chart_by_status1":
         if (parts[0] == "slice")
           console.log("id :" + dataTable.getValue(parseInt(parts[1]), 2));
         else if (parts[0] == "legendentry")
           console.log("legendentry : " + parts[1]);
         break;
       case "chart_of_below_permance":
-        if (parts[0] == "slice"){
-          var programId = dataTable.getValue(parseInt(parts[1]),2);
-          this.chartByProgramId(programId,data.chartId);
+      case "chart_of_below_permance1":
+        if (parts[0] == "slice") {
+          var programId = dataTable.getValue(parseInt(parts[1]), 2);
+          this.chartByProgramId(programId, data.chartId);
           console.log("id" + programId, 2);
         }
-          
+
         else if (parts[0] == "legendentry")
           console.log("legendentry : " + parts[1]);
         break;
       case "chart_by_program_standard":
+      case "chart_by_program_standard1":
         if (parts[0] == "vAxis") {
           var programId = dataTable.getValue(parseInt(parts[2]), 1);
           console.log("ProgramId :" + programId);
@@ -99,6 +118,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
         break;
       case "chart_by_category_status":
+      case "chart_by_category_status1":
         if (parts[0] == "vAxis") {
           var categoryId = dataTable.getValue(parseInt(parts[2]), 1);
           console.log("categoryId :" + categoryId);
@@ -110,6 +130,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
         break;
       case "plan_chart":
+      case "plan_chart1":
         console.log("row :" + parts[2] + ", col:" + parts[1]);
         break;
 
@@ -117,7 +138,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   chartByStatus() {
     this.c.getComplaintByStatus().subscribe((response) => {
-      // var data = this.dataTable;
       var data = new google.visualization.DataTable();
       var res = response.json();
       data.addColumn('string', 'status');
@@ -180,7 +200,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  chartByProgramId(programId,containerId) {
+  chartByProgramId(programId, containerId) {
     this.drilled = true;
     this.c.getBelowPerfomanceOfProgramById(programId).subscribe(response => {
       var data = new google.visualization.DataTable();
@@ -194,12 +214,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
         data.setCell(i, 1, res[i].count);
         data.setCell(i, 2, res[i].standardId);
       }
-      var options = { is3D: true }; 
+      var options = { is3D: true };
       var chartType = "PieChart";
-      this.vc.drawGraph(options,chartType,data,containerId);     
+      this.vc.drawGraph(options, chartType, data, containerId);
     });
   }
-  
+
   back() {
     this.chartOfBelowPerformance();
   }
@@ -265,5 +285,5 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 
 
-  
+
 }
