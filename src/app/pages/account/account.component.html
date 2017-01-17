@@ -1,10 +1,8 @@
 <div class="row accountPage">
-  <div class="row">
-    <h3 class="text-grey">Profile Details</h3>
-  </div>
   <div class="row container">
-    <div class="card hoverable">
-      <table class=" striped responsive-table centered">
+    <div class="card profile-card hoverable">
+        <span class="title">Profile Details</span>
+      <table class=" striped responsive-table">
         <tr>
           <td>
             <b>Name</b>
@@ -49,9 +47,9 @@
     </div>
   </div>
 
-  <h3 class="text-grey">Update Password</h3>
   <div class="row container">
-    <div class="card form hoverable">
+    <div class="card profile-card form hoverable">
+      <span class="title">Update Password</span>
       <form (ngSubmit)="submitForm() " [formGroup]="resetPasswordForm" novalidate>
         <div class="form-content">
           <label>
@@ -74,5 +72,5 @@
         </div>
       </form>
     </div>
- </div>
+  </div>
 </div>
