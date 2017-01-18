@@ -19,8 +19,7 @@
         <div class="col">
         </div>
         <div class="input-field col s6 l4 right">
-          <input id="icon_telephone" placeholder="Search" type="text" class="validate searchBox">
-          <!--<label for="icon_telephone">Search<i class="tiny material-icons">search</i></label>-->
+          <input id="icon_telephone" placeholder="Search" type="text" class="validate searchBox" (keyup)="searchComplaints($event)">
         </div>
       </div>
     </form>
@@ -33,7 +32,8 @@
         <th data-field="price">StudentName</th>
         <th data-field="name">Status</th>
         <th data-field="price">Priority</th>
-        <th>Actions</th>
+        <th>Edit</th>
+        <th>Comment</th>
         <th></th>
       </tr>
     </thead>
@@ -41,11 +41,11 @@
       <tr *ngFor="let c of complaints; let i = index;">
         <td (click)="openModal(c)" class="action"><span class="cid">{{c.id}}</span></td>
         <td>{{c.title}}</td>
-        <td>{{c.studentName}}</td>
+        <td>{{c.studentName}} - {{c.studentStandardName}}</td>
         <td><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
         <td>{{c.priorityName}}</td>
-        <td><a (click)="openEditModal(c)" class="action">EDIT</a></td>
-        <td><a class="action">COMMENT</a></td>
+        <td><a (click)="openEditModal(c)" class="action"><i class="material-icons">create</i></a></td>
+        <td><a class="action"><i class="material-icons center">chat_bubble_outline</i></a></td>
       </tr>
     </tbody>
   </table>
