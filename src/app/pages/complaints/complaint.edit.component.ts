@@ -13,11 +13,13 @@ declare let Materialize;
 
 @Component({
   selector: 'edit-complaint',
-  styleUrls: [],
+  styleUrls: ['./complaint.component.css'],
   template: `
-    <button (click)="goBack()" class="btn">Back</button>
-    <div class="row container">
-      <div class="form">
+<div class="row  ">
+  <div class="col l6">
+    <div class="card">
+      <i class="material-icons right icon-button" (click)="goBack()">close</i>
+      <div class="form pad">
         <form novalidate>
           <div class="form-content">
             <label>
@@ -25,14 +27,7 @@ declare let Materialize;
               <input type="text" name="name" [(ngModel)]="assignedEmployeeName" (focus)="employeesList()" class="sd-form-control validate">
             </label>
           </div>
-          <div class="input-field col s6" *ngIf="employees">
-            <div class="input-field col s6 l4 right">
-              <input placeholder="Search" type="text" class="validate searchBox" (keyup)="searchEmployees($event)">
-            </div>
-            <ul class="collection" *ngFor="let e of employees">
-              <li class="collection-item dismissable" (click)="selectEmployee(e)"><div>{{e.name}}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-            </ul>
-          </div>
+
           <div class="row">
             <p>
               <input class="with-gap" name="group1" type="radio" id="test1" checked />
@@ -45,14 +40,37 @@ declare let Materialize;
           </div>
           <div class="row">
             <p>
-              <input type="checkbox" class="filled-in" id="filled-in-box"/>
+              <input type="checkbox" class="filled-in" id="filled-in-box" />
               <label for="filled-in-box">InProgress</label>
             </p>
           </div>
-          <button (click)="editComplaint()" class="btn">Submit<i class="material-icons right">cloud</i></button>
+          <div class="row">
+          <button (click)="goBack()" class="btn right margin-btn">Submit</button>
+          <button (click)="editComplaint()" class="btn right margin-btn">Close</button>
+          </div>
         </form>
       </div>
     </div>
+  </div>
+
+  <div class="col l6" *ngIf="employees">
+    <div class="card">
+      <div class="input-field pad">
+        <div class="input-field">
+          <input placeholder="Search" type="text" class="validate searchBox" (keyup)="searchEmployees($event)">
+        </div>
+        <div class="teacher-list">
+        <ul class="collection" *ngFor="let e of employees">
+          <li class="collection-item dismissable" (click)="selectEmployee(e)">
+            <div>{{e.name}}<a href="#!" class="secondary-content"><i class="material-icons">reply</i></a></div>
+          </li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   `
 })
 

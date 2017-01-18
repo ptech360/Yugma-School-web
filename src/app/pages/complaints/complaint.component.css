@@ -78,3 +78,17 @@ thead{
 .modal{
 	background:white;
 }
+.edit-box{
+    margin: 20px;
+}
+.pad{
+   padding: 15px;
+}
+.teacher-list{
+  height: 55vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.margin-btn{
+  margin-left:5px;
+}
