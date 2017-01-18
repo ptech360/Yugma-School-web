@@ -11,7 +11,6 @@ declare var $;
   selector: 'login',
   styleUrls: ['./login.component.css'],
   template: `
-    <loader [condition]="hasSubmit"></loader>
     <div class="row valign-wrapper login-card">
       <div class="col valign">
         <div class="card">
@@ -31,6 +30,7 @@ declare var $;
                 </label>
                 <div class="form-submit">
                   <button class="btn waves-effect waves-light bcolor" type="submit">Login</button>
+                  <loader class="loading" [condition]="hasSubmit"></loader>
                   <a class="right underline" style="padding: 15px 0px 0px 0px;" [routerLink]="['/parent/forget-password']">Forget Password</a>
                 </div>
               </div>

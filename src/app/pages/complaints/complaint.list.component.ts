@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterContentInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Configuration } from '../../services/app.constant';
 import { Router } from '@angular/router';
 
@@ -13,9 +13,10 @@ import { ComplaintService } from '../../services/complaint.service';
   templateUrl: './complaint.component.html'
 })
 
-export class ComplaintListComponent implements OnInit, AfterContentInit {
+export class ComplaintListComponent implements OnInit {
 
   private complaints;
+  private complaintsCOPY;
   private EmptyComplaints: boolean = false;
   private complaint = {
     title: ""
@@ -26,17 +27,11 @@ export class ComplaintListComponent implements OnInit, AfterContentInit {
   constructor(private c: ComplaintService,
               private router: Router,
               private config: Configuration) {
-                console.log("DASD11111")
   }
 
   ngOnInit() {
-    console.log("DASD")
     $('.modal').modal();
     this.getComplaints();
-  }
-
-  ngAfterContentInit() {
-    console.log("2222")
   }
 
   getComplaints() {
@@ -46,11 +41,11 @@ export class ComplaintListComponent implements OnInit, AfterContentInit {
       } else {
         this.EmptyComplaints = false;
         this.complaints = res.json();
+        this.complaintsCOPY = res.json();
       }
     }, (err) => {
       this.complaints = [];
       this.config.showToast("Internal server error.. Try again later");
-      console.log("err", err);
     });
   }
 
@@ -60,18 +55,8 @@ export class ComplaintListComponent implements OnInit, AfterContentInit {
   }
 
   openEditModal(complaint) {
-    // this.complaint = complaint;
-    // $('#editModal').modal('open');
-    // $('select').material_select();
+    this.complaint = complaint;
     this.router.navigate(["/complaints/edit"]);
-    this.c.editInfo()
-    .then((res) => {
-      console.log("DSDSD", res.json().employees);
-      let employees = res.json().employees;
-
-    }, (err) => {
-      console.log("errr", err)
-    });
   }
 
   previousComplaint() {
@@ -84,6 +69,20 @@ export class ComplaintListComponent implements OnInit, AfterContentInit {
     delete this.complaints;
     this.currentPage += 1;
     this.getComplaints();
+  }
+
+  loadComplaints() {
+    this.complaints = this.complaintsCOPY;
+  }
+
+  searchComplaints(ev: any) {
+    this.loadComplaints();
+    let val = ev.target.value;
+    if (val && val.trim() != '') {
+      this.complaints = this.complaintsCOPY.filter((item) => {
+        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+    }
   }
 
 }

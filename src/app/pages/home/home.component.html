@@ -1,6 +1,7 @@
-<div class="row flip-cards">
+<div class="row flip-cards hide-on-med-and-down">
 
-  <div class="col l3 s12 flip-container" ontouchstart="this.classList.toggle('hover');">
+  <div class="col l3 s12 " ontouchstart="this.classList.toggle('hover');">
+    <div class="flip-container">
     <div class="flipper">
       <div class="front pink lighten-1">
         <div class="valign-wrapper text-white">
@@ -15,9 +16,11 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 
-  <div class="col l3 s12 flip-container" ontouchstart="this.classList.toggle('hover');">
+  <div class="col l3 s12" ontouchstart="this.classList.toggle('hover');">
+     <div class="flip-container">
     <div class="flipper">
       <div class="front  teal lighten-1">
         <div class="valign-wrapper text-white">
@@ -32,9 +35,11 @@
         </div>
       </div>
     </div>
+     </div>
   </div>
 
-  <div class="col l3 s12 flip-container" ontouchstart="this.classList.toggle('hover');">
+  <div class="col l3 s12" ontouchstart="this.classList.toggle('hover');">
+    <div class="flip-container">
     <div class="flipper">
       <div class="front grey darken-3">
         <div class="valign-wrapper text-white">
@@ -49,9 +54,11 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 
-  <div class="col l3 s12 flip-container" ontouchstart="this.classList.toggle('hover');">
+  <div class="col l3 s12" ontouchstart="this.classList.toggle('hover');">
+    <div class="flip-container">
     <div class="flipper">
       <div class="front  light-blue darken-3">
         <div class="valign-wrapper text-white">
@@ -66,6 +73,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 
@@ -82,7 +90,7 @@
     <div class="col l6 s12">
       <div class="card hoverable ">
         <i data-target="graph2" class="material-icons icon-button" (click)="expand(2)">aspect_ratio</i>
-        <button *ngIf="drilled" (click)="back()">Prev</button>
+        <i class="material-icons icon-button" *ngIf="drilled" (click)="back()">replay</i>
         <div class="graph-table-cell" GoogleChart id="chart_of_below_permance" [chartData]="belowPerformance" [chartOptions]="belowPerformanceChartOptions" chartType="PieChart" (onSelected)="onSelected($event)"> </div>
       </div>
     </div>
@@ -124,9 +132,10 @@
 </div>
 <div id="graph2" class="modal" style="height:500px">
   <i class="material-icons modal-close right icon-button">call_received</i>
+      <i class="material-icons icon-button right" *ngIf="drilled" (click)="back()">replay</i>
   <div class="modal-content">
     <h4>Graph Name</h4>
-    <button *ngIf="drilled" (click)="back()">Prev</button>
+   
     <div class="graph-table-cell" GoogleChart id="chart_of_below_permance1" [chartData]="belowPerformance" [chartOptions]="belowPerformanceChartOptions" chartType="PieChart" (onSelected)="onSelected($event)"> </div>
   </div>
 </div>

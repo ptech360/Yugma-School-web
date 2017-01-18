@@ -1,79 +1,123 @@
-<h3>All Complaints</h3>
-<loader [condition]="!complaints"></loader>
-<button (click)="previousComplaint()" class="btn" [disabled]="currentPage === 1">Previous</button>
-<button (click)="nextComplaint()" class="btn"  [disabled]="EmptyComplaints">Next</button>
-<table class="bordered">
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th data-field="id">Title</th>
-      <th data-field="price">StudentName</th>
-      <th data-field="name">Status</th>
-      <th data-field="price">Priority</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let c of complaints; let i = index;">
-      <td><button (click)="openModal(c)" class="btn">View</button></td>
-      <td><button (click)="openEditModal(c)" class="btn">Edit</button></td>
-      <td>{{c.title}}</td>
-      <td>{{c.studentName}}</td>
-      <td>{{c.statusName}}</td>
-      <td>{{c.priorityName}}</td>
-    </tr>
-  </tbody>
-</table>
+
+<div class="table-content">
+
+  <div class="row table-title-box">
+    <div class="col l10 s6 col1">
+      All <span class="table-title-text">Complaints</span>
+      <i class="material-icons icon-button right col2">replay</i>
+    </div>
+    <div class="col l2 s6 col-l">
+      <a class="col2">
+      <b> + </b> add Complain
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <form class="col s12 l12">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="input-field col s6 l4 right">
+          <input id="icon_telephone" placeholder="Search" type="text" class="validate searchBox" (keyup)="searchComplaints($event)">
+        </div>
+      </div>
+    </form>
+  </div>
+  <table class="highlight bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th data-field="id">Title</th>
+        <th data-field="price">StudentName</th>
+        <th data-field="name">Status</th>
+        <th data-field="price">Priority</th>
+        <th>Edit</th>
+        <th>Comment</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of complaints; let i = index;">
+        <td (click)="openModal(c)" class="action"><span class="cid">{{c.id}}</span></td>
+        <td>{{c.title}}</td>
+        <td>{{c.studentName}} - {{c.studentStandardName}}</td>
+        <td><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
+        <td>{{c.priorityName}}</td>
+        <td><a (click)="openEditModal(c)" class="action"><i class="material-icons">create</i></a></td>
+        <td class="center-align"><a class="action"><i class="material-icons">chat_bubble_outline</i></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row loader">
+    <loader class="col l7 s7 right valign" [condition]="!complaints"></loader>
+  </div>
+  <div class="row">
+    <div class="col l12 s12">
+      <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints">Next</button>
+      <button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
+    </div>
+  </div>
+</div>
 
 <div id="modal1" class="modal">
   <div class="modal-content">
     <h4>{{complaint.title}}</h4>
-    <p>Status: {{complaint.statusName}}</p>
-    <p *ngIf="!complaint.anonymous">Anonymous: {{complaint.anonymous}}</p>
-    <p *ngIf="complaint.assignedEmployeeName">Assigned To: {{complaint.assignedEmployeeName}}</p>
-    <p *ngIf="complaint.againstEmployeeName">Against Employee Name: {{complaint.againstEmployeeName}}</p>
-    <p *ngIf="complaint.againstCategoryName && !complaint.againstEmployeeName">Against Category Name: {{complaint.againstCategoryName}}</p>
-    <p>Priority: {{complaint.priorityName}}</p>
-    <p>Root Cause: {{complaint.rca}}</p>
-    <p *ngIf="!complaint.anonymous">Student Name: {{complaint.studentName}}</p>
-    <p *ngIf="!complaint.anonymous">Standard: {{complaint.studentStandardName}}</p>
-    <p>{{complaint.description}}</p>
-  </div>
-  <div class="modal-footer">
-    <button  class="waves-effect waves-light btn"><i class="material-icons left">clear</i>Close</button>&nbsp;
-    <button  class="waves-effect waves-light btn"><i class="material-icons left">create</i>Edit</button>&nbsp;
-    <button  class="waves-effect waves-light btn"><i class="material-icons left">comment</i>Comment</button>
-  </div>
-</div>
+      <table>
+        <thead>
+          <tr>
+              <th data-field="id">Complaint</th>
+              <th data-field="name">{{complaint.title}}</th>
+          </tr>
+        </thead>
 
-<div id="editModal" class="modal">
-  <div class="modal-content">
-    <h4>Modal Header</h4>
-    <div class="row">
-      <div class="col s12">
-        <div class="row">
-          <div class="input-field col s12">
-            <select>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select>
-            <label>Materialize Select</label>
-          </div>
-      </div>
-    </div>
+        <tbody>
+          <tr>
+            <td>Status</td>
+            <td>{{complaint.statusName}}</td>
+          </tr>
+          <tr>
+            <td>Anonymous</td>
+            <td>{{complaint.anonymous}}</td>
+          </tr>
+          <tr>
+            <td>Assigned To</td>
+            <td>{{complaint.assignedEmployeeName}}</td>
+          </tr>
+          <tr>
+            <td>Against Employee Name</td>
+            <td>{{complaint.againstEmployeeName}}</td>
+          </tr>
+          <tr>
+            <td>Against Category Name</td>
+            <td>{{complaint.againstCategoryName}}</td>
+          </tr>     
+          <tr>
+            <td>Priority</td>
+            <td>{{complaint.priorityName}}</td>
+          </tr>  
+          <tr>
+            <td>Root Cause</td>
+            <td>{{complaint.rca}}</td>
+          </tr>  
+          <tr>
+            <td>Student Name</td>
+            <td>{{complaint.studentName}}</td>
+          </tr>  
+          <tr>
+            <td>Standard</td>
+            <td>{{complaint.studentStandardName}}</td>
+          </tr>   
+          <tr><td>Description: {{complaint.description}}</td></tr>                                                      
+        </tbody>
+      </table>
+
+
+
   </div>
   <div class="modal-footer">
-    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    <button class="waves-effect waves-light btn"><i class="material-icons left">clear</i>Close</button>&nbsp;
+    <button class="waves-effect waves-light btn"><i class="material-icons left">create</i>Edit</button>&nbsp;
+    <button class="waves-effect waves-light btn"><i class="material-icons left">comment</i>Comment</button>
   </div>
 </div>
