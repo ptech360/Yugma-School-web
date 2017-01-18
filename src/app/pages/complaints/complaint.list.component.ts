@@ -31,6 +31,7 @@ export class ComplaintListComponent implements OnInit {
 
   ngOnInit() {
     $('.modal').modal();
+     $('.tooltipped').tooltip({delay: 50});
     this.getComplaints();
   }
 
