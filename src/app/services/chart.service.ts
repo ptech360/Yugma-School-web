@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Http, Response } from '@angular/http';
+import { Http, Response,RequestOptions } from '@angular/http';
+import { Configuration } from './app.constant';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -8,51 +9,60 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class ChartService {
-
-  constructor(private http: Http) {
-
+  
+  private baseUrl: string = "";
+ constructor(private http: Http,
+              private config: Configuration) {
+    this.baseUrl = this.config.getUrl();
   }
 
   public getComplaintByStatus() {
-    return this.http.get("https://yugmasrgstesting.appspot.com/director/3718285666/complaint/status").map(res => {
-      return res;
-    });
+    return this.http.get(this.baseUrl+"/complaint/status").toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
   public getComplaintByCategoryAndStatus() {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/complaint/category-status").map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/complaint/category-status").toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
   public getComplaintByStatusId(statusId) {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/complaint/status/" + statusId).map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/complaint/status/" + statusId).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
   public getComplaintByCategoryId(categoryId) {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/complaint/category-status/category/" + categoryId).map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/complaint/category-status/category/" + categoryId).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
   public getComplaintByCategoryAndStatusId(categoryId, statusId) {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/complaint/category-status/" + categoryId + "/" + statusId).map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/complaint/category-status/" + categoryId + "/" + statusId).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
   public getComplaintOfProgramAndStandard() {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/complaint/program-standard").map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/complaint/program-standard").toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
   public getComplaintOfProgramByProgramId(programId) {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/complaint/program-standard/program/" + programId).map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/complaint/program-standard/program/" + programId).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
   public getComplaintOfProgramByStandardId(standardId) {
@@ -60,31 +70,36 @@ export class ChartService {
   }
 
   public getComplaintOfProgramByProgramAndStandardId(programId, standardId) {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/complaint/program-standard/" + programId + "/" + standardId).map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/complaint/program-standard/" + programId + "/" + standardId).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
   public getBelowPerfomanceOfProgram() {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/below-performer/program").map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/below-performer/program").toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
   public getBelowPerfomanceOfProgramById(programId) {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/below-performer/program/" + programId).map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/below-performer/program/" + programId).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
   public getBelowPerfomanceStudentsByStandard(programId, standardId) {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/below-performer/program/" + programId + "/" + standardId).map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/below-performer/program/" + programId + "/" + standardId).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
   public getPlansForBelowPerformer() {
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT/director/3718285666/below-performer/program/plan").map(res => {
-      return (res);
-    });
+    return this.http.get(this.baseUrl+"/below-performer/program/plan").toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
   }
 
 }

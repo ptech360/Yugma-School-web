@@ -21,7 +21,7 @@ export class GoogleChart {
   }
 
   ngOnInit() {
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages':['corechart', 'table']});
   }
 
   @Input() set chartData(data) {

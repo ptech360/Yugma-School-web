@@ -16,8 +16,8 @@ export class Configuration {
 
   }
 
-  private url: string = "https://yugmasrgstesting.appspot.com";
-  // private url: string = "http://desktop-nj52npk:8080/YUGMASRGSUT";
+  // private url: string = "https://yugmasrgstesting.appspot.com";
+  private url: string = "http://desktop-nj52npk:8080/YUGMASRGSUT";
 
   // getUrl() {
   //   return this.url;

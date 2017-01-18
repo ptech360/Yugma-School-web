@@ -1,5 +1,6 @@
 
 import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 // import service
 import { ChartService } from '../../services/chart.service';
@@ -16,32 +17,26 @@ declare let $;
   styleUrls: ['./home.component.css'],
   templateUrl: './home.component.html',
 })
-
-
 export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild(GoogleChart) vc: GoogleChart;
-  public dataTable;
   public complaintByStatus;  
   public plansOfBelowPerformer;
   public complaintByCategoryAndStatus;
   public belowPerformance;
-  public complaintByProgramAndStandard;
-  
+  public complaintByProgramAndStandard;  
   public drilled;
-
   public ProgramAndStandardChartOptions;
   public belowPerformanceChartOptions;
   public categoryAndStatusChartOptions;
   public plansChartOptions;
   public pie_ChartOptions;
-
-  constructor(public c: ChartService, public userService: UserService) {
-
+  
+  constructor(private router: Router, public c: ChartService) {
+    
   }
-
+  
   ngOnInit() {
     setTimeout(() => {
-      // this.dataTable = new google.visualization.DataTable();
       this.chartByStatus();
       this.chartByProgramAndStandard();
       this.chartOfBelowPerformance();
@@ -78,10 +73,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.chartByPlans();
         break;    
       default:
-        console.log("id nahi mili");
         break;
     }
-    this.chartByPlans();
   }
   onSelected(data) {
     var dataTable = data.wrapper.getDataTable();
@@ -98,7 +91,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
       case "chart_of_below_permance1":
         if (parts[0] == "slice") {
           var programId = dataTable.getValue(parseInt(parts[1]), 2);
-          this.chartByProgramId(programId, data.chartId);
+          if(this.drilled){
+            var standardId = dataTable.getValue(parseInt(parts[1]), 2);
+            this.router.navigate(['student-detail', programId, standardId]);
+          }
+          else
+            this.chartByProgramId(programId, data.chartId);
           console.log("id" + programId, 2);
         }
 
@@ -137,7 +135,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
   chartByStatus() {
-    this.c.getComplaintByStatus().subscribe((response) => {
+    this.c.getComplaintByStatus().then((response) => {
       var data = new google.visualization.DataTable();
       var res = response.json();
       data.addColumn('string', 'status');
@@ -156,8 +154,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
   chartByProgramAndStandard() {
-    this.c.getComplaintOfProgramAndStandard().subscribe((response) => {
-      // var data = this.dataTable;
+    this.c.getComplaintOfProgramAndStandard().then((response) => {
       var data = new google.visualization.DataTable();
       var res = response.json();
       data.addColumn('string', 'ProgramName');
@@ -183,7 +180,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   chartOfBelowPerformance() {
     this.drilled = false;
-    this.c.getBelowPerfomanceOfProgram().subscribe((response) => {
+    this.c.getBelowPerfomanceOfProgram().then((response) => {
       var data = new google.visualization.DataTable();
       var res = response.json();
       data.addColumn('string', 'Program');
@@ -202,7 +199,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   chartByProgramId(programId, containerId) {
     this.drilled = true;
-    this.c.getBelowPerfomanceOfProgramById(programId).subscribe(response => {
+    this.c.getBelowPerfomanceOfProgramById(programId).then(response => {
       var data = new google.visualization.DataTable();
       var res = response.json();
       data.addColumn('string', 'Standard');
@@ -225,7 +222,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   chartByCategoryAndStatus() {
-    this.c.getComplaintByCategoryAndStatus().subscribe((response) => {
+    this.c.getComplaintByCategoryAndStatus().then((response) => {
       var data = new google.visualization.DataTable();
       var res = response.json();
       data.addColumn('string', 'categoryName');
@@ -243,7 +240,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         for (let j = 0; j < res[i].statusResults.length; j++) {
           data.setCell(i, parseInt(res[i].statusResults[j].statusId) * 2, res[i].statusResults[j].count);
           data.setCell(i, parseInt(res[i].statusResults[j].statusId) * 2 + 1, res[i].statusResults[j].statusId);
-
         }
         if (res[i].totalCount > maxVal)
           maxVal = res[i].totalCount;
@@ -253,13 +249,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
   chartByPlans() {
-    this.c.getPlansForBelowPerformer().subscribe(response => {
+    this.c.getPlansForBelowPerformer().then(response => {
       var data = new google.visualization.DataTable();
       var res = response.json();
       data.addColumn('string', 'programName');
       data.addColumn('number', 'True');
       data.addColumn('number', 'False');
-
       data.addRows(res.length);
       var pipCountLength;
       for (let i = 0; i < res.length; i++) {
@@ -281,7 +276,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
 
   }
-
   openModal(whichId) {
     console.log("SASASASASA",whichId, document.getElementById(whichId));
     $('#modal1').modal('open');

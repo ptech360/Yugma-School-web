@@ -23,6 +23,7 @@ import { ParentComponent } from './pages/login/parent'
 import { ForgetPasswordComponent } from './pages/login/forget.password.component';
 import { CustomLoader } from './customComponent/loader.component';
 import { EditComplaint } from './pages/complaints/complaint.edit.component';
+import { StudentDetail} from './pages/student-detail/student-detail.component';
 
 // import service
 import { ChartService } from './services/chart.service';
@@ -33,6 +34,7 @@ import { ComplaintService } from './services/complaint.service';
 
 @NgModule({
   declarations: [
+    StudentDetail,
     EditComplaint,
     GoogleChart,
     AppComponent,
