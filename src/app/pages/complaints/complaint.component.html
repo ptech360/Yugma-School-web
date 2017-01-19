@@ -28,12 +28,12 @@
     <thead>
       <tr>
         <th>Id</th>
-        <th data-field="id">Title</th>
-        <th data-field="price">StudentName</th>
-        <th data-field="name">Status</th>
-        <th data-field="price">Priority</th>
-        <th>Edit</th>
-        <th>Comment</th>
+        <th >Title</th>
+        <th >StudentName</th>
+        <th *ngIf="!complaintStatus">Status</th>
+        <th >Priority</th>
+        <th >Edit</th>
+        <th >Comment</th>
         <th></th>
       </tr>
     </thead>
@@ -42,7 +42,7 @@
         <td (click)="openModal(c)" class="action"><span class="cid">{{c.id}}</span></td>
         <td>{{c.title}}</td>
         <td>{{c.studentName}} - {{c.studentStandardName}}</td>
-        <td><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
+        <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
         <td>{{c.priorityName}}</td>
         <td><a (click)="openEditModal(c)" class="action"><i class="material-icons">create</i></a></td>
         <td class="center-align"><a class="action"><i class="material-icons">chat_bubble_outline</i></a></td>

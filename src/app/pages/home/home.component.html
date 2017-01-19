@@ -79,18 +79,21 @@
 
 
 <div (window:resize)="onResize($event)">
+  <!--<div class="row loader">
+    <loader class="col l6 s6" [condition]="!complaints" style="text-align: center"></loader>
+  </div>-->
   <div class="row">
     <div class="col l6 s12">
-      <div class="card hoverable ">
+      <div class="card hoverable " >
         <i data-target="graph1" class="material-icons icon-button" (click)="expand(1)">aspect_ratio</i>
-        <div class="graph-table-cell" GoogleChart id="complaint_chart_by_status" [chartData]="complaintByStatus" [chartOptions]="pie_ChartOptions" chartType="PieChart" (onSelected)="onSelected($event)" > </div>
+        <div class="graph-table-cell" GoogleChart id="complaint_chart_by_status" [chartData]="complaintByStatus" [chartOptions]="complaintByStatusChartOptions" chartType="PieChart" (onSelected)="onSelected($event)" > </div>
       </div>
     </div>
 
     <div class="col l6 s12">
       <div class="card hoverable ">
         <i data-target="graph2" class="material-icons icon-button" (click)="expand(2)">aspect_ratio</i>
-        <i class="material-icons icon-button" *ngIf="drilled" (click)="back()">replay</i>
+        <i class="material-icons icon-button" *ngIf="drilled" (click)="back()" style="cursor: pointer">replay</i>
         <div class="graph-table-cell" GoogleChart id="chart_of_below_permance" [chartData]="belowPerformance" [chartOptions]="belowPerformanceChartOptions" chartType="PieChart" (onSelected)="onSelected($event)"> </div>
       </div>
     </div>

@@ -1,1 +1,21 @@
-<div GoogleChart id="student_table" [chartData]="studentTableData" [chartOptions]="studentTableOptions" chartType="Table" (onSelected)="onSelected($event)" style="width: 100%;"> </div>
+<div class="table-content">
+  <table class="highlight bordered">
+    <thead>
+      <tr>
+        <th>StudentName</th>
+        <th>Subject Name</th>        
+        <th>Have plan</th>
+        <th>Created At</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of studentDetail; let i = index;">
+        <td>{{d.studentName}}</td>
+        <td>{{d.subjectName}}</td>
+        <td>{{d.isPIP}}</td>
+        <td>{{d.createdAt}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

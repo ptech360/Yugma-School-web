@@ -30,47 +30,8 @@ export class ChartService {
     }).catch((err) => { return Promise.reject(err); });
   }
 
-  public getComplaintByStatusId(statusId) {
-    return this.http.get(this.baseUrl+"/complaint/status/" + statusId).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
-
-  public getComplaintByCategoryId(categoryId) {
-    return this.http.get(this.baseUrl+"/complaint/category-status/category/" + categoryId).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
-
-  public getComplaintByCategoryAndStatusId(categoryId, statusId) {
-    return this.http.get(this.baseUrl+"/complaint/category-status/" + categoryId + "/" + statusId).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
-
   public getComplaintOfProgramAndStandard() {
     return this.http.get(this.baseUrl+"/complaint/program-standard").toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
-
-  public getComplaintOfProgramByProgramId(programId) {
-    return this.http.get(this.baseUrl+"/complaint/program-standard/program/" + programId).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
-
-  public getComplaintOfProgramByStandardId(standardId) {
-
-  }
-
-  public getComplaintOfProgramByProgramAndStandardId(programId, standardId) {
-    return this.http.get(this.baseUrl+"/complaint/program-standard/" + programId + "/" + standardId).toPromise()
     .then((response) => {
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });

@@ -19,11 +19,16 @@ export const rootRouterConfig: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard] },
   { path: 'complaints', component: ComplaintComponent, canActivate: [LoggedInGuard],
     children: [
+      { path: 'status/:statusId', component: ComplaintListComponent, pathMatch: 'full'},
+      { path: 'category/:categoryId', component: ComplaintListComponent, pathMatch: 'full'},
+      { path: 'category-status/:categoryId/:statusId', component: ComplaintListComponent, pathMatch: 'full'},
+      { path: 'program/:programId', component: ComplaintListComponent, pathMatch: 'full'},
+      { path: 'program-standard/:programId/:standardId', component: ComplaintListComponent, pathMatch: 'full'},      
       { path: 'list', component: ComplaintListComponent, pathMatch: 'full'},
       { path: 'edit', component: EditComplaint}
     ]
   },
-  {path:'student-detail/:programId/:standardId',component:StudentDetail},
+  {path:'student-detail/:programId/:standardId',component:StudentDetail, canActivate: [LoggedInGuard]},
   { path: 'parent', component: ParentComponent,
     children: [
       { path: 'login', component: LoginComponent },

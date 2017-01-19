@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public belowPerformanceChartOptions;
   public categoryAndStatusChartOptions;
   public plansChartOptions;
-  public pie_ChartOptions;
+  public complaintByStatusChartOptions;
   
   constructor(private router: Router, public c: ChartService) {
     
@@ -82,8 +82,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     switch (data.chartId.id) {
       case "complaint_chart_by_status":
       case "complaint_chart_by_status1":
-        if (parts[0] == "slice")
-          console.log("id :" + dataTable.getValue(parseInt(parts[1]), 2));
+        if (parts[0] == "slice"){
+          this.router.navigate(['/complaints/status',dataTable.getValue(parseInt(parts[1]), 2)]);
+        }
         else if (parts[0] == "legendentry")
           console.log("legendentry : " + parts[1]);
         break;
@@ -99,32 +100,35 @@ export class HomeComponent implements OnInit, AfterViewInit {
             this.chartByProgramId(programId, data.chartId);
           console.log("id" + programId, 2);
         }
-
         else if (parts[0] == "legendentry")
           console.log("legendentry : " + parts[1]);
         break;
       case "chart_by_program_standard":
       case "chart_by_program_standard1":
         if (parts[0] == "vAxis") {
-          var programId = dataTable.getValue(parseInt(parts[2]), 1);
+          var programId = dataTable.getValue(parseInt(parts[parts.indexOf('label') + 1]), 1);
+          this.router.navigate(['/complaints/program',programId]);
           console.log("ProgramId :" + programId);
         }
         else if (parts[0] == "bar") {
           var programId = dataTable.getValue(parseInt(parts[2]), 1);
           var standardId = dataTable.getValue(parseInt(parts[2]), (parseInt(parts[1]) + 1) * 2 + 1);
+          this.router.navigate(['/complaints/program-standard',programId,standardId]);
           console.log("programId :" + programId + ",standardId :" + standardId);
         }
         break;
       case "chart_by_category_status":
       case "chart_by_category_status1":
         if (parts[0] == "vAxis") {
-          var categoryId = dataTable.getValue(parseInt(parts[2]), 1);
+          var categoryId = dataTable.getValue(parseInt(parts[parts.indexOf('label') + 1]), 1);
+          this.router.navigate(['/complaints/category',categoryId]);
           console.log("categoryId :" + categoryId);
         }
         else if (parts[0] == "bar") {
           var categoryId = dataTable.getValue(parseInt(parts[2]), 1);
           var statusId = dataTable.getValue(parseInt(parts[2]), (parseInt(parts[1]) + 1) * 2 + 1);
-          console.log("programId :" + categoryId + ",statusId :" + statusId);
+          this.router.navigate(['complaints/category-status',categoryId,statusId]);
+          console.log("categoryId :" + categoryId + ",statusId :" + statusId);
         }
         break;
       case "plan_chart":
@@ -148,7 +152,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         data.setCell(i, 2, res[i].statusId);
       }
       this.complaintByStatus = data;
-      this.pie_ChartOptions = {
+      this.complaintByStatusChartOptions = {
+        title:"Complaints Report - Statuswise",
         is3D: true
       }
     });
@@ -174,7 +179,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
       }
       this.complaintByProgramAndStandard = data;
-      this.ProgramAndStandardChartOptions = { isStacked: 'true', chartArea: { width: '50%' }, };
+      this.ProgramAndStandardChartOptions = { 
+        title:"Complaint Report - Programwise",
+        isStacked: 'true', 
+        chartArea: { width: '50%' }, 
+      };
     });
 
   }
@@ -193,7 +202,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
         data.setCell(i, 2, res[i].programId);
       }
       this.belowPerformance = data;
-      this.belowPerformanceChartOptions = { is3D: true };
+      this.belowPerformanceChartOptions = { 
+        title:"Below Performance Report - Programwise",
+        is3D: true };
     });
   }
 
@@ -211,7 +222,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
         data.setCell(i, 1, res[i].count);
         data.setCell(i, 2, res[i].standardId);
       }
-      var options = { is3D: true };
+      var options = {
+        title:'Below Performance Report - Yearwise',
+        is3D: true };
       var chartType = "PieChart";
       this.vc.drawGraph(options, chartType, data, containerId);
     });
@@ -245,7 +258,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
           maxVal = res[i].totalCount;
       }
       this.complaintByCategoryAndStatus = data;
-      this.categoryAndStatusChartOptions = { isStacked: 'true', chartArea: {}, };
+      this.categoryAndStatusChartOptions = { title:"Complaint Report - Categorywise",isStacked:'true', chartArea: {}, };
     });
   }
   chartByPlans() {
@@ -272,7 +285,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
       }
       this.plansOfBelowPerformer = data;
-      this.plansChartOptions = {};
+      this.plansChartOptions = {title:'Plans For Below Performers'};
     });
 
   }

@@ -27,7 +27,7 @@ export class GoogleChart {
   @Input() set chartData(data) {
     setTimeout(() => {
       this.drawGraph(this.chartOptions, this.chartType, data,  this._element);
-    });
+    },1000);
   }
   
   @Output() onSelected = new EventEmitter<boolean>();

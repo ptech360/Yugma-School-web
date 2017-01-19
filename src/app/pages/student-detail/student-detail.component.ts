@@ -12,8 +12,7 @@ declare let google;
   templateUrl: './student-detail.component.html'
 })
 export class StudentDetail implements OnInit{
-  public studentTableData;
-  public studentTableOption;
+  public studentDetail;
   constructor(private route: ActivatedRoute,public c: ChartService){
     
   }
@@ -26,21 +25,7 @@ export class StudentDetail implements OnInit{
   }
   drawStudentTable(programId, standardId){
       this.c.getBelowPerfomanceStudentsByStandard(programId, standardId).then(response => {
-      var data = new google.visualization.DataTable();
-      var res = response.json();
-      data.addColumn('string', 'Student Name');
-      data.addColumn('string', 'Subject Name');
-      data.addColumn('boolean', 'Have Plan');
-      data.addColumn('date', 'Created At');
-      data.addRows(res.length);
-      for (let i = 0; i < res.length; i++) {
-        data.setCell(i, 0, res[i].studentName);
-        data.setCell(i, 1, res[i].subjectName);
-        data.setCell(i, 2, res[i].isPIP);
-        data.setCell(i, 3, new Date(res[i].createdAt));
-      }
-      this.studentTableData = data;
-      this.studentTableOption = { showRowNumber: true, width: '100%' };
+        this.studentDetail = response.json();
     });
   }
 }
