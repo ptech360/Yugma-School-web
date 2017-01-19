@@ -53,6 +53,8 @@ export class ComplaintListComponent implements OnInit {
         this.getComplaints();
     });
     $('.modal').modal();
+     $('.tooltipped').tooltip({delay: 50});
+    
   }
 
   getComplaintByCategoryAndStatusId(categoryId,statusId){

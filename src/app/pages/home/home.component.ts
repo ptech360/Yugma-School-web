@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.chartByCategoryAndStatus();
       this.chartByPlans();
     }, 1000);
-
+     $('.tooltipped').tooltip({delay: 50});
   }
   ngAfterViewInit() {
     $('.modal').modal();
