@@ -1,21 +1,54 @@
 <div class="table-content">
+  <div class="row table-title-box">
+    <div class="col l10 s6 col1">
+      Below <span class="table-title-text">Performance Report</span>
+      <i class="material-icons icon-button right col2">replay</i>
+    </div>
+    <div class="col l2 s6 col-l">
+      <a class="col2">
+       <b> + </b> Graphs
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <form class="col s12 l12">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="input-field col s6 l4 right">
+          <input id="icon_telephone" placeholder="Search" type="text" class="validate searchBox" (keyup)="searchComplaints($event)">
+        </div>
+      </div>
+    </form>
+  </div>
   <table class="highlight bordered">
     <thead>
       <tr>
-        <th>StudentName</th>
-        <th>Subject Name</th>        
-        <th>Have plan</th>
-        <th>Created At</th>
-        <th></th>
+        <th>Id</th>
+        <th >Student Name</th>
+        <th >Subject Name</th>
+        <th *ngIf="!complaintStatus" class="center-align">Have Plan</th>
+        <th >Created at</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let d of studentDetail; let i = index;">
+        <td (click)="openModal(c)" class="action"><span class="cid">0001</span></td>
         <td>{{d.studentName}}</td>
         <td>{{d.subjectName}}</td>
-        <td>{{d.isPIP}}</td>
+        <td class="center-align">
+          <span *ngIf="d.isPIP == true">
+              <i class="material-icons green-text">done</i>  
+          </span>
+          <span *ngIf="d.isPIP == false">
+              <i class="material-icons red-text">close</i>  
+          </span>          
+        </td>
         <td>{{d.createdAt}}</td>
-      </tr>
+       </tr>
     </tbody>
   </table>
+  <div class="row loader">
+    <loader class="col l7 s7 right valign" [condition]="!studentDetail"></loader>
+  </div>
 </div>
