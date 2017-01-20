@@ -36,6 +36,10 @@ export class ComplaintListComponent implements OnInit {
       if(params['statusId']&&params['categoryId']) {
         this.complaintStatus = params['statusId'];
         this.getComplaintByCategoryAndStatusId(params['categoryId'],params['statusId']);
+      }
+      else if(params['statusId']&&params['departmentId']) {
+        this.complaintStatus = params['statusId'];
+        this.getComplaintByDepartmentAndStatusId(params['departmentId'],params['statusId']);
       }        
       else if(params['statusId']){
         this.complaintStatus = params['statusId'];
@@ -43,7 +47,9 @@ export class ComplaintListComponent implements OnInit {
       }
       else if(params['categoryId'])
         this.getComplaintByCategoryId(params['categoryId']);
-      if(params['standardId']&&params['programId']) 
+      else if(params['departmentId'])
+        this.getComplaintByDepartmentId(params['departmentId']);
+      else if(params['standardId']&&params['programId']) 
         this.getComplaintOfProgramByProgramAndStandardId(params['programId'],params['standardId']);
       else if(params['standardId'])
         this.getComplaintByStandardId(params['standardId']);
@@ -58,7 +64,7 @@ export class ComplaintListComponent implements OnInit {
   }
 
   getComplaintByCategoryAndStatusId(categoryId,statusId){
-    this.c.getComplaintByStatusId(statusId).then((res) => {
+    this.c.getComplaintByCategoryAndStatusId(categoryId,statusId).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {
@@ -74,6 +80,37 @@ export class ComplaintListComponent implements OnInit {
 
   getComplaintByCategoryId(categoryId){
     this.c.getComplaintByCategoryId(categoryId).then((res) => {
+      if (res.status === 204) {
+        this.EmptyComplaints = true;
+      } else {
+        this.EmptyComplaints = false;
+        this.complaints = res.json();
+        this.complaintsCOPY = res.json();
+      }
+    }, (err) => {
+      this.complaints = [];
+      this.config.showToast("Internal server error.. Try again later");
+    });
+
+  }
+
+  getComplaintByDepartmentAndStatusId(departmentId,statusId){
+    this.c.getComplaintByDepartmentAndStatusId(departmentId,statusId).then((res) => {
+      if (res.status === 204) {
+        this.EmptyComplaints = true;
+      } else {
+        this.EmptyComplaints = false;
+        this.complaints = res.json();
+        this.complaintsCOPY = res.json();
+      }
+    }, (err) => {
+      this.complaints = [];
+      this.config.showToast("Internal server error.. Try again later");
+    });
+  }
+
+  getComplaintByDepartmentId(departmentId){
+    this.c.getComplaintByDepartmentId(departmentId).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {

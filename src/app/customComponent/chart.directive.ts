@@ -2,6 +2,7 @@ import { Component, Directive, Input, ElementRef, EventEmitter, Output } from '@
 
 declare var google:any;
 declare var googleLoaded:any;
+declare let $;
 
 @Directive({
   selector: '[GoogleChart]'
@@ -48,6 +49,8 @@ export class GoogleChart {
 
       function onReady() {
         google.visualization.events.addListener(wrapper.getChart(), 'click', selectHandler);
+        google.visualization.events.addListener(wrapper.getChart(), 'onmouseover', onmouseover);
+        google.visualization.events.addListener(wrapper.getChart(), 'onmouseout', onmouseout);
       }
       
       function selectHandler(e) {
@@ -58,6 +61,12 @@ export class GoogleChart {
           e:e
         }
         that.onSelected.emit(that.selectedData);
+      }
+      function onmouseover(){
+        $('#'+ele.id).css('cursor','pointer')
+      }
+      function onmouseout(){
+        $('#'+ele.id).css('cursor','default')
       }
     }
   }

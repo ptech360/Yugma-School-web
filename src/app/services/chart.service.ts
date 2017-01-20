@@ -63,4 +63,11 @@ export class ChartService {
     }).catch((err) => { return Promise.reject(err); });
   }
 
+  public getComplaintByDepartmentAndStatus() {
+    return this.http.get(this.baseUrl+"/complaint/department-status").toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
+  }
+
 }

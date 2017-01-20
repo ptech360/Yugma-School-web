@@ -22,6 +22,8 @@ export const rootRouterConfig: Routes = [
       { path: 'status/:statusId', component: ComplaintListComponent, pathMatch: 'full'},
       { path: 'category/:categoryId', component: ComplaintListComponent, pathMatch: 'full'},
       { path: 'category-status/:categoryId/:statusId', component: ComplaintListComponent, pathMatch: 'full'},
+      { path: 'department/:departmentId', component: ComplaintListComponent, pathMatch: 'full'},
+      { path: 'department-status/:departmentId/:statusId', component: ComplaintListComponent, pathMatch: 'full'},
       { path: 'program/:programId', component: ComplaintListComponent, pathMatch: 'full'},
       { path: 'program-standard/:programId/:standardId', component: ComplaintListComponent, pathMatch: 'full'},      
       { path: 'list', component: ComplaintListComponent, pathMatch: 'full'},

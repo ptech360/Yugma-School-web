@@ -52,6 +52,22 @@ export class ComplaintService {
     }).catch((err) => { return Promise.reject(err); });
   }
 
+  getComplaintByDepartmentAndStatusId(departmentId,statusId){
+    let options = this.config.getHeaderWithWeb();
+    return this.http.get(this.baseUrl+ "/complaint/department-status/" + departmentId + "/" + statusId,options).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
+  }
+
+  getComplaintByDepartmentId(departmentId){
+    let options = this.config.getHeaderWithWeb();
+    return this.http.get(this.baseUrl+"/complaint/department-status/department/" + departmentId,options).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
+  }
+
   getComplaintOfProgramByProgramAndStandardId(programId,standardId){
     let options = this.config.getHeaderWithWeb();
     return this.http.get(this.baseUrl+"/complaint/program-standard/" + programId +"/" + standardId,options).toPromise()

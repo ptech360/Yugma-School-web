@@ -86,7 +86,7 @@
     <div class="col l6 s12">
       <div class="card hoverable ">
         <i data-target="graph1" class="material-icons icon-button  tooltipped" data-position="bottom" data-delay="50" data-tooltip="Expand" (click)="expand(1)">aspect_ratio</i>
-        <div class="graph-table-cell" GoogleChart id="complaint_chart_by_status" [chartData]="complaintByStatus" [chartOptions]="pie_ChartOptions"
+        <div class="graph-table-cell" GoogleChart id="complaint_chart_by_status" [chartData]="complaintByStatus" [chartOptions]="complaintByStatusChartOptions"
           chartType="PieChart" (onSelected)="onSelected($event)"> </div>
       </div>
     </div>
@@ -117,6 +117,14 @@
     </div>
 
     <div class="col l6 s12">
+      <div class="card hoverable">
+        <i data-target="graph6" class="material-icons icon-button tooltipped" data-position="bottom" data-delay="50" data-tooltip="Expand"  (click)="expand(6)">aspect_ratio</i>
+        <div class=" graph-table-cell" GoogleChart id="chart_by_department_status" [chartData]="complaintByDepartmentAndStatus" [chartOptions]="departmentAndStatusChartOptions"
+          chartType="BarChart" (onSelected)="onSelected($event)"> </div>
+      </div>
+    </div>
+
+    <div class="col l6 s12">
       <div class="card hoverable ">
         <i data-target="graph5" class="material-icons icon-button tooltipped" data-position="bottom" data-delay="50" data-tooltip="Expand"  (click)="expand(5)">aspect_ratio</i>
         <div class="graph-table-cell" GoogleChart id="plan_chart" [chartData]="plansOfBelowPerformer" [chartOptions]="plansChartOptions"
@@ -133,7 +141,7 @@
   <i class="material-icons modal-close right icon-button tooltipped" data-position="bottom" data-delay="50" data-tooltip="shrink" >call_received</i>
   <div class="modal-content">
     <h4>Graph Name</h4>
-    <div class="graph-table-cell" GoogleChart id="complaint_chart_by_status1" [chartData]="complaintByStatus" [chartOptions]="pie_ChartOptions"
+    <div class="graph-table-cell" GoogleChart id="complaint_chart_by_status1" [chartData]="complaintByStatus" [chartOptions]="complaintByStatusChartOptions"
       chartType="PieChart" (onSelected)="onSelected($event)"> </div>
   </div>
 </div>
@@ -169,5 +177,13 @@
     <h4>Graph Name</h4>
     <div class="graph graph-table-cell" GoogleChart id="plan_chart1" name="modal" [chartData]="plansOfBelowPerformer" [chartOptions]="plansChartOptions"
       chartType="ColumnChart" (onSelected)="onSelected($event)"> </div>
+  </div>
+</div>
+<div id="graph6" class="modal" style="height:500px">
+  <i class="material-icons modal-close right icon-button tooltipped" data-position="bottom" data-delay="50" data-tooltip="shrink">call_received</i>
+  <div class="modal-content">
+    <h4>Graph Name</h4>
+    <div class=" graph-table-cell" GoogleChart id="chart_by_department_status1" [chartData]="complaintByDepartmentAndStatus" [chartOptions]="departmentAndStatusChartOptions"
+          chartType="BarChart" (onSelected)="onSelected($event)"> </div>
   </div>
 </div>
