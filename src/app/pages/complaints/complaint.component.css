@@ -91,3 +91,20 @@ thead{
 .margin-btn{
   margin-left:5px;
 }
+.chatBox{
+  width:25% !important;
+      left: inherit;
+      right:10px;
+          height: 50%;
+}
+.comments{
+  margin-top:20px;
+  padding:10px;
+}
+.myChat{
+  float:right;
+  color:red;
+}
+.msg{
+  color:blue;
+}

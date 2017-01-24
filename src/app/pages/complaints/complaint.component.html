@@ -44,7 +44,7 @@
         <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
         <td>{{c.priorityName}}</td>
         <td><a (click)="openEditModal(c)" class="action"><i class="material-icons">create</i></a></td>
-        <td class="center-align"><a class="action"><i class="material-icons">chat_bubble</i></a></td>
+        <td class="center-align"><a href="#chat" class="action"><i class="material-icons">chat_bubble</i></a></td>
       </tr>
     </tbody>
   </table>
@@ -126,3 +126,26 @@
     </div>
   </div>
 </div>
+
+<!-- Chat Modal Structure -->
+  <div id="chat" class="modal bottom-sheet chatBox">
+    <i class="material-icons modal-close right icon-button tooltipped" data-position="bottom" data-tooltip="close">close</i>
+<div class="comments">
+    <div class="myChat">
+      Hello
+    </div>
+    <div  class="msg">
+      Bye
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+    <form class="col s12">
+      <div class="row">
+          <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+       
+      </div>
+    </form>
+  </div>
+    </div>
+</div>
+  </div>
