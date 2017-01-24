@@ -15,8 +15,8 @@
 	}
 
 .flip-container, .front, .back {
-	width: 15vw;
-	height: 20vh;
+	width: 230px;
+	height: 110px;
 }
 
 .flipper {
@@ -85,4 +85,14 @@
 }
 .modal{
 	background:white;
+}
+.card-image{
+	display:block;
+	width:80px;
+	    margin-left: 50px;
+    
+}
+.c1{
+	margin-top:30px;
+	text-align:center;
 }
