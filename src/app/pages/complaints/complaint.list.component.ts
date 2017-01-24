@@ -197,7 +197,7 @@ export class ComplaintListComponent implements OnInit {
 
   openEditModal(complaint) {
     this.complaint = complaint;
-    this.router.navigate(["/complaints/edit"]);
+    this.router.navigate(["/complaints/edit",complaint.id]);
   }
 
   previousComplaint() {

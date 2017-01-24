@@ -27,10 +27,11 @@ export const rootRouterConfig: Routes = [
       { path: 'program/:programId', component: ComplaintListComponent, pathMatch: 'full'},
       { path: 'program-standard/:programId/:standardId', component: ComplaintListComponent, pathMatch: 'full'},      
       { path: 'list', component: ComplaintListComponent, pathMatch: 'full'},
-      { path: 'edit', component: EditComplaint}
+      { path: 'edit/:complaint', component: EditComplaint}
     ]
   },
-  {path:'student-detail/:programId/:standardId',component:StudentDetail, canActivate: [LoggedInGuard]},
+  {path:'program/student-detail/:programId/:standardId',component:StudentDetail, canActivate: [LoggedInGuard]},
+  {path:'department/student-detail/:departmentId/:standardId',component:StudentDetail, canActivate: [LoggedInGuard]},
   { path: 'parent', component: ParentComponent,
     children: [
       { path: 'login', component: LoginComponent },

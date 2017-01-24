@@ -33,7 +33,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let d of studentDetail; let i = index;">
-        <td (click)="openModal(c)" class="action"><span class="cid">0001</span></td>
+        <td (click)="openModal(c)" class="action"><span class="cid">{{d.id}}</span></td>
         <td>{{d.studentName}}</td>
         <td>{{d.subjectName}}</td>
         <td class="center-align">
