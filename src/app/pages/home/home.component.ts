@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     $('.modal').modal();
       $('.collapsible').collapsible({
       expandable: true, // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-  );
+      });
      
   }
   onResize(event) {

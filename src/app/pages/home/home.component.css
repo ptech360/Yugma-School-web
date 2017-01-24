@@ -96,13 +96,9 @@
 	margin-top:30px;
 	text-align:center;
 }
-.complaints{
+.collapsible-header{
 	font-size: 25px;
   color: #26a69a;
-}
-.below-performance{
-	font-size: 25px;
-  color: #ec407a;
 }
 .collapsible-header:hover{
 	color:orange;
