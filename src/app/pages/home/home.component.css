@@ -96,3 +96,10 @@
 	margin-top:30px;
 	text-align:center;
 }
+.collapsible-header{
+	font-size: 25px;
+  color: #26a69a;
+}
+.collapsible-header:hover{
+	color:orange;
+}

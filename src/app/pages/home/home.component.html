@@ -103,17 +103,11 @@
 
 
 <div (window:resize)="onResize($event)">
-  <!--<div class="row loader">
-    <loader class="col l6 s6" [condition]="!complaints" style="text-align: center"></loader>
-  </div>-->
-  
-        
+ <ul class="collapsible" data-collapsible="expandable">
+    <li>
+      <div class="collapsible-header active center-align complaints">Complaints<i class="material-icons list1" style="float:right">keyboard_arrow_down</i></div>
+      <div class="collapsible-body">
   <div class="row">
-    <nav>
-      <div class="nav-wrapper blue-grey darken-1">
-        <a href="#!" class="brand-logo center">COMPLAINTS</a>
-      </div>
-    </nav>
     <div class="col l6 s12">
       <div class="card hoverable ">
         <i data-target="graph1" class="material-icons icon-button  tooltipped" data-position="bottom" data-delay="50" data-tooltip="Expand" (click)="expand(1)">aspect_ratio</i>
@@ -146,13 +140,12 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <nav>
-      <div class="nav-wrapper blue-grey darken-1">
-        <a href="#!" class="brand-logo center">BELOW PERFORMANCE</a>
       </div>
-    </nav>
+    </li>
+    <li>
+      <div class="collapsible-header active center-align below-performance">Below Performance<i class="material-icons drop" style="float:right">keyboard_arrow_down</i></div>
+      <div class="collapsible-body">
+  <div class="row">
     <div class="col l6 s12">
       <div class="card hoverable ">
         <i data-target="graph2" class="material-icons icon-button tooltipped" data-position="bottom" data-delay="50" data-tooltip="Expand"
@@ -163,7 +156,6 @@
           chartType="PieChart" (onSelected)="onSelected($event)"> </div>
       </div>
     </div>
-
     <div class="col l6 s12">
       <div class="card hoverable ">
         <i data-target="graph7" class="material-icons icon-button tooltipped" data-position="bottom" data-delay="50" data-tooltip="Expand"  (click)="expand(7)">aspect_ratio</i>
@@ -186,7 +178,29 @@
       </div>
     </div>
   </div>
+      </div>
+    </li>
+  </ul>
 </div>
+
+
+
+
+
+
+
+
+
+
+  <!--<div class="row loader">
+    <loader class="col l6 s6" [condition]="!complaints" style="text-align: center"></loader>
+  </div>-->
+  
+        
+
+
+
+
 
 
 
