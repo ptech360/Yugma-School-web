@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router}   from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // import service
@@ -29,29 +29,25 @@ declare let Materialize;
           </div>
 
           <div class="row">
-            <p>
-              <input class="with-gap" name="group1" type="radio" id="test1" checked />
-              <label for="test1">Red</label>
-              <input class="with-gap" name="group1" type="radio" id="test2" checked />
-              <label for="test2">blue</label>
-              <input class="with-gap" name="group1" type="radio" id="test3" checked />
-              <label for="test3">green</label>
-            </p>
+              <div *ngFor="let p of priorities; let i = index;">
+                <input class="with-gap" name="group1" type="radio" id="{{p.id}}" [checked]="p.id === priority" value="{{p}}" (change)="onPriorityChange(p)"/>
+                <label for="{{p.id}}">{{p.name}}</label>
+              </div>            
           </div>
-          <div class="row">
+          <div class="row" *ngIf="inprogressBtn">
             <p>
-              <input type="checkbox" class="filled-in" id="filled-in-box" />
+              <input type="checkbox" name="isInprogress" class="filled-in" id="filled-in-box" [(ngModel)]="isInprogress" (change)="onInprogress()"/>
               <label for="filled-in-box">InProgress</label>
             </p>
           </div>
           <div class="row">
-          <button (click)="goBack()" class="btn right margin-btn">Submit</button>
-          <button (click)="editComplaint()" class="btn right margin-btn">Close</button>
+          <button (click)="editComplaint()" class="btn right margin-btn" [disabled]="submitButton">Submit</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+  
 
   <div class="col l6" *ngIf="employees">
     <div class="card">
@@ -74,17 +70,52 @@ declare let Materialize;
   `
 })
 
-export class EditComplaint {
-
+export class EditComplaint implements OnInit{
+  public selectedComplaint;
   employees;
+  priorities;
+  isInprogress:boolean = false;
+  inprogressBtn:boolean = true;
   employeesCOPY;
   assignedEmployeeName: string;
+  assignedEmployeeId:any;
+  priority : {};
+  submitButton:boolean = true;
 
   constructor(private location: Location,
-              private c: ComplaintService) {
+              private c: ComplaintService,
+              private route: ActivatedRoute) {
 
   }
+  ngOnInit(){
+    this.route.params.subscribe(params => {
+      if(params['complaint']){
+        this.c.getComplaintById(params['complaint']).then(response => {
+          console.log(response.json());
+          this.selectedComplaint = response.json();
+          this.setComplaintData();
+          this.employeesList();
+        });
+      }
+    });
+    
+  }
+  
 
+  setComplaintData(){
+      this.assignedEmployeeName = this.selectedComplaint.assignedEmployeeName;
+      this.assignedEmployeeId = this.selectedComplaint.assignedEmployeId;
+      this.priority = this.selectedComplaint.priorityId;
+      if(this.selectedComplaint.statusId<3) this.inprogressBtn = true;    
+        else {this.inprogressBtn = false;}
+  }
+
+  validateForm(){
+    if(this.assignedEmployeeName == this.selectedComplaint.assignedEmployeeName && this.priority == this.selectedComplaint.priorityId && this.isInprogress == false)
+      this.submitButton = true;
+    else
+      this.submitButton = false;
+  }
   goBack() {
     window.history.back();
   }
@@ -93,6 +124,7 @@ export class EditComplaint {
     this.c.editInfo()
     .then((res) => {
       this.employees = res.json().employees;
+      this.priorities = res.json().priorities;
       this.employeesCOPY = res.json().employees;
       console.log("DSDSD", this.employees);
     }, (err) => {
@@ -102,8 +134,19 @@ export class EditComplaint {
 
   selectEmployee(employee) {
     this.assignedEmployeeName = employee.name;
-    console.log("FDSfds", name);
+    this.assignedEmployeeId = employee.id;
     delete this.employees;
+    this.validateForm();
+  }
+
+  onPriorityChange(p){    
+    this.priority = p.id;
+    this.validateForm();
+  }
+
+  onInprogress(){
+    console.log(this.isInprogress);
+    this.validateForm();
   }
 
   editComplaint() {

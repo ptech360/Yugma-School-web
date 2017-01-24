@@ -19,6 +19,15 @@ export class ComplaintService {
     this.baseUrl = this.config.getUrl();
   }
 
+  getComplaintById(id){
+    let options = this.config.getHeaderWithWeb();
+    return this.http.get(this.baseUrl + "/complaint/" + id, options)
+    .toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
+  }
+
   getComplaints(pageNo) {
     let options = this.config.getHeaderWithWeb();
     return this.http.get(this.baseUrl + "/complaint/page/" + pageNo, options)

@@ -19,12 +19,19 @@ export class StudentDetail implements OnInit{
   ngOnInit(){
     this.route.params.subscribe(params => {
       if(params['standardId']&&params['programId']){
-        this.drawStudentTable(params['programId'],params['standardId']);
-      } 
+        this.drawStudentTableByProgram(params['programId'],params['standardId']);
+      }else if(params['standardId']&&params['departmentId']) {
+        this.drawStudentTableByDepartment(params['standardId'],params['departmentId']);
+      }
     });
   }
-  drawStudentTable(programId, standardId){
-      this.c.getBelowPerfomanceStudentsByStandard(programId, standardId).then(response => {
+  drawStudentTableByProgram(programId, standardId){
+      this.c.getBelowPerfomanceOfProgramStudentsByStandard(programId, standardId).then(response => {
+        this.studentDetail = response.json();
+    });
+  }
+  drawStudentTableByDepartment(departmentId, standardId){
+      this.c.getBelowPerfomanceOfDepartmentStudentsByStandard(departmentId, standardId).then(response => {
         this.studentDetail = response.json();
     });
   }
