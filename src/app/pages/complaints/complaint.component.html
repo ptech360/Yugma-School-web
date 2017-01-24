@@ -44,7 +44,7 @@
         <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
         <td>{{c.priorityName}}</td>
         <td><a (click)="openEditModal(c)" class="action"><i class="material-icons">create</i></a></td>
-        <td class="center-align"><a class="action"><i class="material-icons">chat_bubble</i></a></td>
+        <td class="center-align"><a class="action" (click)="getComplaintCommentById(c.id)"><i class="material-icons">chat_bubble</i></a></td>
       </tr>
     </tbody>
   </table>
@@ -118,7 +118,7 @@
             <ul>
               <li><a class="btn-floating red tooltipped" data-position="top" data-tooltip="close complaint"><i class="material-icons left">gavel</i>Close</a></li>
               <li><a class="btn-floating  modal-close yellow darken-1" data-position="top" data-tooltip="edit complaint" (click)="openEditModal(complaint)" ><i class="material-icons left">edit</i>Edit</a></li>
-              <li><a class="btn-floating green tooltipped" data-tooltip="comment" data-position="top"><i class="material-icons left">chat</i>Comment</a></li>
+              <li><a class="btn-floating green tooltipped" data-tooltip="comment" data-position="top" (click)="getComplaintCommentById(complaint.id)"><i class="material-icons left">chat</i>Comment</a></li>
             </ul>
           </div>
         </div>

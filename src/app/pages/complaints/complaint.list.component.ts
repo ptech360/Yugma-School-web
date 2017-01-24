@@ -16,6 +16,8 @@ import { ComplaintService } from '../../services/complaint.service';
 export class ComplaintListComponent implements OnInit {
 
   private complaints;
+  private comments;
+  private EmptyComments;
   private complaintStatus;
   private complaintsCOPY;
   private EmptyComplaints: boolean = false;
@@ -224,6 +226,21 @@ export class ComplaintListComponent implements OnInit {
         return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
     }
+  }
+
+  getComplaintCommentById(complaintId){
+    this.c.getComplaintCommentById(complaintId).then((res) => {
+      if (res.status === 204) {
+        this.EmptyComments = true;
+      } else {
+        this.EmptyComments = false;
+        this.comments = res.json();
+        console.log("comments",this.comments);
+      }
+    }, (err) => {
+      this.comments = [];
+      this.config.showToast("Internal server error.. Try again later");
+    });
   }
 
 }
