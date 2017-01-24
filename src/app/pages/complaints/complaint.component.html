@@ -44,7 +44,7 @@
         <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
         <td>{{c.priorityName}}</td>
         <td><a (click)="openEditModal(c)" class="action"><i class="material-icons">create</i></a></td>
-        <td class="center-align"><a href="#chat" class="action"><i class="material-icons">chat_bubble</i></a></td>
+        <td class="center-align"><a href="#chat" (click)="getComplaintCommentById(c.id)" class="action"><i class="material-icons">chat_bubble</i></a></td>
       </tr>
     </tbody>
   </table>
@@ -68,35 +68,35 @@
       <div class="col l6 s12">
         <table class="striped">
           <tbody>
-            <tr>
+            <tr *ngIf="complaint.statusName">
               <td><b>Status</b></td>
               <td>{{complaint.statusName}}</td>
             </tr>
-            <tr>
+            <tr *ngIf="complaint.anonymous">
               <td><b>Anonymous</b></td>
               <td>{{complaint.anonymous}}</td>
             </tr>
-            <tr>
+            <tr *ngIf="complaint.assignedEmployeeName">
               <td><b>Assigned To</b></td>
               <td>{{complaint.assignedEmployeeName}}</td>
             </tr>
-            <tr>
+            <tr *ngIf="complaint.againstEmployeeName">
               <td><b>Against Employee Name</b></td>
               <td>{{complaint.againstEmployeeName}}</td>
             </tr>
-            <tr>
+            <tr *ngIf="complaint.againstCategoryName">
               <td><b>Against Category Name</b></td>
               <td>{{complaint.againstCategoryName}}</td>
             </tr>
-            <tr>
+            <tr *ngIf="complaint.priorityName">
               <td><b>Priority</b></td>
               <td>{{complaint.priorityName}}</td>
             </tr>
-            <tr>
+            <tr *ngIf="complaint.studentName">
               <td><b>Student Name</b></td>
               <td>{{complaint.studentName}}</td>
             </tr>
-            <tr>
+            <tr *ngIf="complaint.studentStandardName">
               <td><b>Standard</b></td>
               <td>{{complaint.studentStandardName}}</td>
             </tr>
@@ -117,8 +117,8 @@
             </a>
             <ul>
               <li><a class="btn-floating red tooltipped" data-position="top" data-tooltip="close complaint"><i class="material-icons left">gavel</i>Close</a></li>
-              <li><a class="btn-floating  modal-close yellow darken-1" data-position="top" data-tooltip="edit complaint" (click)="openEditModal(c)" ><i class="material-icons left">edit</i>Edit</a></li>
-              <li><a class="btn-floating green tooltipped" data-tooltip="comment" data-position="top"><i class="material-icons left">chat</i>Comment</a></li>
+              <li><a class="btn-floating  modal-close yellow darken-1" data-position="top" data-tooltip="edit complaint" (click)="openEditModal(complaint)" ><i class="material-icons left">edit</i>Edit</a></li>
+              <li><a class="btn-floating green tooltipped" data-tooltip="comment" data-position="top" (click)="getComplaintCommentById(complaint.id)"><i class="material-icons left">chat</i>Comment</a></li>
             </ul>
           </div>
         </div>
@@ -131,21 +131,26 @@
   <div id="chat" class="modal bottom-sheet chatBox">
     <i class="material-icons modal-close right icon-button tooltipped" data-position="bottom" data-tooltip="close">close</i>
 <div class="comments">
-    <div class="myChat">
-      Hello
+    <div *ngFor="let c of comments">
+      <div class="row" *ngIf="c.employeeId" >
+        <div class="msg">{{c.comment}}</div>
+      </div>
+      <div class="row" *ngIf="c.employeeId==null">
+        <div  class="myMsg">{{c.comment}}</div>
+      </div>
     </div>
-    <div  class="msg">
-      Bye
+    <div style="position:absolute; bottom:0;width: 90%;
+    background: white;">
+      <input type="text"/>
     </div>
-    <div class="modal-footer">
+    <!--<div class="modal-footer">
         <div class="row">
     <form class="col s12">
       <div class="row">
           <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-       
       </div>
     </form>
   </div>
-    </div>
+    </div>-->
 </div>
   </div>

@@ -97,6 +97,14 @@ export class ComplaintService {
     }).catch((err) => { return Promise.reject(err); });
   }
 
+  getComplaintCommentById(complaintId){
+    let options = this.config.getHeaderWithWeb();
+    return this.http.get(this.baseUrl+"/complaint/" + complaintId+"/comment",options).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
+  }
+
   editInfo() {
     let options = this.config.getHeaderWithoutWeb();
     return this.http.get(this.baseUrl + "/complaint/edit-info", options)

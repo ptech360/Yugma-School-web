@@ -16,6 +16,8 @@ import { ComplaintService } from '../../services/complaint.service';
 export class ComplaintListComponent implements OnInit {
 
   private complaints;
+  private comments;
+  private EmptyComments;
   private complaintStatus;
   private complaintsCOPY;
   private EmptyComplaints: boolean = false;
@@ -60,6 +62,19 @@ export class ComplaintListComponent implements OnInit {
     });
     $('.modal').modal();
      $('.tooltipped').tooltip({delay: 50});
+      $('.modal').modal({
+      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+      opacity: 0, // Opacity of modal background
+      in_duration: 300, // Transition in duration
+      out_duration: 200, // Transition out duration
+      starting_top: '4%', // Starting top style attribute
+      ending_top: '10%', // Ending top style attribute
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+        console.log(modal, trigger);
+      }
+    }
+  );
+      
     
   }
 
@@ -224,6 +239,21 @@ export class ComplaintListComponent implements OnInit {
         return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
     }
+  }
+
+  getComplaintCommentById(complaintId){
+    this.c.getComplaintCommentById(complaintId).then((res) => {
+      if (res.status === 204) {
+        this.EmptyComments = true;
+      } else {
+        this.EmptyComments = false;
+        this.comments = res.json();
+        console.log("comments",this.comments);
+      }
+    }, (err) => {
+      this.comments = [];
+      this.config.showToast("Internal server error.. Try again later");
+    });
   }
 
 }

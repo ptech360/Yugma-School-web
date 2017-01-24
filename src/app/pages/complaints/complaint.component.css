@@ -93,18 +93,36 @@ thead{
 }
 .chatBox{
   width:25% !important;
-      left: inherit;
-      right:10px;
-          height: 50%;
+  left: inherit;
+  right:10px;
+  height: 50%;
+  background:#e8e8e8;
+      border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border: 5px solid #493d55;
+    border-bottom: none;
 }
 .comments{
   margin-top:20px;
   padding:10px;
 }
-.myChat{
-  float:right;
-  color:red;
+.comments .row{
+          height: 1px;
+}
+.myMsg{
+    color: black;
+    padding: 5px;
+    background: #dff9d9;
+    border-radius: 33px;
+    float:right;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 .msg{
-  color:blue;
+    display:block;
+    color: black;
+    padding: 5px;
+    background: white;
+    border-radius: 15px;
+    float:left;
 }
