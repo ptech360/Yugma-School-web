@@ -16,8 +16,8 @@ export class AccountComponent implements OnInit {
   resetPasswordForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              private userService: UserService) {}
+    private router: Router,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.resetPasswordForm = new FormGroup({
@@ -26,7 +26,7 @@ export class AccountComponent implements OnInit {
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(2)]),
     }, passwordMatchValidator);
     function passwordMatchValidator(g: FormGroup) {
-       return g.get('newPassword').value === g.get('confirmPassword').value ? null : {'mismatch': true};
+      return g.get('newPassword').value === g.get('confirmPassword').value ? null : { 'mismatch': true };
     }
   }
 
@@ -35,14 +35,14 @@ export class AccountComponent implements OnInit {
       this.checkValidation(this.resetPasswordForm.value);
     } else {
       this.userService.resetPassword(this.resetPasswordForm.value)
-      .then((res) => {
-        this.router.navigate(["/home"]);
-        this.commonToast("Update password successfully");
-      }, (err) => {
-        if(err.status === 401) {
-          this.commonToast("You have entered wrong old password");
-        }
-      });
+        .then((res) => {
+          this.router.navigate(["/home"]);
+          this.commonToast("Update password successfully");
+        }, (err) => {
+          if (err.status === 401) {
+            this.commonToast("You have entered wrong old password");
+          }
+        });
     }
   }
 
