@@ -136,11 +136,18 @@
 
   <div class="comments">
     <div *ngFor="let c of comments">
-      <div class="row" *ngIf="c.employeeId">
+      
+      <div *ngIf="c.employeeId">
+        <div class="row">
         <div class="msg">{{c.comment}}</div>
+     
+        </div>   <div class="left myDate" style="">{{c.employeeName}}: {{c.createdAt|date}}</div>
       </div>
       <div class="row" *ngIf="c.employeeId==null">
+         <div class="row">
         <div class="myMsg">{{c.comment}}</div>
+         </div>
+         <div class="right myDate" style="">me: {{c.createdAt|date}}</div>
       </div>
     </div>
     <form class="chat-form">
