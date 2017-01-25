@@ -93,8 +93,9 @@ export class EditComplaint implements OnInit{
         this.c.getComplaintById(params['complaint']).then(response => {
           console.log(response.json());
           this.selectedComplaint = response.json();
+          this.getInfoTOEdit();
           this.setComplaintData();
-          this.employeesList();
+          
         });
       }
     });
@@ -120,16 +121,20 @@ export class EditComplaint implements OnInit{
     window.history.back();
   }
 
-  employeesList() {
+  getInfoTOEdit() {
     this.c.editInfo()
     .then((res) => {
-      this.employees = res.json().employees;
+      // this.employees = res.json().employees;
       this.priorities = res.json().priorities;
       this.employeesCOPY = res.json().employees;
       console.log("DSDSD", this.employees);
     }, (err) => {
       console.log("errr", err)
     });
+  }
+
+  employeesList(){
+    this.employees = this.employeesCOPY;
   }
 
   selectEmployee(employee) {
