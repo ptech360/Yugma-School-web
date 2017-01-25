@@ -62,7 +62,7 @@ export class ComplaintListComponent implements OnInit {
     });
     $('.modal').modal();
      $('.tooltipped').tooltip({delay: 50});
-      $('.modal').modal({
+      $('#chat').modal({
       dismissible: false, // Modal can be dismissed by clicking outside of the modal
       opacity: 0, // Opacity of modal background
       in_duration: 300, // Transition in duration

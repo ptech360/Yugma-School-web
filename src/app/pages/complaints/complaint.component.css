@@ -106,7 +106,7 @@ thead{
   padding:10px;
 }
 .comments .row{
-          height: 1px;
+          height: 12px;
 }
 .myMsg{
     color: black;
@@ -134,10 +134,20 @@ thead{
 .chat-input{
       margin: 0px;
           border: 1px solid #493d55;
-    width: 80%;
+    width: 85%;
     background:white;
         padding-left: 5px;
 }
 .chat-form{
   position:absolute; bottom:0;width:95%
+}
+.msgDate{
+    font-size: 10px;
+    color: grey;
+    margin-left: 5px;
+}
+.myDate{
+    font-size: 10px;
+    color: grey;
+    float:right;
 }

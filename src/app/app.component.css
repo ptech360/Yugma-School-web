@@ -115,9 +115,11 @@ header, main, footer {
 }
 .breadcrumb{
     color:grey;
+    font-size: 15px;
 }
 .breadcrumb:before{
   color:grey;
+  font-size: 15px;
 }
 .homeicon{
   padding-top:2px;

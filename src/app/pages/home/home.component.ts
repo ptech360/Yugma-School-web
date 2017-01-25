@@ -142,6 +142,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
   onSelected(data) {
+      $('.modal').modal('close');
     var dataTable = data.wrapper.getDataTable();
     var parts = data.e.targetID.split('#');
     switch (data.chartId.id) {
