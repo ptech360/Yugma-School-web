@@ -79,11 +79,13 @@ export class EditComplaint implements OnInit{
   employeesCOPY;
   assignedEmployeeName: string;
   assignedEmployeeId:any;
+  editedComplaint:Object = {};
   priority : {};
   submitButton:boolean = true;
 
   constructor(private location: Location,
               private c: ComplaintService,
+              private config: Configuration,
               private route: ActivatedRoute) {
 
   }
@@ -139,23 +141,39 @@ export class EditComplaint implements OnInit{
 
   selectEmployee(employee) {
     this.assignedEmployeeName = employee.name;
-    this.assignedEmployeeId = employee.id;
+    // this.assignedEmployeeId = employee.id;
+    if(this.assignedEmployeeName != this.selectedComplaint.assignedEmployeeName)
+      this.editedComplaint['assignedTo'] = employee.id;
+    else
+      delete this.editedComplaint['assignedTo'];
     delete this.employees;
     this.validateForm();
   }
 
   onPriorityChange(p){    
     this.priority = p.id;
+    if(p.id != this.selectedComplaint.priorityId)
+      this.editedComplaint['priorityId'] = p.id;
+    else  
+      delete this.editedComplaint['priorityId'];
     this.validateForm();
   }
 
   onInprogress(){
-    console.log(this.isInprogress);
+    if(this.selectedComplaint.statusId<3 && this.isInprogress)
+      this.editedComplaint['statusId'] = 3;
+    else
+      delete this.editedComplaint['statusId'];
     this.validateForm();
   }
 
   editComplaint() {
-
+    console.log("comaplaint:",this.editedComplaint);
+    this.c.updateComplaint(this.selectedComplaint.id,this.editedComplaint).then((res) =>{
+      console.log("updated",res);
+    }, (err) => {
+      this.config.showToast(err);
+    });
   }
 
   loadEmployees() {

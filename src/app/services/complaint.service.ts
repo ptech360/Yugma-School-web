@@ -105,6 +105,15 @@ export class ComplaintService {
     }).catch((err) => { return Promise.reject(err); });
   }
 
+  updateComplaint(complaintId,complaint){
+    console.log(complaint);
+    let options = this.config.getHeaderWithWeb();
+    return this.http.put(this.baseUrl+"/complaint/" + complaintId, complaint).toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
+  }
+
   editInfo() {
     let options = this.config.getHeaderWithoutWeb();
     return this.http.get(this.baseUrl + "/complaint/edit-info", options)
