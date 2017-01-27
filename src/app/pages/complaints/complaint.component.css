@@ -125,7 +125,7 @@ thead {
   width: 25% !important;
   left: inherit;
   right: 10px;
-  height: 50%;
+  height: 300px;
   background: #e8e8e8;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -133,31 +133,25 @@ thead {
 }
 
 .comments {
-  margin-top: 20px;
-  padding: 10px;
+  padding: 0px 10px 0px 10px;
 }
 
-.comments .row {
-  height: 15px;
-}
 
 .myMsg {
   color: black;
-  padding: 5px;
   background: #dff9d9;
-  border-radius: 33px;
-  float: right;
-  justify-content: flex-end;
-  align-items: flex-end;
+    padding: 5px;
+     border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .msg {
-  display: block;
   color: black;
   padding: 5px;
   background: white;
-  border-radius: 15px;
-  float: left;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+
 }
 
 .chat-header {
@@ -184,11 +178,8 @@ thead {
 .msgDate {
   font-size: 10px;
   color: grey;
-  margin-left: 5px;
+  padding-top: 5px;
 }
-
-.myDate {
-  font-size: 10px;
-  color: grey;
-  float: right;
+.my{
+      padding-top: 15px !important;
 }

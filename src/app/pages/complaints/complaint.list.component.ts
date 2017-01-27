@@ -241,6 +241,7 @@ export class ComplaintListComponent implements OnInit {
     }
   }
   complaintIdOfCommentModel;
+  currentUser = this.config.getUserId();
   getComplaintCommentById(complaintId){
     this.complaintIdOfCommentModel = complaintId;
     this.c.getComplaintCommentById(complaintId).then((res) => {

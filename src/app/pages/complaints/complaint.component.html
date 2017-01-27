@@ -60,7 +60,6 @@
   <i class="material-icons modal-close right icon-button tooltipped" data-position="bottom" data-tooltip="close">close</i>
   <div class="modal-content">
     <h4>{{complaint.title}}</h4>
-
     <div class="row">
       <div class="col l6 s12">
         <table class="striped">
@@ -127,32 +126,28 @@
     </div>
   </div>
 </div>
-
 <!-- Chat box Structure -->
 <div id="chat" class="modal bottom-sheet chatBox">
   <div class="chat-header">
+    Complaint title here
     <i class="material-icons modal-close right icon-button tooltipped" data-position="bottom" data-tooltip="close">close</i>
   </div>
-
   <div class="comments">
-    <div *ngFor="let c of comments">
-      
-      <div *ngIf="c.employeeId">
-        <div class="row">
-        <div class="msg">{{c.comment}}</div>
-     
-        </div>   <div class="left myDate" style="">{{c.employeeName}}: {{c.createdAt|date}}</div>
-      </div>
-      <div class="row" *ngIf="c.employeeId==null">
-         <div class="row">
-        <div class="myMsg">{{c.comment}}</div>
-         </div>
-         <div class="right myDate" style="">me: {{c.createdAt|date}}</div>
+    <div class="row" style="max-height: 220px;overflow-y: scroll;">
+      <div *ngFor="let c of comments">
+        <div class="col s12" *ngIf="c.employeeId != currentUser">
+          <span class="msg">{{c.comment}}</span><br>
+          <div class="msgDate"><span *ngIf="c.employeeName">{{c.employeeName}}</span><span *ngIf="c.parentName">{{c.parentName}}</span>: {{c.createdAt|date}}</div>
+        </div>
+        <div class="col s12" *ngIf="c.employeeId == currentUser">
+          <span class="myMsg right">{{c.comment}}</span><br>
+          <div class="msgDate right-align my">me: {{c.createdAt|date}}</div>
+        </div>
       </div>
     </div>
-    <div class="chat-form">
+  </div>
+  <div class="chat-form">
       <input type="text" class="chat-input" [(ngModel)]="comment"/>
       <a class="btn-floating btn-small waves-effect waves-light right red" (click)="postComment()"><i class="material-icons">send</i></a>
     </div>
-  </div>
 </div>
