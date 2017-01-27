@@ -150,9 +150,9 @@
          <div class="right myDate" style="">me: {{c.createdAt|date}}</div>
       </div>
     </div>
-    <form class="chat-form">
-      <input type="text" class="chat-input" />
-      <a class="btn-floating btn-small waves-effect waves-light right red"><i class="material-icons">send</i></a>
-    </form>
+    <div class="chat-form">
+      <input type="text" class="chat-input" [(ngModel)]="comment"/>
+      <a class="btn-floating btn-small waves-effect waves-light right red" (click)="postComment()"><i class="material-icons">send</i></a>
+    </div>
   </div>
 </div>

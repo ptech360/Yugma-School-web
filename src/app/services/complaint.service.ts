@@ -105,9 +105,15 @@ export class ComplaintService {
     }).catch((err) => { return Promise.reject(err); });
   }
 
+  postComplaintComment(complaintId,comment){
+    console.log("1",comment);
+    return this.http.post(this.baseUrl+"/complaint/" + complaintId+"/comment",{comment:comment}).toPromise()
+    .then((response) =>{
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
+  }
+
   updateComplaint(complaintId,complaint){
-    console.log(complaint);
-    let options = this.config.getHeaderWithWeb();
     return this.http.put(this.baseUrl+"/complaint/" + complaintId, complaint).toPromise()
     .then((response) => {
       return Promise.resolve(response);

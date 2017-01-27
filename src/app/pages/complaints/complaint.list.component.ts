@@ -240,8 +240,9 @@ export class ComplaintListComponent implements OnInit {
       });
     }
   }
-
+  complaintIdOfCommentModel;
   getComplaintCommentById(complaintId){
+    this.complaintIdOfCommentModel = complaintId;
     this.c.getComplaintCommentById(complaintId).then((res) => {
       if (res.status === 204) {
         this.EmptyComments = true;
@@ -252,6 +253,18 @@ export class ComplaintListComponent implements OnInit {
       }
     }, (err) => {
       this.comments = [];
+      this.config.showToast("Internal server error.. Try again later");
+    });
+  }
+
+  comment;
+
+  postComment(){
+    if(this.comment)
+    this.c.postComplaintComment(this.complaintIdOfCommentModel,this.comment).then((res) =>{
+      console.log("submited",res);
+      this.comment = "";
+    }, (err) => {
       this.config.showToast("Internal server error.. Try again later");
     });
   }
