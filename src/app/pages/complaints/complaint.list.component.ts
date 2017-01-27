@@ -34,6 +34,26 @@ export class ComplaintListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getComplaintByPagination();
+    $('.modal').modal();
+     $('.tooltipped').tooltip({delay: 50});
+      $('#chat').modal({
+      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+      opacity: 0, // Opacity of modal background
+      in_duration: 300, // Transition in duration
+      out_duration: 200, // Transition out duration
+      starting_top: '4%', // Starting top style attribute
+      ending_top: '10%', // Ending top style attribute
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+        console.log(modal, trigger);
+      }
+    }
+  );
+      
+    
+  }
+
+  getComplaintByPagination(){
     this.route.params.subscribe(params => {
       if(params['statusId']&&params['categoryId']) {
         this.complaintStatus = params['statusId'];
@@ -60,26 +80,10 @@ export class ComplaintListComponent implements OnInit {
       else
         this.getComplaints();
     });
-    $('.modal').modal();
-     $('.tooltipped').tooltip({delay: 50});
-      $('#chat').modal({
-      dismissible: false, // Modal can be dismissed by clicking outside of the modal
-      opacity: 0, // Opacity of modal background
-      in_duration: 300, // Transition in duration
-      out_duration: 200, // Transition out duration
-      starting_top: '4%', // Starting top style attribute
-      ending_top: '10%', // Ending top style attribute
-      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-        console.log(modal, trigger);
-      }
-    }
-  );
-      
-    
   }
 
   getComplaintByCategoryAndStatusId(categoryId,statusId){
-    this.c.getComplaintByCategoryAndStatusId(categoryId,statusId).then((res) => {
+    this.c.getComplaintByCategoryAndStatusId(categoryId,statusId,this.currentPage).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {
@@ -94,7 +98,7 @@ export class ComplaintListComponent implements OnInit {
   }
 
   getComplaintByCategoryId(categoryId){
-    this.c.getComplaintByCategoryId(categoryId).then((res) => {
+    this.c.getComplaintByCategoryId(categoryId,this.currentPage).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {
@@ -110,7 +114,7 @@ export class ComplaintListComponent implements OnInit {
   }
 
   getComplaintByDepartmentAndStatusId(departmentId,statusId){
-    this.c.getComplaintByDepartmentAndStatusId(departmentId,statusId).then((res) => {
+    this.c.getComplaintByDepartmentAndStatusId(departmentId,statusId,this.currentPage).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {
@@ -125,7 +129,7 @@ export class ComplaintListComponent implements OnInit {
   }
 
   getComplaintByDepartmentId(departmentId){
-    this.c.getComplaintByDepartmentId(departmentId).then((res) => {
+    this.c.getComplaintByDepartmentId(departmentId,this.currentPage).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {
@@ -141,7 +145,7 @@ export class ComplaintListComponent implements OnInit {
   }
 
   getComplaintOfProgramByProgramAndStandardId(programId,standardId){
-    this.c.getComplaintOfProgramByProgramAndStandardId(programId,standardId).then((res) => {
+    this.c.getComplaintOfProgramByProgramAndStandardId(programId,standardId,this.currentPage).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {
@@ -161,7 +165,7 @@ export class ComplaintListComponent implements OnInit {
   }
 
   getComplaintOfProgramByProgramId(programId){
-    this.c.getComplaintOfProgramByProgramId(programId).then((res) => {
+    this.c.getComplaintOfProgramByProgramId(programId,this.currentPage).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {
@@ -192,7 +196,7 @@ export class ComplaintListComponent implements OnInit {
   }
 
   getComplaintsByStatusId(statusId){
-    this.c.getComplaintByStatusId(statusId).then((res) => {
+    this.c.getComplaintByStatusId(statusId,this.currentPage).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {
@@ -218,13 +222,13 @@ export class ComplaintListComponent implements OnInit {
   previousComplaint() {
     delete this.complaints;
     this.currentPage -= 1;
-    this.getComplaints();
+    this.getComplaintByPagination();
   }
 
   nextComplaint() {
     delete this.complaints;
     this.currentPage += 1;
-    this.getComplaints();
+    this.getComplaintByPagination();
   }
 
   loadComplaints() {

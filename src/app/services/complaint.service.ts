@@ -37,49 +37,49 @@ export class ComplaintService {
     }).catch((err) => { return Promise.reject(err); });
   }
 
-  public getComplaintByStatusId(statusId) {
+  public getComplaintByStatusId(statusId,pageNo) {
     let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+"/complaint/status/" + statusId,options).toPromise()
+    return this.http.get(this.baseUrl+"/complaint/status/" + statusId+"/page/"+pageNo,options).toPromise()
     .then((response) => {
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });
   }
 
-  getComplaintByCategoryAndStatusId(categoryId,statusId){
+  getComplaintByCategoryAndStatusId(categoryId,statusId,pageNo){
     let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+ "/complaint/category-status/" + categoryId + "/" + statusId,options).toPromise()
+    return this.http.get(this.baseUrl+ "/complaint/category-status/" + categoryId + "/" + statusId+"/page/"+pageNo,options).toPromise()
     .then((response) => {
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });
   }
 
-  getComplaintByCategoryId(categoryId){
+  getComplaintByCategoryId(categoryId,pageNo){
     let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+"/complaint/category-status/category/" + categoryId,options).toPromise()
+    return this.http.get(this.baseUrl+"/complaint/category-status/category/" + categoryId+"/page/"+pageNo,options).toPromise()
     .then((response) => {
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });
   }
 
-  getComplaintByDepartmentAndStatusId(departmentId,statusId){
+  getComplaintByDepartmentAndStatusId(departmentId,statusId,pageNo){
     let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+ "/complaint/department-status/" + departmentId + "/" + statusId,options).toPromise()
+    return this.http.get(this.baseUrl+ "/complaint/department-status/" + departmentId + "/" + statusId+"/page/"+pageNo,options).toPromise()
     .then((response) => {
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });
   }
 
-  getComplaintByDepartmentId(departmentId){
+  getComplaintByDepartmentId(departmentId,pageNo){
     let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+"/complaint/department-status/department/" + departmentId,options).toPromise()
+    return this.http.get(this.baseUrl+"/complaint/department-status/department/" + departmentId+"/page/"+pageNo,options).toPromise()
     .then((response) => {
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });
   }
 
-  getComplaintOfProgramByProgramAndStandardId(programId,standardId){
+  getComplaintOfProgramByProgramAndStandardId(programId,standardId,pageNo){
     let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+"/complaint/program-standard/" + programId +"/" + standardId,options).toPromise()
+    return this.http.get(this.baseUrl+"/complaint/program-standard/" + programId +"/" + standardId+"/page/"+pageNo,options).toPromise()
     .then((response) => {
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });
@@ -89,9 +89,9 @@ export class ComplaintService {
     
   }
 
-  getComplaintOfProgramByProgramId(programId){
+  getComplaintOfProgramByProgramId(programId,pageNo){
     let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+"/complaint/program-standard/program/" + programId,options).toPromise()
+    return this.http.get(this.baseUrl+"/complaint/program-standard/program/" + programId+"/page/"+pageNo,options).toPromise()
     .then((response) => {
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });
