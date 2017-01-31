@@ -1,6 +1,6 @@
 
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 // import service
 import { ChartService } from '../../services/chart.service';
@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public departmentPlansChartOptions;
   public complaintByStatusChartOptions;
 
-  constructor(private router: Router, public c: ChartService) {
+  constructor(private router: Router, public c: ChartService, public route:ActivatedRoute) {
     this.c.getComplaintByCategoryAndStatus().then((response) => {
       this.responseByCategoryAndStatus = response.json();
     });
@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.responseOfDepartmentBelowPerformer = response.json();
     });
   }
-
+  
   ngOnInit() {
     setTimeout(() => {
       this.chartByStatus();
@@ -149,7 +149,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       case "complaint_chart_by_status":
       case "complaint_chart_by_status1":
         if (parts[0] == "slice") {
-          this.router.navigate(['/complaints/status', dataTable.getValue(parseInt(parts[1]), 2)]);
+          this.router.navigate(['/complaint/status/'+dataTable.getValue(parseInt(parts[1]), 2)]);
         }
         else if (parts[0] == "legendentry")
           console.log("legendentry : " + parts[1]);
@@ -188,13 +188,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
       case "chart_by_program_standard1":
         if (parts[0] == "vAxis") {
           var programId = dataTable.getValue(parseInt(parts[parts.indexOf('label') + 1]), 1);
-          this.router.navigate(['/complaints/program', programId]);
+          this.router.navigate(['/complaint/program-standard/program/'+programId]);
           console.log("ProgramId :" + programId);
         }
         else if (parts[0] == "bar") {
           var programId = dataTable.getValue(parseInt(parts[2]), 1);
           var standardId = dataTable.getValue(parseInt(parts[2]), (parseInt(parts[1]) + 1) * 2 + 1);
-          this.router.navigate(['/complaints/program-standard', programId, standardId]);
+          this.router.navigate(['/complaint/program-standard/'+programId+'/'+standardId]);
           console.log("programId :" + programId + ",standardId :" + standardId);
         }
         break;
@@ -202,14 +202,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       case "chart_by_category_status1":
         if (parts[0] == "vAxis") {
           var categoryId = dataTable.getValue(parseInt(parts[parts.indexOf('label') + 1]), 1);
-          this.router.navigate(['/complaints/category', categoryId]);
+          this.router.navigate(['/complaint/category-status/category/'+categoryId]);
           console.log("categoryId :" + categoryId);
         }
         else if (parts[0] == "bar") {
           console.log(parts);
           var categoryId = dataTable.getValue(parseInt(parts[2]), 1);
           var statusId = dataTable.getValue(parseInt(parts[2]), (parseInt(parts[1]) + 1) * 2 + 1);
-          this.router.navigate(['complaints/category-status', categoryId, statusId]);
+          this.router.navigate(['complaint/category-status/'+categoryId+'/'+ statusId]);
           console.log("categoryId :" + categoryId + ",statusId :" + statusId);
         }
         else if (parts[0] == "legendentry") {
@@ -232,14 +232,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       case "chart_by_department_status1":
         if (parts[0] == "vAxis") {
           var departmentId = dataTable.getValue(parseInt(parts[parts.indexOf('label') + 1]), 1);
-          this.router.navigate(['/complaints/department', departmentId]);
+          this.router.navigate(['/complaint/department-status/department/'+departmentId]);
           console.log("departmentId :" + departmentId);
         }
         else if (parts[0] == "bar") {
           console.log(parts);
           var departmentId = dataTable.getValue(parseInt(parts[2]), 1);
           var statusId = dataTable.getValue(parseInt(parts[2]), (parseInt(parts[1]) + 1) * 2 + 1);
-          this.router.navigate(['complaints/department-status', departmentId, statusId]);
+          this.router.navigate(['complaint/department-status/'+departmentId+'/'+ statusId]);
           console.log("departmentId :" + departmentId + ",statusId :" + statusId);
         }
         else if (parts[0] == "legendentry") {

@@ -4,9 +4,6 @@ import { EditComplaint } from './pages/complaints/complaint.edit.component';
 import { ComplaintComponent } from './pages/complaints/complaint';
 import { ComplaintListComponent } from './pages/complaints/complaint.list.component';
 import { HomeComponent } from './pages/home/home.component';
-import { RepoBrowserComponent } from './pages/github/repo-browser/repo-browser.component';
-import { RepoListComponent } from './pages/github/repo-list/repo-list.component';
-import { RepoDetailComponent } from './pages/github/repo-detail/repo-detail.component';
 import { AccountComponent } from './pages/account/account.component';
 import { ParentComponent } from './pages/login/parent'
 import { LoginComponent } from './pages/login/login.component';
@@ -17,16 +14,16 @@ import { StudentDetail } from './pages/student-detail/student-detail.component';
 export const rootRouterConfig: Routes = [
   { path: '', redirectTo: 'parent/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard] },
-  { path: 'complaints', component: ComplaintComponent, canActivate: [LoggedInGuard],
+  { path: 'complaint', component: ComplaintComponent, canActivate: [LoggedInGuard],
     children: [
       { path: 'status/:statusId', component: ComplaintListComponent, pathMatch: 'full'},
-      { path: 'category/:categoryId', component: ComplaintListComponent, pathMatch: 'full'},
+      { path: 'category-status/category/:categoryId', component: ComplaintListComponent, pathMatch: 'full'},
       { path: 'category-status/:categoryId/:statusId', component: ComplaintListComponent, pathMatch: 'full'},
-      { path: 'department/:departmentId', component: ComplaintListComponent, pathMatch: 'full'},
+      { path: 'department-status/department/:departmentId', component: ComplaintListComponent, pathMatch: 'full'},
       { path: 'department-status/:departmentId/:statusId', component: ComplaintListComponent, pathMatch: 'full'},
-      { path: 'program/:programId', component: ComplaintListComponent, pathMatch: 'full'},
-      { path: 'program-standard/:programId/:standardId', component: ComplaintListComponent, pathMatch: 'full'},      
-      { path: 'list', component: ComplaintListComponent, pathMatch: 'full'},
+      { path: 'program-standard/program/:programId', component: ComplaintListComponent, pathMatch: 'full'},
+      { path: 'program-standard/:programId/:standardId', component: ComplaintListComponent, pathMatch: 'full'},    
+      { path: '', component: ComplaintListComponent, pathMatch: 'full'},
       { path: 'edit/:complaint', component: EditComplaint}
     ]
   },
@@ -37,16 +34,6 @@ export const rootRouterConfig: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'forget-password', component: ForgetPasswordComponent }
     ]
-  },
-  { path: 'github', component: RepoBrowserComponent,
-    children: [
-      { path: '', component: RepoListComponent },
-      { path: ':org', component: RepoListComponent,
-        children: [
-          { path: '', component: RepoDetailComponent },
-          { path: ':repo', component: RepoDetailComponent }
-        ]
-      }]
   },
   { path: 'account', component: AccountComponent }
 ];

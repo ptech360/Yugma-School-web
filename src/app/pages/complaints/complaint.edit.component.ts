@@ -171,6 +171,7 @@ export class EditComplaint implements OnInit{
     console.log("comaplaint:",this.editedComplaint);
     this.c.updateComplaint(this.selectedComplaint.id,this.editedComplaint).then((res) =>{
       console.log("updated",res);
+      this.goBack();
     }, (err) => {
       this.config.showToast(err);
     });

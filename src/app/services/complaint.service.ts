@@ -19,6 +19,15 @@ export class ComplaintService {
     this.baseUrl = this.config.getUrl();
   }
 
+  getComplaint(url,pageNo){
+    let options = this.config.getHeaderWithWeb();
+    return this.http.get(this.baseUrl + url +"/page/"+pageNo, options)
+    .toPromise()
+    .then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => { return Promise.reject(err); });
+  }
+
   getComplaintById(id){
     let options = this.config.getHeaderWithWeb();
     return this.http.get(this.baseUrl + "/complaint/" + id, options)
@@ -28,74 +37,74 @@ export class ComplaintService {
     }).catch((err) => { return Promise.reject(err); });
   }
 
-  getComplaints(pageNo) {
-    let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl + "/complaint/page/" + pageNo, options)
-    .toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
+  // getComplaints(pageNo) {
+  //   let options = this.config.getHeaderWithWeb();
+  //   return this.http.get(this.baseUrl + "/complaint/page/" + pageNo, options)
+  //   .toPromise()
+  //   .then((response) => {
+  //     return Promise.resolve(response);
+  //   }).catch((err) => { return Promise.reject(err); });
+  // }
 
-  public getComplaintByStatusId(statusId,pageNo) {
-    let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+"/complaint/status/" + statusId+"/page/"+pageNo,options).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
+  // public getComplaintByStatusId(statusId,pageNo) {
+  //   let options = this.config.getHeaderWithWeb();
+  //   return this.http.get(this.baseUrl+"/complaint/status/" + statusId+"/page/"+pageNo,options).toPromise()
+  //   .then((response) => {
+  //     return Promise.resolve(response);
+  //   }).catch((err) => { return Promise.reject(err); });
+  // }
 
-  getComplaintByCategoryAndStatusId(categoryId,statusId,pageNo){
-    let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+ "/complaint/category-status/" + categoryId + "/" + statusId+"/page/"+pageNo,options).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
+  // getComplaintByCategoryAndStatusId(categoryId,statusId,pageNo){
+  //   let options = this.config.getHeaderWithWeb();
+  //   return this.http.get(this.baseUrl+ "/complaint/category-status/" + categoryId + "/" + statusId+"/page/"+pageNo,options).toPromise()
+  //   .then((response) => {
+  //     return Promise.resolve(response);
+  //   }).catch((err) => { return Promise.reject(err); });
+  // }
 
-  getComplaintByCategoryId(categoryId,pageNo){
-    let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+"/complaint/category-status/category/" + categoryId+"/page/"+pageNo,options).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
+  // getComplaintByCategoryId(categoryId,pageNo){
+  //   let options = this.config.getHeaderWithWeb();
+  //   return this.http.get(this.baseUrl+"/complaint/category-status/category/" + categoryId+"/page/"+pageNo,options).toPromise()
+  //   .then((response) => {
+  //     return Promise.resolve(response);
+  //   }).catch((err) => { return Promise.reject(err); });
+  // }
 
-  getComplaintByDepartmentAndStatusId(departmentId,statusId,pageNo){
-    let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+ "/complaint/department-status/" + departmentId + "/" + statusId+"/page/"+pageNo,options).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
+  // getComplaintByDepartmentAndStatusId(departmentId,statusId,pageNo){
+  //   let options = this.config.getHeaderWithWeb();
+  //   return this.http.get(this.baseUrl+ "/complaint/department-status/" + departmentId + "/" + statusId+"/page/"+pageNo,options).toPromise()
+  //   .then((response) => {
+  //     return Promise.resolve(response);
+  //   }).catch((err) => { return Promise.reject(err); });
+  // }
 
-  getComplaintByDepartmentId(departmentId,pageNo){
-    let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+"/complaint/department-status/department/" + departmentId+"/page/"+pageNo,options).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
+  // getComplaintByDepartmentId(departmentId,pageNo){
+  //   let options = this.config.getHeaderWithWeb();
+  //   return this.http.get(this.baseUrl+"/complaint/department-status/department/" + departmentId+"/page/"+pageNo,options).toPromise()
+  //   .then((response) => {
+  //     return Promise.resolve(response);
+  //   }).catch((err) => { return Promise.reject(err); });
+  // }
 
-  getComplaintOfProgramByProgramAndStandardId(programId,standardId,pageNo){
-    let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+"/complaint/program-standard/" + programId +"/" + standardId+"/page/"+pageNo,options).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
+  // getComplaintOfProgramByProgramAndStandardId(programId,standardId,pageNo){
+  //   let options = this.config.getHeaderWithWeb();
+  //   return this.http.get(this.baseUrl+"/complaint/program-standard/" + programId +"/" + standardId+"/page/"+pageNo,options).toPromise()
+  //   .then((response) => {
+  //     return Promise.resolve(response);
+  //   }).catch((err) => { return Promise.reject(err); });
+  // }
 
-  getComplaintByStandardId(standardId){
+  // getComplaintByStandardId(standardId){
     
-  }
+  // }
 
-  getComplaintOfProgramByProgramId(programId,pageNo){
-    let options = this.config.getHeaderWithWeb();
-    return this.http.get(this.baseUrl+"/complaint/program-standard/program/" + programId+"/page/"+pageNo,options).toPromise()
-    .then((response) => {
-      return Promise.resolve(response);
-    }).catch((err) => { return Promise.reject(err); });
-  }
+  // getComplaintOfProgramByProgramId(programId,pageNo){
+  //   let options = this.config.getHeaderWithWeb();
+  //   return this.http.get(this.baseUrl+"/complaint/program-standard/program/" + programId+"/page/"+pageNo,options).toPromise()
+  //   .then((response) => {
+  //     return Promise.resolve(response);
+  //   }).catch((err) => { return Promise.reject(err); });
+  // }
 
   getComplaintCommentById(complaintId){
     let options = this.config.getHeaderWithWeb();

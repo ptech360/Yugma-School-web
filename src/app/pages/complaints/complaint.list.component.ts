@@ -24,9 +24,9 @@ export class ComplaintListComponent implements OnInit {
   private complaint = {
     title: ""
   }
+  private url:string ="";
 
   private currentPage = 1;
-
   constructor(private c: ComplaintService,
               private router: Router,
               private config: Configuration,
@@ -34,7 +34,17 @@ export class ComplaintListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getComplaintByPagination();
+    console.log(this.route.pathFromRoot);
+    this.route.pathFromRoot.forEach(oe => {
+      oe.url.forEach( ie =>{
+        ie.forEach( e =>{
+          if(e.path)
+            this.url += "/" + e.path;
+        })
+      })
+    });
+    this.route.params.subscribe(param =>{ if(param['statusId']) this.complaintStatus = param['statusId']})
+    this.fetchComplaints();
     $('.modal').modal();
      $('.tooltipped').tooltip({delay: 50});
       $('#chat').modal({
@@ -47,43 +57,11 @@ export class ComplaintListComponent implements OnInit {
       ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
         console.log(modal, trigger);
       }
-    }
-  );
-      
-    
-  }
-
-  getComplaintByPagination(){
-    this.route.params.subscribe(params => {
-      if(params['statusId']&&params['categoryId']) {
-        this.complaintStatus = params['statusId'];
-        this.getComplaintByCategoryAndStatusId(params['categoryId'],params['statusId']);
-      }
-      else if(params['statusId']&&params['departmentId']) {
-        this.complaintStatus = params['statusId'];
-        this.getComplaintByDepartmentAndStatusId(params['departmentId'],params['statusId']);
-      }        
-      else if(params['statusId']){
-        this.complaintStatus = params['statusId'];
-        this.getComplaintsByStatusId(this.complaintStatus);
-      }
-      else if(params['categoryId'])
-        this.getComplaintByCategoryId(params['categoryId']);
-      else if(params['departmentId'])
-        this.getComplaintByDepartmentId(params['departmentId']);
-      else if(params['standardId']&&params['programId']) 
-        this.getComplaintOfProgramByProgramAndStandardId(params['programId'],params['standardId']);
-      else if(params['standardId'])
-        this.getComplaintByStandardId(params['standardId']);
-      else if(params['programId'])
-        this.getComplaintOfProgramByProgramId(params['programId']);
-      else
-        this.getComplaints();
     });
   }
 
-  getComplaintByCategoryAndStatusId(categoryId,statusId){
-    this.c.getComplaintByCategoryAndStatusId(categoryId,statusId,this.currentPage).then((res) => {
+  fetchComplaints() {
+    this.c.getComplaint(this.url, this.currentPage).then((res) => {
       if (res.status === 204) {
         this.EmptyComplaints = true;
       } else {
@@ -97,118 +75,7 @@ export class ComplaintListComponent implements OnInit {
     });
   }
 
-  getComplaintByCategoryId(categoryId){
-    this.c.getComplaintByCategoryId(categoryId,this.currentPage).then((res) => {
-      if (res.status === 204) {
-        this.EmptyComplaints = true;
-      } else {
-        this.EmptyComplaints = false;
-        this.complaints = res.json();
-        this.complaintsCOPY = res.json();
-      }
-    }, (err) => {
-      this.complaints = [];
-      this.config.showToast("Internal server error.. Try again later");
-    });
-
-  }
-
-  getComplaintByDepartmentAndStatusId(departmentId,statusId){
-    this.c.getComplaintByDepartmentAndStatusId(departmentId,statusId,this.currentPage).then((res) => {
-      if (res.status === 204) {
-        this.EmptyComplaints = true;
-      } else {
-        this.EmptyComplaints = false;
-        this.complaints = res.json();
-        this.complaintsCOPY = res.json();
-      }
-    }, (err) => {
-      this.complaints = [];
-      this.config.showToast("Internal server error.. Try again later");
-    });
-  }
-
-  getComplaintByDepartmentId(departmentId){
-    this.c.getComplaintByDepartmentId(departmentId,this.currentPage).then((res) => {
-      if (res.status === 204) {
-        this.EmptyComplaints = true;
-      } else {
-        this.EmptyComplaints = false;
-        this.complaints = res.json();
-        this.complaintsCOPY = res.json();
-      }
-    }, (err) => {
-      this.complaints = [];
-      this.config.showToast("Internal server error.. Try again later");
-    });
-
-  }
-
-  getComplaintOfProgramByProgramAndStandardId(programId,standardId){
-    this.c.getComplaintOfProgramByProgramAndStandardId(programId,standardId,this.currentPage).then((res) => {
-      if (res.status === 204) {
-        this.EmptyComplaints = true;
-      } else {
-        this.EmptyComplaints = false;
-        this.complaints = res.json();
-        this.complaintsCOPY = res.json();
-      }
-    }, (err) => {
-      this.complaints = [];
-      this.config.showToast("Internal server error.. Try again later");
-    });
-
-  }
-
-  getComplaintByStandardId(standardId){
-
-  }
-
-  getComplaintOfProgramByProgramId(programId){
-    this.c.getComplaintOfProgramByProgramId(programId,this.currentPage).then((res) => {
-      if (res.status === 204) {
-        this.EmptyComplaints = true;
-      } else {
-        this.EmptyComplaints = false;
-        this.complaints = res.json();
-        this.complaintsCOPY = res.json();
-      }
-    }, (err) => {
-      this.complaints = [];
-      this.config.showToast("Internal server error.. Try again later");
-    });
-
-  }
-
-  getComplaints() {
-    this.c.getComplaints(this.currentPage).then((res) => {
-      if (res.status === 204) {
-        this.EmptyComplaints = true;
-      } else {
-        this.EmptyComplaints = false;
-        this.complaints = res.json();
-        this.complaintsCOPY = res.json();
-      }
-    }, (err) => {
-      this.complaints = [];
-      this.config.showToast("Internal server error.. Try again later");
-    });
-  }
-
-  getComplaintsByStatusId(statusId){
-    this.c.getComplaintByStatusId(statusId,this.currentPage).then((res) => {
-      if (res.status === 204) {
-        this.EmptyComplaints = true;
-      } else {
-        this.EmptyComplaints = false;
-        this.complaints = res.json();
-        this.complaintsCOPY = res.json();
-      }
-    }, (err) => {
-      this.complaints = [];
-      this.config.showToast("Internal server error.. Try again later");
-    });
-  }
+ 
   openModal(complaint) {
     this.complaint = complaint;
     $('#modal1').modal('open');
@@ -216,19 +83,19 @@ export class ComplaintListComponent implements OnInit {
 
   openEditModal(complaint) {
     this.complaint = complaint;
-    this.router.navigate(["/complaints/edit",complaint.id]);
+    this.router.navigate(["/complaint/edit",complaint.id]);
   }
 
   previousComplaint() {
     delete this.complaints;
     this.currentPage -= 1;
-    this.getComplaintByPagination();
+    this.fetchComplaints();
   }
 
   nextComplaint() {
     delete this.complaints;
     this.currentPage += 1;
-    this.getComplaintByPagination();
+    this.fetchComplaints();
   }
 
   loadComplaints() {
@@ -262,7 +129,6 @@ export class ComplaintListComponent implements OnInit {
   }
 
   comment;
-
   postComment(){
     if(this.comment)
     this.c.postComplaintComment(this.complaintIdOfCommentModel,this.comment).then((res) =>{
