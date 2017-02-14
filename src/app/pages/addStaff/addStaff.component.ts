@@ -25,7 +25,7 @@ export class AddStaffComponent implements OnInit{
       name : new FormControl('',[Validators.required,Validators.maxLength(40)]),
       username: new FormControl('',[Validators.required]),
       nickName: new FormControl('',[Validators.required]),
-      email: new FormControl('',[Validators.required, ValidationService.emailValidator]),
+      email: new FormControl('',[Validators.required]),
       contactNo: new FormControl('',[Validators.required, Validators.pattern('[2-9]{2}[0-9]{8}$')]),
       password: new FormControl('',[Validators.required,Validators.pattern('^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{5,100}$')]),
     });
