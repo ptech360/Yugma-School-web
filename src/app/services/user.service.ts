@@ -18,7 +18,7 @@ export class UserService {
   }
 
   login(data) {
-    return this.http.post("http://desktop-nj52npk:8080/YUGMASRGSUT/login", data)
+    return this.http.post("https://yugma-ut.appspot-preview.com/login", data)
     .toPromise()
     .then(response => {
       localStorage.setItem('access_token', response.json().access_token);
@@ -28,7 +28,7 @@ export class UserService {
 
   getManagementInfo() {
     let options = this.config.getHeaderWithoutWeb();
-    return this.http.get("http://desktop-nj52npk:8080/YUGMASRGSUT" + "/management/info", options)
+    return this.http.get("https://yugma-ut.appspot-preview.com" + "/management/info", options)
     .toPromise()
     .then((res) => {
       return Promise.resolve(res);

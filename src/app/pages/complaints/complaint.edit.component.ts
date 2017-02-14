@@ -90,14 +90,12 @@ export class EditComplaint implements OnInit{
 
   }
   ngOnInit(){
+    this.getInfoTOEdit();
     this.route.params.subscribe(params => {
       if(params['complaint']){
         this.c.getComplaintById(params['complaint']).then(response => {
-          console.log(response.json());
-          this.selectedComplaint = response.json();
-          this.getInfoTOEdit();
-          this.setComplaintData();
-          
+          this.selectedComplaint = response.json();          
+          this.setComplaintData();          
         });
       }
     });
@@ -107,7 +105,6 @@ export class EditComplaint implements OnInit{
 
   setComplaintData(){
       this.assignedEmployeeName = this.selectedComplaint.assignedEmployeeName;
-      this.assignedEmployeeId = this.selectedComplaint.assignedEmployeId;
       this.priority = this.selectedComplaint.priorityId;
       if(this.selectedComplaint.statusId<3) this.inprogressBtn = true;    
         else {this.inprogressBtn = false;}
@@ -126,7 +123,6 @@ export class EditComplaint implements OnInit{
   getInfoTOEdit() {
     this.c.editInfo()
     .then((res) => {
-      // this.employees = res.json().employees;
       this.priorities = res.json().priorities;
       this.employeesCOPY = res.json().employees;
       console.log("DSDSD", this.employees);
@@ -141,7 +137,6 @@ export class EditComplaint implements OnInit{
 
   selectEmployee(employee) {
     this.assignedEmployeeName = employee.name;
-    // this.assignedEmployeeId = employee.id;
     if(this.assignedEmployeeName != this.selectedComplaint.assignedEmployeeName)
       this.editedComplaint['assignedTo'] = employee.id;
     else
@@ -170,7 +165,7 @@ export class EditComplaint implements OnInit{
   editComplaint() {
     console.log("comaplaint:",this.editedComplaint);
     this.c.updateComplaint(this.selectedComplaint.id,this.editedComplaint).then((res) =>{
-      console.log("updated",res);
+      this.config.showToast("Complaint edited.,.");
       this.goBack();
     }, (err) => {
       this.config.showToast(err);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Configuration } from '../../services/app.constant';
 import { ActivatedRoute, Params, Router}   from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 declare let $;
 
@@ -30,19 +31,21 @@ export class ComplaintListComponent implements OnInit {
   constructor(private c: ComplaintService,
               private router: Router,
               private config: Configuration,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              public userService: UserService) {
+                this.userService.urlToTravers = this.router.url;
   }
 
   ngOnInit() {
-    console.log(this.route.pathFromRoot);
-    this.route.pathFromRoot.forEach(oe => {
-      oe.url.forEach( ie =>{
-        ie.forEach( e =>{
-          if(e.path)
-            this.url += "/" + e.path;
-        })
-      })
-    });
+    this.url = this.router.url;
+    // this.route.pathFromRoot.forEach(oe => {
+    //   oe.url.forEach( ie =>{
+    //     ie.forEach( e =>{
+    //       if(e.path)
+    //         this.url += "/" + e.path;            
+    //     })
+    //   })
+    // });
     this.route.params.subscribe(param =>{ if(param['statusId']) this.complaintStatus = param['statusId']})
     this.fetchComplaints();
     $('.modal').modal();
@@ -138,6 +141,10 @@ export class ComplaintListComponent implements OnInit {
     }, (err) => {
       this.config.showToast("Internal server error.. Try again later");
     });
+  }
+
+  clearComment(){
+    delete this.comments;
   }
 
 }

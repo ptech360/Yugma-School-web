@@ -13,14 +13,12 @@ export class AppComponent implements AfterViewInit {
   private user;
 
   constructor(public userService: UserService,
-              private router: Router) {
-
-
-    this.user = {
-      username: localStorage.getItem("name"),
-      email: localStorage.getItem("email"),
-      role: localStorage.getItem("role")
-    }
+              private router: Router) {              
+              this.user = {
+                username: localStorage.getItem("name"),
+                email: localStorage.getItem("email"),
+                role: localStorage.getItem("role")
+              }
   }
 
   ngAfterViewInit() {
