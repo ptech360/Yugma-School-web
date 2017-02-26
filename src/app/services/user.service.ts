@@ -6,7 +6,6 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
-  public urlToTravers = "";
   private url: string = "";
   private loggedIn = false;
   private headers;

@@ -20,7 +20,7 @@ export class ComplaintService {
   }
 
   getComplaint(url,pageNo){
-    let options = this.config.getHeaderWithWeb();
+    let options = this.config.getHeaderWithoutWeb();
     return this.http.get(this.baseUrl + url +"/page/"+pageNo, options)
     .toPromise()
     .then((response) => {
@@ -29,7 +29,7 @@ export class ComplaintService {
   }
 
   getComplaintById(id){
-    let options = this.config.getHeaderWithWeb();
+    let options = this.config.getHeaderWithoutWeb();
     return this.http.get(this.baseUrl + "/complaint/" + id, options)
     .toPromise()
     .then((response) => {
@@ -38,7 +38,7 @@ export class ComplaintService {
   }
 
   getComplaintCommentById(complaintId){
-    let options = this.config.getHeaderWithWeb();
+    let options = this.config.getHeaderWithoutWeb();
     return this.http.get(this.baseUrl+"/complaint/" + complaintId+"/comment",options).toPromise()
     .then((response) => {
       return Promise.resolve(response);

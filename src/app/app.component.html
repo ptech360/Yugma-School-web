@@ -16,8 +16,9 @@
       <li><a [routerLink]="['/complaint']" class="waves-effect waves-teal"><i class="material-icons">thumb_down</i>
         All Complaints</a>
       </li>
-      <li><a [routerLink]="['/add-management']" class="waves-effect waves-teal"><i class="material-icons">group add</i>Add Management</a></li>
+      <!--<li><a [routerLink]="['/add-management']" class="waves-effect waves-teal"><i class="material-icons">group add</i>Add Management</a></li>-->
       <li><a [routerLink]="['/add-staff']" class="waves-effect waves-teal"><i class="material-icons">group add</i>Add Staff</a></li>
+      <li><a [routerLink]="['/upload-file']" class="waves-effect waves-teal"><i class="material-icons">input</i>Upload File</a></li>
       <li class="hide-on-large-only"><a (click)="logout()" class="waves-effect waves-teal"><i class="material-icons">power_settings_new</i>Logout</a>
       </li>
     </ul>
@@ -66,5 +67,6 @@
       </div>
     </div>
   </nav>
+  <div >{{currentUrl}}</div>
 	<router-outlet></router-outlet>
 </main>

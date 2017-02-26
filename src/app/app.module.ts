@@ -20,7 +20,8 @@ import { ForgetPasswordComponent } from './pages/login/forget.password.component
 import { CustomLoader } from './customComponent/loader.component';
 import { EditComplaint } from './pages/complaints/complaint.edit.component';
 import { AddStaffComponent } from './pages/addStaff/addStaff.component';
-
+import { UploadComponent } from './pages/upload/upload.component';
+ 
 // import service
 import { ChartService } from './services/chart.service';
 import { UserService } from './services/user.service';
@@ -29,6 +30,7 @@ import { Configuration } from './services/app.constant';
 import { ComplaintService } from './services/complaint.service';
 import { AdminService } from './services/admin.service';
 import { ValidationService } from './services/formValidation.service';
+import { CommonService } from './services/common.service';
  
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { ValidationService } from './services/formValidation.service';
     ForgetPasswordComponent,
     ParentComponent,
     CustomLoader,
-    AddStaffComponent
+    AddStaffComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { ValidationService } from './services/formValidation.service';
     Configuration,
     ComplaintService,
     AdminService,
-    ValidationService
+    ValidationService,
+    CommonService
   ],
   bootstrap: [ AppComponent ]
 })

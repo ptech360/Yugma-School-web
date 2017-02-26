@@ -30,9 +30,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router,
               public c: ChartService, 
-              public route:ActivatedRoute,
-              public userService: UserService) {
-              this.userService.urlToTravers = this.router.url;
+              public route:ActivatedRoute) {
               this.c.getComplaintByCategoryAndStatus().then((response) => {
                 this.responseByCategoryAndStatus = response.json();
               });
@@ -45,7 +43,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.chartByStatus();
       this.chartByCategoryAndStatus();
-    }, 1000);
+    }, 2000);
     $('.tooltipped').tooltip({ delay: 50 });
   }
   ngAfterViewInit() {

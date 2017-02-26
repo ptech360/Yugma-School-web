@@ -10,6 +10,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ForgetPasswordComponent } from './pages/login/forget.password.component';
 import { LoggedInGuard } from './pages/login/logged-in.guard';
 import { AddStaffComponent } from './pages/addStaff/addStaff.component';
+import { UploadComponent } from './pages/upload/upload.component';
 
 export const rootRouterConfig: Routes = [
   { path: '', redirectTo: 'parent/login', pathMatch: 'full' },
@@ -24,6 +25,7 @@ export const rootRouterConfig: Routes = [
     ]
   },
   { path: 'add-staff', component: AddStaffComponent, canActivate: [LoggedInGuard] },
+  { path: 'upload-file', component: UploadComponent, canActivate: [LoggedInGuard] },
   { path: 'parent', component: ParentComponent,
     children: [
       { path: 'login', component: LoginComponent },

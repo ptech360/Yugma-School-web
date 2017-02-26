@@ -7,11 +7,13 @@ declare let $;
 
 // import service
 import { ComplaintService } from '../../services/complaint.service';
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'complaint-list',
   styleUrls: ['./complaint.component.css'],
-  templateUrl: './complaint.component.html'
+  templateUrl: './complaint.component.html',
+  providers:[CommonService]
 })
 
 export class ComplaintListComponent implements OnInit {
@@ -26,14 +28,15 @@ export class ComplaintListComponent implements OnInit {
     title: ""
   }
   private url:string ="";
+  
 
   private currentPage = 1;
   constructor(private c: ComplaintService,
               private router: Router,
               private config: Configuration,
               private route: ActivatedRoute,
-              public userService: UserService) {
-                this.userService.urlToTravers = this.router.url;
+              private commonService:CommonService) {
+                
   }
 
   ngOnInit() {
@@ -46,6 +49,7 @@ export class ComplaintListComponent implements OnInit {
     //     })
     //   })
     // });
+    this.commonService.pushUrl(this.url);
     this.route.params.subscribe(param =>{ if(param['statusId']) this.complaintStatus = param['statusId']})
     this.fetchComplaints();
     $('.modal').modal();
