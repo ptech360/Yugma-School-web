@@ -14,10 +14,17 @@ declare let Materialize;
 export class AccountComponent implements OnInit {
 
   resetPasswordForm: FormGroup;
-
+  public user;
   constructor(private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService) { }
+    private userService: UserService) { 
+      this.user = {
+                username: localStorage.getItem("name"),
+                email: localStorage.getItem("email"),
+                role: localStorage.getItem("role"),
+                picUrl:localStorage.getItem("picUrl")
+              }
+    }
 
   ngOnInit() {
     this.resetPasswordForm = new FormGroup({

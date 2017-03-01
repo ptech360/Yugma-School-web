@@ -1,4 +1,4 @@
-<form enctype="multipart/form-data" class="container" [formGroup]="uploadForm" action="https://yugma-ut.appspot-preview.com/management/4049858197/picture"  method="POST">
+<form enctype="multipart/form-data" class="container" [formGroup]="uploadForm" >
     <div class="file-field input-field">
       <div class="btn">
         <span>File</span>
@@ -7,9 +7,9 @@
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text" placeholder="Upload one or more files"  >
       </div>
-      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-        <i class="material-icons right">send</i>
-      </button>
-    </div>
-    <button (click)="readImage()">REad</button>    
+      <div *ngFor=" let f of files; let i=index">
+        <p style="float: left;">{{i + 1 }}) {{f.name}} </p>
+        <a class="btn-floating green" (click)="upload(f)"><i class="material-icons">publish</i></a>                
+      </div>
+    </div>   
   </form>

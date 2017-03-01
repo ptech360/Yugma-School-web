@@ -35,6 +35,7 @@ export class UserService {
   }
 
   storeManagementData(management) {
+    console.log(management);
     localStorage.setItem("id", management.id);
     localStorage.setItem("name", management.name);
     localStorage.setItem("email", management.email);
@@ -43,6 +44,7 @@ export class UserService {
     localStorage.setItem("username", management.username);
     localStorage.setItem("nickName", management.nickName);
     localStorage.setItem('role', management.role);
+    localStorage.setItem('picUrl', management.picUrl);
     this.config.buildUrl();
   }
 
@@ -71,6 +73,16 @@ export class UserService {
     .then((res) => {
       return Promise.resolve(res);
     }).catch(err => { return Promise.reject(err); });
+  }
+
+  uploadProfilePic(newfile){
+    let options = this.config.getHeaderForFile();
+    let userId = this.config.getUserId();
+    let formData = new FormData();      
+    formData.append('file',newfile);
+    return this.http.post("https://yugma-ut.appspot-preview.com" + "/management/" + userId + "/picture",formData,options).toPromise().then( res =>{
+          return Promise.resolve(res);
+        });
   }
 
 }

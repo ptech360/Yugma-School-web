@@ -19,6 +19,7 @@ export class Configuration {
   // private url: string = "https://yugmasrgstesting.appspot.com";
   // private url: string = "http://desktop-nj52npk:8080/YUGMASRGSUT";
   private url: string = "https://yugma-ut.appspot-preview.com";
+  // private url: string = "http://nxtlife:8080/YUGMASRGS";
 
   getHeaderWithWeb() {
     this.headers = new Headers({
@@ -38,6 +39,19 @@ export class Configuration {
   getHeaderWithoutWeb() {
     this.headers = new Headers({
       'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+    });
+
+    var options = new RequestOptions({
+      headers: this.headers
+    });
+
+    return options;
+  }
+
+  getHeaderForFile(){
+    this.headers = new Headers({
+      // 'Content-Type': 'multipart/form-data',
       'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     });
 

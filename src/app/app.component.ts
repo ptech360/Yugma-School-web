@@ -20,7 +20,8 @@ export class AppComponent implements AfterViewInit {
               this.user = {
                 username: localStorage.getItem("name"),
                 email: localStorage.getItem("email"),
-                role: localStorage.getItem("role")
+                role: localStorage.getItem("role"),
+                picUrl:localStorage.getItem("picUrl")
               }
               this.commonService.pushUrl(this.router.url);
               this.commonService.urls.subscribe(data =>{
@@ -61,6 +62,16 @@ export class AppComponent implements AfterViewInit {
 
   isLoggedIn() {
     return this.userService.isLoggedIn();
+  }
+  files;
+  uploadProfilePic(event){
+    this.files = event.srcElement.files;
+    if(this.files[0]){
+      this.userService.uploadProfilePic(this.files[0]).then(res =>{
+        this.user['picUrl'] = res.json();
+        localStorage.setItem('picUrl', res.json());
+      });
+    }
   }
 
 }
