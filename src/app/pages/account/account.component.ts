@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { ComplaintService } from '../../services/complaint.service';
 
 declare let Materialize;
 
@@ -17,13 +18,16 @@ export class AccountComponent implements OnInit {
   public user;
   constructor(private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService) { 
+    private userService: UserService,
+    private commonService : ComplaintService) { 
       this.user = {
                 username: localStorage.getItem("name"),
                 email: localStorage.getItem("email"),
                 role: localStorage.getItem("role"),
                 picUrl:localStorage.getItem("picUrl")
               }
+              this.commonService.initArray();
+              this.commonService.pushUrl("Account", "Complaint");
     }
 
   ngOnInit() {

@@ -17,7 +17,7 @@ export class ChartService {
   constructor(private http: Http,
     private config: Configuration) {
     this.baseUrl = this.config.getUrl();
-    this.options = this.config.getHeaderWithoutWeb();
+    this.options = this.config.getHeaderWithWeb();
   }
   
   public getComplaintByStatus() {

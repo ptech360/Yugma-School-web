@@ -84,5 +84,14 @@ export class UserService {
           return Promise.resolve(res);
         });
   }
+  uploadEmployeePic(id,newfile){
+    let options = this.config.getHeaderForFile();
+    let userId = this.config.getUserId();
+    let formData = new FormData();      
+    formData.append('file',newfile);
+    return this.http.post("https://yugma-ut.appspot-preview.com" + "/management/" + id + "/picture",formData,options).toPromise().then( res =>{
+          return Promise.resolve(res);
+        });
+  }
 
 }

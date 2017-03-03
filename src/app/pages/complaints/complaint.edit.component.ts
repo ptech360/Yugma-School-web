@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import service
 import { UserService } from '../../services/user.service';
 import { ComplaintService } from '../../services/complaint.service';
+import { CommonService } from '../../services/common.service';
 
 import { Configuration } from '../../services/app.constant';
 
@@ -86,10 +87,12 @@ export class EditComplaint implements OnInit{
   constructor(private location: Location,
               private c: ComplaintService,
               private config: Configuration,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private commonService : ComplaintService) {
+              this.commonService.pushUrl("Edit Complaint", "Complaint");
 
   }
-  ngOnInit(){
+  ngOnInit(){    
     this.getInfoTOEdit();
     this.route.params.subscribe(params => {
       if(params['complaint']){

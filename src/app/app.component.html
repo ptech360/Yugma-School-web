@@ -64,9 +64,7 @@
       </div>
       <div class="col bcCol2">
     <div class="nav-wrapper ">
-        <a href="#!" class="breadcrumb">First</a>
-        <a href="#!" class="breadcrumb">Second</a>
-        <a href="#!" class="breadcrumb">Third</a>
+        <a routerLink="/{{a.url}}" class="breadcrumb" *ngFor="let a of data">{{a.title}}</a>        
     </div>
       </div>
     </div>

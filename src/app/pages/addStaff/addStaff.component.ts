@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Configuration } from '../../services/app.constant';
 import { AdminService} from '../../services/admin.service';
 import { ValidationService } from '../../services/formValidation.service';
+import { ComplaintService } from '../../services/complaint.service';
+import { UserService } from '../../services/user.service';
 declare let $;
 @Component({
   selector: 'add-staff',
@@ -20,7 +22,7 @@ export class AddStaffComponent implements OnInit{
   public isSubmit : boolean = false;
   public isTeacher : boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private adminService:AdminService,private config: Configuration) {
+  constructor(private formBuilder: FormBuilder, private adminService:AdminService,private config: Configuration, private commonService : ComplaintService,private userService:UserService) {
     this.addStaffForm = new FormGroup({
       name : new FormControl('',[Validators.required,Validators.maxLength(40)]),
       username: new FormControl('',[Validators.required]),
@@ -29,6 +31,8 @@ export class AddStaffComponent implements OnInit{
       contactNo: new FormControl('',[Validators.required, Validators.pattern('[2-9]{2}[0-9]{8}$')]),
       password: new FormControl('',[Validators.required,Validators.pattern('^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{5,100}$')]),
     });
+    this.commonService.initArray();
+    this.commonService.pushUrl("ADD Staff", "Complaint");
   }
 
   ngOnInit(){
@@ -63,8 +67,7 @@ export class AddStaffComponent implements OnInit{
       this.response = res.json();
       console.log(this.response);
       delete this.objectArray;
-      delete this.objectArrayToDisplay;
-      this.addStaffForm.reset();
+      delete this.objectArrayToDisplay;      
       this.isSubmit = true;
       this.isTeacher = false;
     });
@@ -93,6 +96,17 @@ export class AddStaffComponent implements OnInit{
     }    
   }
   addAnotherForm(){
+    this.addStaffForm.reset();
     this.isSubmit = false;
   }
+  files;
+  userProfile;
+  uploadProfilePic(event){
+    this.files = event.srcElement.files;
+    if(this.files[0]){
+      this.userService.uploadEmployeePic(this.response.id,this.files[0]).then(res =>{
+        this.userProfile = res.json();
+      });
+    }
+  } 
 }

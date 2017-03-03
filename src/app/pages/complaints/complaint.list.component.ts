@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Configuration } from '../../services/app.constant';
 import { ActivatedRoute, Params, Router}   from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -16,7 +16,7 @@ import { CommonService } from '../../services/common.service';
   providers:[CommonService]
 })
 
-export class ComplaintListComponent implements OnInit {
+export class ComplaintListComponent implements OnInit{
 
   private complaints;
   private comments;
@@ -28,6 +28,7 @@ export class ComplaintListComponent implements OnInit {
     title: ""
   }
   private url:string ="";
+  private status:string = "";
   
 
   private currentPage = 1;
@@ -35,11 +36,22 @@ export class ComplaintListComponent implements OnInit {
               private router: Router,
               private config: Configuration,
               private route: ActivatedRoute,
-              private commonService:CommonService) {
-                
+              private commonService:ComplaintService) {
+              this.route.params.subscribe(param =>{ if(param['statusId']) this.complaintStatus = param['statusId']});
+                  switch (this.complaintStatus) {
+                    case '1':  this.status = "New";      break;
+                    case '2':  this.status = "Assigned"; break;
+                    case '3':  this.status = "InProgress";break;
+                    case '4':  this.status = "Closed";    break;
+                    case '5':  this.status = "Reopen";    break;
+                    case '6':  this.status = "Satisfied"; break;      
+                    default:   this.status = "All";       break;
+                  }
   }
 
   ngOnInit() {
+    this.commonService.initArray();
+    this.commonService.pushUrl(this.status+" Complaints", "Complaint");
     this.url = this.router.url;
     // this.route.pathFromRoot.forEach(oe => {
     //   oe.url.forEach( ie =>{
@@ -49,8 +61,7 @@ export class ComplaintListComponent implements OnInit {
     //     })
     //   })
     // });
-    this.commonService.pushUrl(this.url);
-    this.route.params.subscribe(param =>{ if(param['statusId']) this.complaintStatus = param['statusId']})
+    
     this.fetchComplaints();
     $('.modal').modal();
      $('.tooltipped').tooltip({delay: 50});
@@ -67,14 +78,15 @@ export class ComplaintListComponent implements OnInit {
     });
   }
 
+  
   fetchComplaints() {
     this.c.getComplaint(this.url, this.currentPage).then((res) => {
-      if (res.status === 204) {
-        this.EmptyComplaints = true;
-      } else {
+      if (res.status !== 204) {
         this.EmptyComplaints = false;
         this.complaints = res.json();
-        this.complaintsCOPY = res.json();
+        this.complaintsCOPY = res.json();        
+      } else {
+        this.EmptyComplaints = true;
       }
     }, (err) => {
       this.complaints = [];

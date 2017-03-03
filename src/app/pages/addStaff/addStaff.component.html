@@ -74,6 +74,19 @@
   </div>
   <div *ngIf="isSubmit">
     <h2>You have Registered Successively,..</h2>
+    <form action="#">
+      <h3>Upload Your Profile Pic</h3>
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>Upload</span>
+          <input type="file" (change)="uploadProfilePic($event)">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+      <img style="height:150px;width:100px;" src="{{userProfile}}" *ngIf="userProfile">
+    </form>
     <div class="row">
       <div class="col-md-2">Employee Id</div>
       <div class="col-md-10 pull-left">{{ response.id }}</div>

@@ -1,7 +1,7 @@
-import {Component, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ElementRef, ViewChild, AfterViewInit,OnInit} from '@angular/core';
 import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
-import { CommonService } from './services/common.service';
+import { ComplaintService } from './services/complaint.service';
 
 declare var $;
 
@@ -10,27 +10,31 @@ declare var $;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
-  private user;
+export class AppComponent implements AfterViewInit,OnInit {
+  public user;
   public currentUrl:any;
+  public data;
 
   constructor(public userService: UserService,
-              private router: Router,
-              private commonService:CommonService) {              
+              public router: Router,
+              public commonService:ComplaintService) {        
               this.user = {
                 username: localStorage.getItem("name"),
                 email: localStorage.getItem("email"),
                 role: localStorage.getItem("role"),
                 picUrl:localStorage.getItem("picUrl")
               }
-              this.commonService.pushUrl(this.router.url);
               this.commonService.urls.subscribe(data =>{
-                this.currentUrl = data;
+                this.data = data;
               });
-              console.log("adsdf",this.currentUrl);
+  }
+
+  ngOnInit(){
+ 
   }
 
   ngAfterViewInit() {
+    
     
     $('.dropdown-button').dropdown({
       inDuration: 300,

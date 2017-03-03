@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 
 import { Configuration } from '../../services/app.constant';
 
+
 @Component({
   selector: 'complaint',
   template: `
@@ -13,5 +14,7 @@ import { Configuration } from '../../services/app.constant';
 })
 export class ComplaintComponent {
 
+  constructor(){
 
+  }
 }

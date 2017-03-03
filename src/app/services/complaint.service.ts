@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable ,EventEmitter} from '@angular/core';
 import { Http, Headers,RequestOptions } from '@angular/http';
 import { Configuration } from './app.constant';
 import 'rxjs/add/operator/toPromise';
@@ -14,14 +14,28 @@ export class ComplaintService {
   private userId: string;
   private complaintUrl: string;
 
-  constructor(private http: Http,
-              private config: Configuration) {
+  constructor(private http: Http,private config: Configuration) {
     this.baseUrl = this.config.getUrl();
   }
 
+  public urlToTraver = new Array();
+  urls: EventEmitter<any> = new EventEmitter();
+
+  initArray() {
+    this.urlToTraver = [];
+  }
+
+  pushUrl(title, url){
+    this.urlToTraver.push({
+      title: title,
+      url: url
+    });    
+    this.urls.emit(this.urlToTraver);
+  }
+  
   getComplaint(url,pageNo){
-    let options = this.config.getHeaderWithoutWeb();
-    return this.http.get(this.baseUrl + url +"/page/"+pageNo, options)
+    let options = this.config.getHeaderWithWeb();
+    return this.http.get(this.config.getUrl() +"/"+ url +"/page/"+pageNo, options)
     .toPromise()
     .then((response) => {
       return Promise.resolve(response);
@@ -29,8 +43,8 @@ export class ComplaintService {
   }
 
   getComplaintById(id){
-    let options = this.config.getHeaderWithoutWeb();
-    return this.http.get(this.baseUrl + "/complaint/" + id, options)
+    let options = this.config.getHeaderWithWeb();
+    return this.http.get(this.config.getUrl() + "/complaint/" + id, options)
     .toPromise()
     .then((response) => {
       return Promise.resolve(response);
@@ -38,8 +52,8 @@ export class ComplaintService {
   }
 
   getComplaintCommentById(complaintId){
-    let options = this.config.getHeaderWithoutWeb();
-    return this.http.get(this.baseUrl+"/complaint/" + complaintId+"/comment",options).toPromise()
+    let options = this.config.getHeaderWithWeb();
+    return this.http.get(this.config.getUrl()+"/complaint/" + complaintId+"/comment",options).toPromise()
     .then((response) => {
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });
@@ -47,22 +61,22 @@ export class ComplaintService {
 
   postComplaintComment(complaintId,comment){
     console.log("1",comment);
-    return this.http.post(this.baseUrl+"/complaint/" + complaintId+"/comment",{comment:comment}).toPromise()
+    return this.http.post(this.config.getUrl()+"/complaint/" + complaintId+"/comment",{comment:comment}).toPromise()
     .then((response) =>{
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });
   }
 
   updateComplaint(complaintId,complaint){
-    return this.http.put(this.baseUrl+"/complaint/" + complaintId, complaint).toPromise()
+    return this.http.put(this.config.getUrl()+"/complaint/" + complaintId, complaint).toPromise()
     .then((response) => {
       return Promise.resolve(response);
     }).catch((err) => { return Promise.reject(err); });
   }
 
   editInfo() {
-    let options = this.config.getHeaderWithoutWeb();
-    return this.http.get(this.baseUrl + "/complaint/edit-info", options)
+    let options = this.config.getHeaderWithWeb();
+    return this.http.get(this.config.getUrl() + "/complaint/edit-info", options)
     .toPromise()
     .then((response) => {
       return Promise.resolve(response);
