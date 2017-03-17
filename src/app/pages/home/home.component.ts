@@ -1,6 +1,6 @@
 
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Router} from '@angular/router';
 
 // import service
 import { ChartService } from '../../services/chart.service';
@@ -8,7 +8,7 @@ import { UserService } from '../../services/user.service';
 import { ComplaintService } from '../../services/complaint.service'
 
 // import directive
-import { GoogleChart } from '../../customComponent/chart.directive';
+// import { GoogleChart } from '../../customComponent/chart.directive';
 
 declare let google;
 declare let $;
@@ -19,7 +19,7 @@ declare let $;
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  @ViewChild(GoogleChart) vc: GoogleChart;
+  // @ViewChild(GoogleChart) vc: GoogleChart;
   public complaintByStatus;
   public responseByStatus: any = [];
 
@@ -34,8 +34,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router,
     public c: ChartService,
-    public route: ActivatedRoute,
     public commonService: ComplaintService) {
+    
+  }
+
+  ngOnInit() {
+    $('.tooltipped').tooltip({ delay: 50 });
     this.commonService.initArray();
     this.commonService.pushUrl("", "");
     this.c.getComplaintByCategoryAndStatus().then((response) => {
@@ -46,10 +50,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.responseByStatus = response.json();
       this.chartByStatus();
     });
-  }
-
-  ngOnInit() {
-    $('.tooltipped').tooltip({ delay: 50 });
   }
   ngAfterViewInit() {
     $('.modal').modal();
@@ -168,6 +168,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       isStacked: 'true', chartArea: {},
       colors: ['#4CAF50', '#2196f3', '#FFEB3B', '#F48FB1', '#EF5350', '#9C27B0', '#FF8C00']
     };
+  }
+  navigate(url){
+    this.router.navigateByUrl(url);
   }
 
   openModal(whichId) {

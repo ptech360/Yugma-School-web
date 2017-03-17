@@ -17,7 +17,7 @@ export class UserService {
   }
 
   login(data) {
-    return this.http.post("https://yugma-ut.appspot-preview.com/login", data)
+    return this.http.post(this.url+"/login", data)
     .toPromise()
     .then(response => {
       localStorage.setItem('access_token', response.json().access_token);
@@ -27,7 +27,7 @@ export class UserService {
 
   getManagementInfo() {
     let options = this.config.getHeaderWithoutWeb();
-    return this.http.get("https://yugma-ut.appspot-preview.com" + "/management/info", options)
+    return this.http.get(this.url + "/management/info", options)
     .toPromise()
     .then((res) => {
       return Promise.resolve(res);
@@ -68,7 +68,7 @@ export class UserService {
   resetPassword(data) {
     let options = this.config.getHeaderWithoutWeb ();
     let userId = this.config.getUserId();
-    return this.http.put(this.url + "/management/" + userId + "/password", data, options)
+    return this.http.put(this.url + "/management/" + userId +"/password", data, options)
     .toPromise()
     .then((res) => {
       return Promise.resolve(res);
@@ -80,7 +80,7 @@ export class UserService {
     let userId = this.config.getUserId();
     let formData = new FormData();      
     formData.append('file',newfile);
-    return this.http.post("https://yugma-ut.appspot-preview.com" + "/management/" + userId + "/picture",formData,options).toPromise().then( res =>{
+    return this.http.post(this.url + "/management/" + userId +"/picture",formData,options).toPromise().then( res =>{
           return Promise.resolve(res);
         });
   }

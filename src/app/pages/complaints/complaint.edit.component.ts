@@ -73,6 +73,7 @@ declare let Materialize;
 
 export class EditComplaint implements OnInit{
   public selectedComplaint;
+  public complaintId;
   employees;
   priorities;
   isInprogress:boolean = false;
@@ -89,14 +90,15 @@ export class EditComplaint implements OnInit{
               private config: Configuration,
               private route: ActivatedRoute,
               private commonService : ComplaintService) {
-              this.commonService.pushUrl("Edit Complaint", "Complaint");
+              this.commonService.pushUrl("Edit Complaint", "/edit/"+this.complaintId);
 
   }
   ngOnInit(){    
     this.getInfoTOEdit();
     this.route.params.subscribe(params => {
-      if(params['complaint']){
-        this.c.getComplaintById(params['complaint']).then(response => {
+      this.complaintId = params['complaint'];
+      if(this.complaintId){
+        this.c.getComplaintById(this.complaintId).then(response => {
           this.selectedComplaint = response.json();          
           this.setComplaintData();          
         });

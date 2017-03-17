@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { Configuration } from '../../services/app.constant';
 import { ActivatedRoute, Params, Router}   from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -16,12 +16,12 @@ import { CommonService } from '../../services/common.service';
   providers:[CommonService]
 })
 
-export class ComplaintListComponent implements OnInit{
-
-  private complaints;
+export class ComplaintListComponent implements OnInit,AfterViewInit{
+  public complaints;
   private comments;
   private EmptyComments;
   private complaintStatus;
+  private complaintCategory;
   private complaintsCOPY;
   private EmptyComplaints: boolean = false;
   private complaint = {
@@ -29,43 +29,45 @@ export class ComplaintListComponent implements OnInit{
   }
   private url:string ="";
   private status:string = "";
+  mouseover:boolean;
   
 
   private currentPage = 1;
-  constructor(private c: ComplaintService,
-              private router: Router,
-              private config: Configuration,
+  constructor(private router: Router,
               private route: ActivatedRoute,
+              private c: ComplaintService,
+              private config: Configuration,              
               private commonService:ComplaintService) {
-              this.route.params.subscribe(param =>{ if(param['statusId']) this.complaintStatus = param['statusId']});
-                  switch (this.complaintStatus) {
-                    case '1':  this.status = "New";      break;
-                    case '2':  this.status = "Assigned"; break;
-                    case '3':  this.status = "InProgress";break;
-                    case '4':  this.status = "Closed";    break;
-                    case '5':  this.status = "Reopen";    break;
-                    case '6':  this.status = "Satisfied"; break;      
-                    default:   this.status = "All";       break;
-                  }
+              this.url = this.router.url;
+              this.route.params.subscribe(param =>{ 
+                if(param['statusId']) this.complaintStatus = param['statusId'];
+                if(param['categoryId']) this.complaintCategory = param['categoryId'];
+              });
+              switch (this.complaintStatus) {
+                case '1':  this.status = "New";      break;
+                case '2':  this.status = "Assigned"; break;
+                case '3':  this.status = "InProgress";break;
+                case '4':  this.status = "Closed";    break;
+                case '5':  this.status = "Reopen";    break;
+                case '6':  this.status = "Satisfied"; break;      
+                default:   this.status = "All";       break;
+              }
+              this.fetchComplaints();
   }
 
   ngOnInit() {
     this.commonService.initArray();
-    this.commonService.pushUrl(this.status+" Complaints", "Complaint");
-    this.url = this.router.url;
-    // this.route.pathFromRoot.forEach(oe => {
-    //   oe.url.forEach( ie =>{
-    //     ie.forEach( e =>{
-    //       if(e.path)
-    //         this.url += "/" + e.path;            
-    //     })
-    //   })
-    // });
-    
-    this.fetchComplaints();
+    if(this.complaintStatus && this.complaintCategory)
+      this.commonService.pushUrl(this.status+" Complaints", '/complaint/category-status/'+this.complaintCategory+'/'+this.complaintStatus);
+    else if(this.complaintStatus)
+      this.commonService.pushUrl(this.status+" Complaints", '/complaint/status/'+this.complaintStatus);
+    else if(this.complaintCategory)
+      this.commonService.pushUrl(this.status+" Complaints", '/complaint/category-status/category/'+this.complaintCategory); 
+    else
+      this.commonService.pushUrl(this.status+" Complaints", '/complaint');  
     $('.modal').modal();
-     $('.tooltipped').tooltip({delay: 50});
-      $('#chat').modal({
+    $('.tooltipped').tooltip({delay: 50});
+    $('#chat').modal({
       dismissible: false, // Modal can be dismissed by clicking outside of the modal
       opacity: 0, // Opacity of modal background
       in_duration: 300, // Transition in duration
@@ -78,13 +80,18 @@ export class ComplaintListComponent implements OnInit{
     });
   }
 
+  ngAfterViewInit(){
+    
+  }
+
   
   fetchComplaints() {
     this.c.getComplaint(this.url, this.currentPage).then((res) => {
       if (res.status !== 204) {
-        this.EmptyComplaints = false;
-        this.complaints = res.json();
-        this.complaintsCOPY = res.json();        
+        console.log(res);
+        this.complaints = res;
+        this.complaintsCOPY = res;
+        this.EmptyComplaints = false;               
       } else {
         this.EmptyComplaints = true;
       }
@@ -94,7 +101,6 @@ export class ComplaintListComponent implements OnInit{
     });
   }
 
- 
   openModal(complaint) {
     this.complaint = complaint;
     $('#modal1').modal('open');
@@ -130,10 +136,17 @@ export class ComplaintListComponent implements OnInit{
       });
     }
   }
+
   complaintIdOfCommentModel;
+  complaintTitleOfCommentModel;
   currentUser = this.config.getUserId();
   getComplaintCommentById(complaintId){
     this.complaintIdOfCommentModel = complaintId;
+    this.complaints.forEach(element => {
+      if(element['id'] == complaintId)
+        this.complaintTitleOfCommentModel = element.title;
+    });
+
     this.c.getComplaintCommentById(complaintId).then((res) => {
       if (res.status === 204) {
         this.EmptyComments = true;
@@ -162,5 +175,6 @@ export class ComplaintListComponent implements OnInit{
   clearComment(){
     delete this.comments;
   }
-
 }
+
+

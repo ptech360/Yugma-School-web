@@ -38,7 +38,7 @@ export class ComplaintService {
     return this.http.get(this.config.getUrl() +"/"+ url +"/page/"+pageNo, options)
     .toPromise()
     .then((response) => {
-      return Promise.resolve(response);
+      return Promise.resolve(response.json());
     }).catch((err) => { return Promise.reject(err); });
   }
 

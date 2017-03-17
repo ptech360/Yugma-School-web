@@ -20,7 +20,11 @@ import { ForgetPasswordComponent } from './pages/login/forget.password.component
 import { CustomLoader } from './customComponent/loader.component';
 import { EditComplaint } from './pages/complaints/complaint.edit.component';
 import { AddStaffComponent } from './pages/addStaff/addStaff.component';
+import { AddStudentComponent } from './pages/addStudent/addStudent.component';
 import { UploadComponent } from './pages/upload/upload.component';
+import { Timetable } from './pages/timetable/timetable.component';
+import { ViewTimetable} from './pages/timetable/timetable.view';
+import { CreateTimetable} from './pages/timetable/timetable.create';
  
 // import service
 import { ChartService } from './services/chart.service';
@@ -46,7 +50,11 @@ import { CommonService } from './services/common.service';
     ParentComponent,
     CustomLoader,
     AddStaffComponent,
-    UploadComponent
+    AddStudentComponent,
+    UploadComponent,
+    Timetable,
+    ViewTimetable,
+    CreateTimetable
   ],
   imports: [
     BrowserModule,

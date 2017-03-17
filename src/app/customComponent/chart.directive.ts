@@ -29,7 +29,7 @@ export class GoogleChart {
       this.drawGraph(this.chartOptions, this.chartType, data,  this._element);
   }
   
-  @Output() onSelected = new EventEmitter<boolean>();
+  @Output() onSelected : EventEmitter<boolean> = new EventEmitter<boolean>();
 
   drawGraph (chartOptions,chartType,chartData,ele) {
     google.charts.setOnLoadCallback(drawChart);
@@ -42,9 +42,8 @@ export class GoogleChart {
         options: chartOptions || {},
         containerId: ele.id
       });
-      google.visualization.events.addListener(wrapper, 'ready', onReady);
+      google.visualization.events.addListener(wrapper, 'ready', onReady);      
       wrapper.draw();
-
       function onReady() {
         google.visualization.events.addListener(wrapper.getChart(), 'click', selectHandler);
         google.visualization.events.addListener(wrapper.getChart(), 'onmouseover', onmouseover);
@@ -61,10 +60,10 @@ export class GoogleChart {
         that.onSelected.emit(that.selectedData);
       }
       function onmouseover(){
-        $('#'+ele.id).css('cursor','pointer')
+        $('#'+ele.id).css('cursor','pointer');
       }
       function onmouseout(){
-        $('#'+ele.id).css('cursor','default')
+        $('#'+ele.id).css('cursor','default');
       }
     }
   }

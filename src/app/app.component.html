@@ -6,10 +6,11 @@
     </a>
     <ul id="slide-out" class="side-nav fixed" *ngIf="isLoggedIn()">
       <li>
-        <div class="userView" >          
-          <i style="position: relative;top: 40px;left: 75%;cursor:pointer;" class="material-icons" onclick="document.getElementById('my_file').click();">mode_edit</i>
-          <input type="file" id="my_file" style="display: none;" (change)="uploadProfilePic($event)"/>          
-          <img class="circle align-center" src="{{user.picUrl}}" *ngIf="user.picUrl"/>
+        <div class="userView" style="padding: 0px !important;">
+          <i style="position: relative;top: 40px;left: 75%;cursor:pointer;" class="material-icons" onclick="document.getElementById('my_file').click();">mode_edit</i>          
+          <input type="file" id="my_file" style="display: none;" (change)="uploadProfilePic($event)"/>           
+          <img class="circle align-center" src="{{user.picUrl}}" *ngIf="user.picUrl"/>  
+          <img src="https://cdn2.hermo.my/hershop/image-loading.gif" style="height: 100px !important;width: 100px !important;position: absolute;margin-top: -120px;margin-left: 100px;" *ngIf="profilePicLoader"/>
         </div>
         <div class="userView" [routerLink]="['/account']">
           <span class="white-text name center-align">{{user.username}}</span>
@@ -20,9 +21,10 @@
       <li><a [routerLink]="['/complaint']" class="waves-effect waves-teal"><i class="material-icons">thumb_down</i>
         All Complaints</a>
       </li>
-      <!--<li><a [routerLink]="['/add-management']" class="waves-effect waves-teal"><i class="material-icons">group add</i>Add Management</a></li>-->
       <li><a [routerLink]="['/add-staff']" class="waves-effect waves-teal"><i class="material-icons">group add</i>Add Staff</a></li>
+      <li><a [routerLink]="['/add-student']" class="waves-effect waves-teal"><i class="material-icons">group add</i>Add Student</a></li>
       <li><a [routerLink]="['/upload-file']" class="waves-effect waves-teal"><i class="material-icons">input</i>Upload File</a></li>
+      <li><a [routerLink]="['/timetable']" class="waves-effect waves-teal"><i class="material-icons">today</i>Timetable</a></li>
       <li class="hide-on-large-only"><a (click)="logout()" class="waves-effect waves-teal"><i class="material-icons">power_settings_new</i>Logout</a>
       </li>
     </ul>

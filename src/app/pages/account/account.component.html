@@ -3,12 +3,12 @@
     <div class="card">
       <div class="row">
         <div class="col s3 m3 l3">
-          <img class="profilePic" src="http://blog.chemistry.com/wp-content/uploads/2012/09/man-smiling.jpg" />
+          <img class="profilePic" src="{{user.picUrl}}" />
         </div>
         <div class="col s9 m9 l9">
           <div class="row">
-            <h4 id="name">Mrs. Cynthia Clark</h4>
-            <span id="role">Teacher, Some College UK</span>
+            <h4 id="name">{{user.username}}</h4>
+            <span id="role">{{user.role}}, SRGS School</span>
           </div>
           <div class="row">
             Teacher teaching since some time at which he was not a child and when he was not a child <b>he was not a child</b>.
@@ -26,7 +26,7 @@
             <b>Name</b>
           </td>
           <td>
-            User name
+            {{user.username}}
           </td>
         </tr>
         <tr>
@@ -34,7 +34,7 @@
             <b>Email</b>
           </td>
           <td>
-            xxx@xxxx.xxx
+            {{user.email}}
           </td>
         </tr>
         <tr>
@@ -42,7 +42,7 @@
             <b>Phone Number</b>
           </td>
           <td>
-            +91 9xxx xxx xxx
+            +91 {{user.contactNo}}
           </td>
         </tr>
         <tr>
@@ -50,7 +50,7 @@
             <b>Nick Name</b>
           </td>
           <td>
-            nick
+            {{user.nickName}}
           </td>
         </tr>
         <tr>
@@ -58,7 +58,7 @@
             <b>Role</b>
           </td>
           <td>
-            Some role
+            {{user.role}}
           </td>
         </tr>
       </table>

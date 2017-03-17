@@ -25,14 +25,11 @@ export class Configuration {
     this.headers = new Headers({
       'Content-Type': 'application/json',
       'isWeb': true,
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-      
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')      
     });
-
     var options = new RequestOptions({
       headers: this.headers
     });
-
     return options;
   }
 
@@ -41,11 +38,9 @@ export class Configuration {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     });
-
     var options = new RequestOptions({
       headers: this.headers
     });
-
     return options;
   }
 
@@ -54,11 +49,9 @@ export class Configuration {
       // 'Content-Type': 'multipart/form-data',
       'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     });
-
     var options = new RequestOptions({
       headers: this.headers
     });
-
     return options;
   }
 
@@ -70,7 +63,7 @@ export class Configuration {
     return localStorage.getItem("id");
   }
 
-  public baseUrl;
+  public baseUrl = this.url;
 
   buildUrl() {
     this.loggedInUser.role = this.getRole();

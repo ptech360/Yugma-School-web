@@ -112,10 +112,21 @@
 								class="material-icons icon-button  tooltipped"
 								data-position="bottom" data-delay="50" data-tooltip="Expand"
 								(click)="expand(1)">aspect_ratio</i>
-							<div class="graph-table-cell" GoogleChart
-								id="complaint_chart_by_status" [chartData]="complaintByStatus"
-								[chartOptions]="complaintByStatusChartOptions"
-								chartType="PieChart" (onSelected)="onSelected($event)"></div>
+								<div *ngIf="complaintByStatus" class="graph-table-cell" GoogleChart id="complaint_chart_by_status" [chartData]="complaintByStatus"	[chartOptions]="complaintByStatusChartOptions" chartType="PieChart" (onSelected)="onSelected($event)">
+								</div>
+								<div *ngIf="!complaintByStatus" class="graph-table-cell">
+									<div style="position: absolute;top: 40%;left: 45%;" class="preloader-wrapper small active">
+										<div class="spinner-layer spinner-green-only">
+											<div class="circle-clipper left">
+												<div class="circle"></div>
+											</div><div class="gap-patch">
+												<div class="circle"></div>
+											</div><div class="circle-clipper right">
+												<div class="circle"></div>
+											</div>
+										</div>
+									</div>
+								</div>
 						</div>
 					</div>
 
@@ -125,11 +136,22 @@
 								class="material-icons icon-button tooltipped"
 								data-position="bottom" data-delay="50" data-tooltip="Expand"
 								(click)="expand(4)">aspect_ratio</i>
-							<div class=" graph-table-cell" GoogleChart
-								id="chart_by_category_status"
-								[chartData]="complaintByCategoryAndStatus"
-								[chartOptions]="categoryAndStatusChartOptions"
-								chartType="BarChart" (onSelected)="onSelected($event)"></div>
+								<div *ngIf="complaintByCategoryAndStatus" class=" graph-table-cell" GoogleChart id="chart_by_category_status" [chartData]="complaintByCategoryAndStatus" 
+								[chartOptions]="categoryAndStatusChartOptions" chartType="BarChart" (onSelected)="onSelected($event)">
+								</div>
+								<div *ngIf="!complaintByCategoryAndStatus" class="graph-table-cell">
+									<div style="position: absolute;top: 40%;left: 45%;" class="preloader-wrapper small active">
+										<div class="spinner-layer spinner-green-only">
+											<div class="circle-clipper left">
+												<div class="circle"></div>
+											</div><div class="gap-patch">
+												<div class="circle"></div>
+											</div><div class="circle-clipper right">
+												<div class="circle"></div>
+											</div>
+										</div>
+									</div>
+								</div>
 						</div>
 					</div>
 

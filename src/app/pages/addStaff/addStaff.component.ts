@@ -32,7 +32,7 @@ export class AddStaffComponent implements OnInit{
       password: new FormControl('',[Validators.required,Validators.pattern('^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{5,100}$')]),
     });
     this.commonService.initArray();
-    this.commonService.pushUrl("ADD Staff", "Complaint");
+    this.commonService.pushUrl("ADD Staff", "/add-staff");
   }
 
   ngOnInit(){

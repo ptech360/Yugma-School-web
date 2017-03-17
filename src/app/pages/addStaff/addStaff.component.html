@@ -2,42 +2,42 @@
     <form class="col s12" [formGroup]="addStaffForm" (ngSubmit)="addStaffData()">
       <div class="row">
         <div class="input-field col s12">
-          <input id="name" type="text" name="name" formControlName="name" class="validate">
-          <label for="name">Name</label>
+          <input id="stname" type="text" name="name" formControlName="name" class="validate">
+          <label for="stname">Name</label>
           <div class="alert alert-danger" [hidden]="addStaffForm.controls.name.valid || addStaffForm.controls.name.pristine">Name is required</div>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="user_name" type="text" class="validate" name="username" formControlName="username">
-          <label for="user_name">User Name</label>
+          <input id="stuser_name" type="text" class="validate" name="username" formControlName="username">
+          <label for="stuser_name">User Name</label>
           <div class="alert alert-danger" [hidden]="addStaffForm.controls.username.valid || addStaffForm.controls.username.pristine">User Name is required</div>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="nick_name" type="text" class="validate" name="nickName" formControlName="nickName">
-          <label for="nick_name">Nick Name</label>
+          <input id="stnick_name" type="text" class="validate" name="nickName" formControlName="nickName">
+          <label for="stnick_name">Nick Name</label>
           <div class="alert alert-danger" [hidden]="addStaffForm.controls.nickName.valid || addStaffForm.controls.nickName.pristine">Nick Name is required</div>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate" name="password" formControlName="password">
-          <label for="password">Password</label>
+          <input id="stpassword" type="password" class="validate" name="password" formControlName="password">
+          <label for="stpassword">Password</label>
           <div class="alert alert-danger" [hidden]="addStaffForm.controls.password.valid || addStaffForm.controls.password.pristine">Password is required and should contain numbers and characters</div>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id="email" type="email" class="validate" name="email" formControlName="email">
-          <label for="email">Email</label>
+          <input id="stemail" type="email" class="validate" name="email" formControlName="email">
+          <label for="stemail">Email</label>
           <div class="alert alert-danger" [hidden]="addStaffForm.controls.email.valid || addStaffForm.controls.email.pristine">Email is required and must be a valid email pattern</div>
         </div>
         <div class="input-field col s6">
           <!--<i class="material-icons prefix">contactNo</i>-->
-          <input id="contactNo" type="tel" class="validate" name="contactNo" formControlName="contactNo">
-          <label for="contactNo">TelecontactNo</label>
+          <input id="stcontactNo" type="tel" class="validate" name="contactNo" formControlName="contactNo">
+          <label for="stcontactNo">TelecontactNo</label>
           <div class="alert alert-danger" [hidden]="addStaffForm.controls.contactNo.valid || addStaffForm.controls.contactNo.pristine" *ngIf="addStaffForm.controls.contactNo.errors && (addStaffForm.controls.contactNo.dirty || addStaffForm.controls.contactNo.touched)">Enter A Valid Mobile Number</div>
         </div>
       </div>

@@ -68,12 +68,16 @@ export class AppComponent implements AfterViewInit,OnInit {
     return this.userService.isLoggedIn();
   }
   files;
+  profilePicLoader : boolean = false;
   uploadProfilePic(event){
+    
     this.files = event.srcElement.files;
     if(this.files[0]){
+      this.profilePicLoader = true;
       this.userService.uploadProfilePic(this.files[0]).then(res =>{
         this.user['picUrl'] = res.json();
         localStorage.setItem('picUrl', res.json());
+        this.profilePicLoader = false;
       });
     }
   }

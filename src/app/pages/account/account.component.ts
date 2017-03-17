@@ -24,10 +24,12 @@ export class AccountComponent implements OnInit {
                 username: localStorage.getItem("name"),
                 email: localStorage.getItem("email"),
                 role: localStorage.getItem("role"),
-                picUrl:localStorage.getItem("picUrl")
+                picUrl:localStorage.getItem("picUrl"),
+                contactNo:localStorage.getItem("contactNo"),
+                nickName:localStorage.getItem("nickName")
               }
               this.commonService.initArray();
-              this.commonService.pushUrl("Account", "Complaint");
+              this.commonService.pushUrl("Account", "/account");
     }
 
   ngOnInit() {

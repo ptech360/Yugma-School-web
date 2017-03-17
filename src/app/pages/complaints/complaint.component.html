@@ -1,4 +1,4 @@
-<div class="table-content">
+<div class="table-content" >
   <div class="row table-title-box">
     <div class="col l10 s6 col1">
       {{status}} <span class="table-title-text">Complaints</span>
@@ -34,7 +34,7 @@
         <th></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody >
       <tr *ngFor="let c of complaints; let i = index;">
         <td (click)="openModal(c)" class="action"><span class="cid">{{c.id}}</span></td>
         <td>{{c.title}}</td>
@@ -130,7 +130,7 @@
 <!-- Chat box Structure -->
 <div id="chat" class="modal bottom-sheet chatBox">
   <div class="chat-header">
-    Complaint title here
+    <span>{{complaintTitleOfCommentModel | uppercase}}</span>
     <i class="material-icons modal-close right icon-button tooltipped" data-position="bottom" data-tooltip="close" (click)="clearComment()">close</i>
   </div>
   <div class="comments">
@@ -144,6 +144,9 @@
           <span class="myMsg right">{{c.comment}}</span><br>
           <div class="msgDate right-align my">me: {{c.createdAt|date}}</div>
         </div>
+      </div>
+      <div class="row loader">
+        <loader class="col l7 s7 right valign" [condition]="!comments"></loader>
       </div>
     </div>
   </div>
