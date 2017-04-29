@@ -1,0 +1,132 @@
+/*Side nav :
+background-color: #493d55
+hover-back: #3a3144
+font-color: #a49eaa
+
+
+User Dropdown (black):#42374d
+*/
+
+.visible {
+  display: inherit !important;
+}
+
+.tb-grey {
+  background-color: #493d55;
+}
+.side-nav{
+  background:#493d55;
+}
+
+.side-nav li a{
+  color:#a49eaa;
+}
+.side-nav li a:hover{
+  color:white;
+  background:#3a3144;
+}
+.side-nav li a i{
+  color:inherit;
+}
+.userView:hover{
+  background:#3a3144;
+}
+
+.userView .circle{
+  width:150px !important;
+  height:150px !important;
+}
+
+.align-center{
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.userView .email{
+  font-size:12px;
+}
+
+.userView .name{
+  font-size:14px;
+  font-weight:bold;
+}
+
+header, main, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+.nav-wrapper #nav-mobile{
+  margin-right: 15px;
+}
+.nav-wrapper #nav-mobile:hover{
+  background: #42374d;
+}
+
+.user-account{
+    overflow: hidden;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 10px;
+    width: 215px;
+    top: 62.6px;
+    right: 0;
+    z-index: 100;
+    position: absolute;
+    background-color: #42374d;
+}
+
+.user-account li:hover{
+  background:rgba(51, 51, 51, 0.1);
+}
+.custom-bread-cumber{
+  margin: 30px 0px 20px 1px;
+    display: block;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+}
+.bcCol1{
+    height: 40px;
+    background:#42374d;
+}
+.bcCol2{
+      margin-top: -12px;
+      font-size:15px !important;
+}
+.colLink{
+  color:#95a2a9;
+  position: absolute;
+  margin-top: -8px;
+}
+.colLinkIn{
+  color:#95a2a9;
+}
+.colLinkIn:hover{
+  color:white;
+  cursor:pointer;
+  cursor: hand;
+}
+.breadcrumb{
+    color:grey;
+    font-size: 15px;
+}
+.breadcrumb:before{
+  color:grey;
+  font-size: 15px;
+}
+.homeicon{
+  padding-top:2px;
+}
+.home-icon{
+  display:initial !important;
+}
+.home-text{
+
+}

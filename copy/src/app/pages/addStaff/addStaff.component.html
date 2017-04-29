@@ -1,0 +1,116 @@
+<div class="row" *ngIf="!isSubmit">
+    <form class="col s12" [formGroup]="addStaffForm" (ngSubmit)="addStaffData()">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="stname" type="text" name="name" formControlName="name" class="validate">
+          <label for="stname">Name</label>
+          <div class="alert alert-danger" [hidden]="addStaffForm.controls.name.valid || addStaffForm.controls.name.pristine">Name is required</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="stuser_name" type="text" class="validate" name="username" formControlName="username">
+          <label for="stuser_name">User Name</label>
+          <div class="alert alert-danger" [hidden]="addStaffForm.controls.username.valid || addStaffForm.controls.username.pristine">User Name is required</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="stnick_name" type="text" class="validate" name="nickName" formControlName="nickName">
+          <label for="stnick_name">Nick Name</label>
+          <div class="alert alert-danger" [hidden]="addStaffForm.controls.nickName.valid || addStaffForm.controls.nickName.pristine">Nick Name is required</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="stpassword" type="password" class="validate" name="password" formControlName="password">
+          <label for="stpassword">Password</label>
+          <div class="alert alert-danger" [hidden]="addStaffForm.controls.password.valid || addStaffForm.controls.password.pristine">Password is required and should contain numbers and characters</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="stemail" type="email" class="validate" name="email" formControlName="email">
+          <label for="stemail">Email</label>
+          <div class="alert alert-danger" [hidden]="addStaffForm.controls.email.valid || addStaffForm.controls.email.pristine">Email is required and must be a valid email pattern</div>
+        </div>
+        <div class="input-field col s6">
+          <!--<i class="material-icons prefix">contactNo</i>-->
+          <input id="stcontactNo" type="tel" class="validate" name="contactNo" formControlName="contactNo">
+          <label for="stcontactNo">TelecontactNo</label>
+          <div class="alert alert-danger" [hidden]="addStaffForm.controls.contactNo.valid || addStaffForm.controls.contactNo.pristine" *ngIf="addStaffForm.controls.contactNo.errors && (addStaffForm.controls.contactNo.dirty || addStaffForm.controls.contactNo.touched)">Enter A Valid Mobile Number</div>
+        </div>
+      </div>
+      <p>
+        <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" [(ngModel)]="isTeacher" [ngModelOptions]="{standalone: true}"/>
+        <label for="filled-in-box">Are you a Teacher</label>
+      </p>
+      <div class="row" *ngIf="isTeacher">
+        <div class="col s6">
+          <label >Select Standard</label>
+          <select [(ngModel)]="selectedStandard" [ngModelOptions]="{standalone: true}" >
+            <option *ngFor="let standard of standards" [ngValue]="standard">{{standard.name}}</option>
+          </select>          
+        </div>
+        <div class="col s6">
+          <label >Select Subject</label>
+          <select [(ngModel)]="selectedSubject" [ngModelOptions]="{standalone: true}">
+            <option *ngFor= "let subject of subjects" [ngValue]="subject">{{subject.name}}</option>
+          </select>          
+        </div>
+        <div class="input-field col s12" >
+          <a class="waves-effect waves-light btn" (click)="pushOnObjectArray()">Add</a>
+        </div>
+        <div class="input-field col s12" *ngFor= "let obj of objectArrayToDisplay; let i=index">
+          <div class="input-field col s4"><p>{{i+1}}) {{obj.subject}}</p></div>
+          <div class="input-field col s4"><p>{{obj.standard}}</p></div>
+          <div class="input-field col s4"><i class="material-icons" (click)="removeFromObjectArray(obj)">delete </i></div>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="addStaffForm.invalid">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+  </div>
+  <div *ngIf="isSubmit">
+    <h2>You have Registered Successively,..</h2>
+    <form action="#">
+      <h3>Upload Your Profile Pic</h3>
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>Upload</span>
+          <input type="file" (change)="uploadProfilePic($event)">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+      <img style="height:150px;width:100px;" src="{{userProfile}}" *ngIf="userProfile">
+    </form>
+    <div class="row">
+      <div class="col-md-2">Employee Id</div>
+      <div class="col-md-10 pull-left">{{ response.id }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Name</div>
+      <div class="col-md-10 pull-left">{{ response.name }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">User Name</div>
+      <div class="col-md-10 pull-left">{{ response.username }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Nick Name</div>
+      <div class="col-md-10 pull-left">{{ response.nickName }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Contact Number</div>
+      <div class="col-md-10 pull-left">{{ response.contactNo }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Email</div>
+      <div class="col-md-10 pull-left">{{ response.email }}</div>
+    </div>
+    <br />
+    <button class="btn btn-default" (click)="addAnotherForm()">Add Another</button>    
+  </div>

@@ -1,0 +1,157 @@
+<div class="table-content" >
+  <div class="row table-title-box">
+    <div class="col l10 s6 col1">
+      {{status}} <span class="table-title-text">Complaints</span>
+      <i class="material-icons icon-button right col2">replay</i>
+    </div>
+    <div class="col l2 s6 col-l">
+      <a class="col2">
+        <b> + </b> add Complain
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <form class="col s12 l12">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="input-field col s6 l4 right">
+          <input id="icon_telephone" placeholder="Search" type="text" class="validate searchBox" (keyup)="searchComplaints($event)">
+        </div>
+      </div>
+    </form>
+  </div>
+  <table class="highlight bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>StudentName</th>
+        <th *ngIf="!complaintStatus">Status</th>
+        <th>Priority</th>
+        <th *ngIf="!(complaintStatus == 4 || complaintStatus == 5)">Edit</th>
+        <th>Comment</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let c of complaints; let i = index;">
+        <td (click)="openModal(c)" class="action"><span class="cid">{{c.id}}</span></td>
+        <td>{{c.title}}</td>
+        <td>{{c.studentName}} - {{c.studentStandardName}}</td>
+        <td *ngIf="!complaintStatus"><span [style.background]="c.statusColor" class="badge">{{c.statusName}}</span></td>
+        <td>{{c.priorityName}}</td>
+        <td *ngIf="!(complaintStatus == 4 || complaintStatus == 5)"><a (click)="openEditModal(c)" class="action"><i class="material-icons">create</i></a></td>
+        <td class="center-align"><a href="#chat" (click)="getComplaintCommentById(c.id)" class="action"><i class="material-icons">chat_bubble</i></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row loader">
+    <loader class="col l7 s7 right valign" [condition]="!complaints"></loader>
+  </div>
+  <div class="row">
+    <div class="col l12 s12">
+      <button (click)="nextComplaint()" class="btn right nav-btn" [disabled]="EmptyComplaints">Next</button>
+      <button (click)="previousComplaint()" class="btn nav-btn right" [disabled]="currentPage === 1">Previous</button>
+    </div>
+  </div>
+</div>
+<div id="modal1" class="modal">
+  <i class="material-icons modal-close right icon-button tooltipped" data-position="bottom" data-tooltip="close">close</i>
+  <div class="modal-content">
+    <h4>{{complaint.title}}</h4>
+    <div class="row">
+      <div class="col l6 s12">
+        <table class="striped">
+          <tbody>
+            <tr *ngIf="complaint.statusName">
+              <td><b>Status</b></td>
+              <td>{{complaint.statusName}}</td>
+            </tr>
+            <tr *ngIf="complaint.anonymous">
+              <td><b>Anonymous</b></td>
+              <td>{{complaint.anonymous}}</td>
+            </tr>
+            <tr *ngIf="complaint.assignedEmployeeName">
+              <td><b>Assigned To</b></td>
+              <td>{{complaint.assignedEmployeeName}}</td>
+            </tr>
+            <tr *ngIf="complaint.againstEmployeeName">
+              <td><b>Against Employee Name</b></td>
+              <td>{{complaint.againstEmployeeName}}</td>
+            </tr>
+            <tr *ngIf="complaint.againstCategoryName">
+              <td><b>Against Category Name</b></td>
+              <td>{{complaint.againstCategoryName}}</td>
+            </tr>
+            <tr *ngIf="complaint.priorityName">
+              <td><b>Priority</b></td>
+              <td>{{complaint.priorityName}}</td>
+            </tr>
+            <tr *ngIf="complaint.studentName">
+              <td><b>Student Name</b></td>
+              <td>{{complaint.studentName}}</td>
+            </tr>
+            <tr *ngIf="complaint.studentStandardName">
+              <td><b>Standard</b></td>
+              <td>{{complaint.studentStandardName}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col l6 s12">
+        <div class="row">
+          <b>Description:</b> {{complaint.description}}
+        </div>
+        <div class="row" *ngIf="complaint.rca">
+          <b>Root Cause:</b> {{complaint.rca}}
+        </div>
+        <div class="row ">
+          <div class="fixed-action-btn horizontal click-to-toggle right">
+            <a class="btn-floating btn-large red">
+              <i class="material-icons">menu</i>
+            </a>
+            <ul>
+              <li><a class="btn-floating red tooltipped" data-position="top" data-tooltip="close complaint"><i class="material-icons left">gavel</i>Close</a></li>
+              <li>
+                <a class="btn-floating  modal-close yellow darken-1" data-position="top" data-tooltip="edit complaint" (click)="openEditModal(complaint)"><i class="material-icons left">edit</i>Edit</a>
+              </li>
+              <li>
+                <a class="btn-floating green tooltipped" data-tooltip="comment" data-position="top" (click)="getComplaintCommentById(complaint.id)"><i class="material-icons left">chat</i>Comment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chat box Structure -->
+<div id="chat" class="modal bottom-sheet chatBox">
+  <div class="chat-header">
+    <span>{{complaintTitleOfCommentModel | uppercase}}</span>
+    <i class="material-icons modal-close right icon-button tooltipped" data-position="bottom" data-tooltip="close" (click)="clearComment()">close</i>
+  </div>
+  <div class="comments">
+    <div class="row" style="max-height: 220px;overflow-y: scroll;">
+      <div *ngFor="let c of comments">
+        <div class="col s12" *ngIf="c.employeeId != currentUser">
+          <span class="msg">{{c.comment}}</span><br>
+          <div class="msgDate"><span *ngIf="c.employeeName">{{c.employeeName}}</span><span *ngIf="c.parentName">{{c.parentName}}</span>: {{c.createdAt|date}}</div>
+        </div>
+        <div class="col s12" *ngIf="c.employeeId == currentUser">
+          <span class="myMsg right">{{c.comment}}</span><br>
+          <div class="msgDate right-align my">me: {{c.createdAt|date}}</div>
+        </div>
+      </div>
+      <div class="row loader">
+        <loader class="col l7 s7 right valign" [condition]="!comments"></loader>
+      </div>
+    </div>
+  </div>
+  <div class="chat-form">
+      <input type="text" class="chat-input" [(ngModel)]="comment"/>
+      <a class="btn-floating btn-small waves-effect waves-light right red" (click)="postComment()"><i class="material-icons">send</i></a>
+    </div>
+</div>

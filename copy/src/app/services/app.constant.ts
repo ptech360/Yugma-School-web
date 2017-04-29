@@ -18,9 +18,8 @@ export class Configuration {
 
   // private url: string = "https://yugmasrgstesting.appspot.com";
   // private url: string = "http://desktop-nj52npk:8080/YUGMASRGSUT";
-  private url: string = "https://yugma-testing.appspot-preview.com";
+  private url: string = "https://yugma-ut.appspot-preview.com";
   // private url: string = "http://nxtlife:8080/YUGMASRGS";
-  // private url : string = "https://yugma-testing";
 
   getHeaderWithWeb() {
     this.headers = new Headers({

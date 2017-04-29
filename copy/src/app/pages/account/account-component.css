@@ -1,0 +1,55 @@
+.form-content {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-content .sd-form-control {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 10px;
+}
+
+.form-content textarea.sd-form-control {
+  max-width: 100%;
+}
+
+.text-grey {
+  color: #616161;
+}
+
+.form {
+  padding: 10px;
+}
+
+.center-align {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  font-size: 30px;
+  padding: 28px !important;
+  font-weight: bold !important;
+  color: #616161 !important;
+}
+
+.profile-card {
+  width: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+}
+
+.profile-card tr td {
+  padding-left: 20px;
+}
+
+.profilePic {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+}

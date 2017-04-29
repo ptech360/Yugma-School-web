@@ -1,0 +1,187 @@
+<div class="row flip-cards hide-on-med-and-down">
+
+	<div class="col l3 s12 " ontouchstart="this.classList.toggle('hover');">
+		<div class="flip-container">
+			<div class="flipper">
+				<div class="front  pink lighten-1">
+					<div class="row" style="height: inherit; color: white">
+						<div class="col s4" style="text-align: right; padding: 0px">
+							<i class="material-icons"
+								style="font-size: 50px; margin-top: 30px;">contact_phone</i>
+						</div>
+						<div class="col s8" style="font-size: 20px; margin-top: 40px;">
+							Complaints</div>
+					</div>
+				</div>
+				<div class="back pink lighten-1">
+					<div class="text-white">
+						<h5 class="c1">
+							Positive: 80%<br> Negetive:20%
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col l3 s12" ontouchstart="this.classList.toggle('hover');">
+		<div class="flip-container">
+			<div class="flipper">
+				<div class="front  teal lighten-1">
+					<div class="row" style="height: inherit; color: white">
+						<div class="col s4" style="text-align: right; padding: 0px">
+							<i class="material-icons"
+								style="font-size: 50px; margin-top: 30px;">record_voice_over</i>
+						</div>
+						<div class="col s8" style="font-size: 20px; margin-top: 40px;">
+							Suggestions</div>
+					</div>
+				</div>
+				<div class="back teal lighten-1">
+					<div class="text-white">
+						<h5 class="c1">
+							Positive: 90%<br> Negetive:10%
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col l3 s12" ontouchstart="this.classList.toggle('hover');">
+		<div class="flip-container">
+			<div class="flipper">
+				<div class="front grey darken-3">
+					<div class="row" style="height: inherit; color: white">
+						<div class="col s4" style="text-align: right; padding: 0px">
+							<i class="material-icons"
+								style="font-size: 50px; margin-top: 30px;">view_list</i>
+						</div>
+						<div class="col s8" style="font-size: 20px; margin-top: 40px;">
+							Charts</div>
+					</div>
+				</div>
+				<div class="back grey darken-3">
+					<div class="text-white">
+						<h5 class="c1">
+							Positive: 50%<br> Negetive:50%
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col l3 s12" ontouchstart="this.classList.toggle('hover');">
+		<div class="flip-container">
+			<div class="flipper">
+				<div class="front  light-blue darken-3">
+					<div class="row" style="height: inherit; color: white">
+						<div class="col s4" style="text-align: right; padding: 0px">
+							<i class="material-icons"
+								style="font-size: 50px; margin-top: 30px;">dashboard</i>
+						</div>
+						<div class="col s8" style="font-size: 20px; margin-top: 40px;">
+							Others</div>
+					</div>
+				</div>
+				<div class="back light-blue darken-3">
+					<div class="text-white">
+						<h5 class="c1">
+							Positive: 80%<br> Negetive:20%
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div (window:resize)="onResize($event)">
+	<ul class="collapsible" data-collapsible="expandable">
+		<li>
+			<div class="collapsible-header active center-align complaints">
+				Complaints <i class="material-icons list1" style="float: right">keyboard_arrow_down</i>
+			</div>
+			<div class="collapsible-body">
+				<div class="row">
+					<div class="col l6 s12">
+						<div class="card hoverable ">
+							<i data-target="graph1"
+								class="material-icons icon-button  tooltipped"
+								data-position="bottom" data-delay="50" data-tooltip="Expand"
+								(click)="expand(1)">aspect_ratio</i>
+								<div *ngIf="complaintByStatus" class="graph-table-cell" GoogleChart id="complaint_chart_by_status" [chartData]="complaintByStatus"	[chartOptions]="complaintByStatusChartOptions" chartType="PieChart" (onSelected)="onSelected($event)">
+								</div>
+								<div *ngIf="!complaintByStatus" class="graph-table-cell">
+									<div style="position: absolute;top: 40%;left: 45%;" class="preloader-wrapper small active">
+										<div class="spinner-layer spinner-green-only">
+											<div class="circle-clipper left">
+												<div class="circle"></div>
+											</div><div class="gap-patch">
+												<div class="circle"></div>
+											</div><div class="circle-clipper right">
+												<div class="circle"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+
+					<div class="col l6 s12">
+						<div class="card hoverable">
+							<i data-target="graph4"
+								class="material-icons icon-button tooltipped"
+								data-position="bottom" data-delay="50" data-tooltip="Expand"
+								(click)="expand(4)">aspect_ratio</i>
+								<div *ngIf="complaintByCategoryAndStatus" class=" graph-table-cell" GoogleChart id="chart_by_category_status" [chartData]="complaintByCategoryAndStatus" 
+								[chartOptions]="categoryAndStatusChartOptions" chartType="BarChart" (onSelected)="onSelected($event)">
+								</div>
+								<div *ngIf="!complaintByCategoryAndStatus" class="graph-table-cell">
+									<div style="position: absolute;top: 40%;left: 45%;" class="preloader-wrapper small active">
+										<div class="spinner-layer spinner-green-only">
+											<div class="circle-clipper left">
+												<div class="circle"></div>
+											</div><div class="gap-patch">
+												<div class="circle"></div>
+											</div><div class="circle-clipper right">
+												<div class="circle"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<div id="graph1" class="modal" style="height: 500px">
+	<i class="material-icons modal-close right icon-button tooltipped"
+		data-position="bottom" data-delay="50" data-tooltip="shrink">call_received</i>
+	<div class="modal-content">
+		<h4>Graph Name</h4>
+		<div class="graph-table-cell" GoogleChart
+			id="complaint_chart_by_status1" [chartData]="complaintByStatus"
+			[chartOptions]="complaintByStatusChartOptions" chartType="PieChart"
+			(onSelected)="onSelected($event)"></div>
+	</div>
+</div>
+
+<div id="graph4" class="modal" style="height: 500px">
+	<i class="material-icons modal-close right icon-button tooltipped"
+		data-position="bottom" data-delay="50" data-tooltip="shrink">call_received</i>
+	<div class="modal-content">
+		<h4>Graph Name</h4>
+		<div class=" graph-table-cell" GoogleChart
+			id="chart_by_category_status1"
+			[chartData]="complaintByCategoryAndStatus"
+			[chartOptions]="categoryAndStatusChartOptions" chartType="BarChart"
+			(onSelected)="onSelected($event)"></div>
+	</div>
+</div>

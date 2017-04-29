@@ -1,0 +1,180 @@
+<div class="row">
+  <div class="col s12">
+    <p class="col s6">
+      <input name="group1" type="radio" id="test1" value="A" (click)="check('A')" checked/>
+      <label for="test1">New Parent</label>
+    </p>
+    <p class="col s6">
+      <input name="group1" type="radio" id="test2" value="B" (click)="check('B')" />
+      <label for="test2">Existing Parent</label>
+    </p>
+  </div>
+  <form class="col s12" name="newStudentForExistingParent" [formGroup]="newStudentForExistingParent" *ngIf="isExistingParent"
+    (submit)="submitStudentDetailWithExistingParent()">
+    <div class="row">
+      <div class="input-field col s12">
+        <input name="parentId" formControlName="parentId" [(ngModel)]="parentId" style="display: none;">
+        <input id="parent_name" type="text" placeholder="Placeholder" class="validate searchBox" (keyup)="searchParents($event)"
+          [(ngModel)]="assignedParentName" (focus)="focusOnList()" [ngModelOptions]="{standalone: true}" style="margin:0px !important;">
+        <label for="parent_name">Parents</label>
+        <div class="teacher-list" *ngIf="parents">
+          <ul class="collection">
+            <li class="collection-item dismissable" *ngFor="let e of parents;let p = index;" (click)="selectParent(e,p)">
+              <div>{{e.name}}<a href="#!" class="secondary-content"><i class="material-icons">reply</i></a></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="parentDetail">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <form class="row" [formGroup]="parentForm" >
+              <div class="col s6">
+                <label class="col s6">Id: </label>
+                <span class="col s6">{{parentDetail.id}}</span>
+                <input style="display: none" name="id" formControlName="id">
+              </div>
+              <div class="col s6">
+                <label class="col s6">Name: </label>
+                <span class="col s6" *ngIf="!edit">{{parentDetail.name}}</span>
+                <input class="col s6" style="height: inherit !important;" *ngIf="edit" name="name" formControlName="name" >
+              </div>
+              <div class="col s6">
+                <label class="col s6">Email: </label>
+                <span class="col s6" *ngIf="!edit">{{parentDetail.email}}</span>
+                <input class="col s6" style="height: inherit !important;" *ngIf="edit" name="email" formControlName="email">
+              </div>
+              <div class="col s6">
+                <label class="col s6">Contact No: </label>
+                <span class="col s6" *ngIf="!edit">{{parentDetail.contactNo}}</span>
+                <input class="col s6" style="height: inherit !important;" *ngIf="edit" name="contactNo" formControlName="contactNo">
+              </div>
+            </form>
+          </div>
+          <div class="card-action">
+            <table *ngIf="students">
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Standard</th>
+                <th *ngIf="edit"></th>
+              </tr>
+              <tr *ngFor="let stu of students; let i=index;">
+                <td>{{stu.id}}</td><input style="display: none;">
+                <td *ngIf="!edit">{{stu.name}}</td>
+                <td *ngIf="edit">
+                  <input style="margin:0 !important;height: inherit !important;" [(ngModel)]="stu.name" [ngModelOptions]="{standalone: true}" (keyup)=" save[i] = true">
+                </td>
+                <td *ngIf="!edit">{{stu.standardName}}</td>
+                <td *ngIf="edit">
+                  <select [(ngModel)]="stu.standardId" style="display: inherit !important;margin:0 !important;height: inherit !important;" (change)=" save[i] = true" [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let standard of standards" value={{standard.id}} [selected]="stu.standardId == standard.id">{{standard.name}}</option>
+                  </select>
+                </td>
+                <td *ngIf="!save[i] && edit"><i class="material-icons" (click)="deleteStudent(stu,i)">delete</i></td>
+                <td *ngIf="save[i]"><i class="material-icons" (click)="updateStudent(stu,i)">save</i></td>
+              </tr>
+            </table>
+            <div formArrayName="students" class="row">
+              <div *ngFor="let stu of newStudentForExistingParent.controls.students.controls; let j=index;">
+                <div class="row" [formGroupName]="j">
+                  <div class="input-field col s5">
+                    <input id="sname" name="name" formControlName="name" type="text" class="validate">
+                    <label for="sname">Student Name</label>
+                  </div>
+                  <div class="col s5">
+                    <label>Select Standard</label>
+                    <select name="standardId" formControlName="standardId" style="display: inherit !important;">
+                      <option *ngFor="let standard of standards" value={{standard.id}}>{{standard.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col s1">
+                    <a class="btn-floating btn-large waves-effect waves-light red" style="margin-top: 15px;">
+                      <i class="material-icons" (click)="removeStudent(newStudentForExistingParent,j)">close</i>
+                    </a>
+                  </div>
+                  <div class="col s1">
+                    <button type="submit" class="btn-floating btn-large waves-effect waves-light green" style="margin-top: 15px;" [disabled]="newStudentForExistingParent.controls.students.invalid">
+                      <i class="material-icons">done</i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="text-align: center; padding-top: 15px;">
+              <a *ngIf="!edit" class="waves-effect waves-light btn" (click)="edit=true;">Edit</a>
+              <a *ngIf="edit" class="waves-effect waves-light btn" (click)="edit=false;save=[];">Go Back</a>
+              <button *ngIf="edit" class="btn waves-effect waves-light" type="button" name="action" (click)="saveParentStudent()" [disabled]="parentForm.invalid">Save</button>
+              <button type="button" class="waves-effect waves-light btn" (click)="addStudent(newStudentForExistingParent)" [disabled]="newStudentForExistingParent.controls.students.controls.length">Add More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <form class="col s12 card" name="newStudent" [formGroup]="newStudent" (submit)="submitStudentDetail()" *ngIf="!isExistingParent">
+    <div class="row card-content">
+      <div class="input-field col s6">
+        <input id="pname" name="name" formControlName="name" type="text" class="validate">
+        <label for="pname">Parent's Name</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="pnickName" name="nickName" formControlName="nickName" type="text" class="validate">
+        <label for="pnickName">Nick Name</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="pcontactNo" name="contactNo" formControlName="contactNo" type="tel" class="validate">
+        <label for="pcontactNo">Phone Number</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="pemail" name="email" formControlName="email" type="email" class="validate">
+        <label for="pemail">Email</label>
+      </div>
+      <div formArrayName="students">
+        <div class="row" *ngFor="let stu of newStudent.controls.students.controls; let i=index;" [formGroupName]="i">
+          <div class="input-field col s6">
+            <input id="nsname" name="name" formControlName="name" type="text" class="validate">
+            <label for="nsname">Student Name</label>
+          </div>
+          <div class="col s5">
+            <label>Select Standard</label>
+            <select name="standardId" formControlName="standardId" style="display: inherit !important;">
+                <option *ngFor="let standard of standards" value={{standard.id}}>{{standard.name}}</option>
+              </select>
+          </div>
+          <div class="col s1">
+            <a class="btn-floating btn-large waves-effect waves-light red" style="margin-top: 15px;"><i class="material-icons" (click)="removeStudent(newStudent,i)">close</i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-action">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+        <button type="button" class="waves-effect waves-light btn" [disabled]="newStudent.controls.students.invalid" (click)="addStudent(newStudent)">Add Siblings</button>        
+    </div>
+  </form>
+</div>
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>

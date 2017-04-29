@@ -1,0 +1,93 @@
+<div class="row accountPage">
+  <div class="container row">
+    <div class="card">
+      <div class="row">
+        <div class="col s3 m3 l3">
+          <img class="profilePic" src="{{user.picUrl}}" />
+        </div>
+        <div class="col s9 m9 l9">
+          <div class="row">
+            <h4 id="name">{{user.username}}</h4>
+            <span id="role">{{user.role}}, SRGS School</span>
+          </div>
+          <div class="row">
+            Teacher teaching since some time at which he was not a child and when he was not a child <b>he was not a child</b>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row container">
+    <div class="card profile-card hoverable">
+      <span class="title">Profile Details</span>
+      <table class=" striped responsive-table">
+        <tr>
+          <td>
+            <b>Name</b>
+          </td>
+          <td>
+            {{user.username}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Email</b>
+          </td>
+          <td>
+            {{user.email}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Phone Number</b>
+          </td>
+          <td>
+            +91 {{user.contactNo}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Nick Name</b>
+          </td>
+          <td>
+            {{user.nickName}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Role</b>
+          </td>
+          <td>
+            {{user.role}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row container">
+    <div class="card profile-card form hoverable">
+      <span class="title">Update Password</span>
+      <form (ngSubmit)="submitForm() " [formGroup]="resetPasswordForm" novalidate>
+        <div class="form-content">
+          <label>
+            Enter Old Password:
+            <input type="text" formControlName="oldPassword" class="sd-form-control">
+          </label>
+          <label>
+            Enter New Password:
+            <input type="text" formControlName="newPassword" class="sd-form-control">
+          </label>
+          <label>
+            Confirm New Password:
+            <input type="text" formControlName="confirmPassword" class="sd-form-control">
+          </label>
+          <div class="form-submit">
+            <button class="center-align btn waves-effect waves-light" type="submit ">
+              Update Password
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

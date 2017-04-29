@@ -1,0 +1,45 @@
+/*
+Colors:
+Login heading: #495a72
+Login footer: #495a72
+*/
+@import url('../../../style.css'); 
+.valign{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heading-margin{
+  margin-top: 3vh;
+  color:#495a72;
+  font-size:30px;
+  font-weight:300;
+}
+
+.bcolor{
+  background:#428bca;
+}
+
+.login-footer{
+  background:#495a72;
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+.valign-wrapper {
+  padding-right: 340px;
+}
+
+
+@media only screen and (max-width : 992px) {
+  .valign-wrapper {
+    padding-right: 0px;
+  }
+}
+
+.login-card .valign .card{
+      margin: 4.5rem 0 1rem 0;
+}

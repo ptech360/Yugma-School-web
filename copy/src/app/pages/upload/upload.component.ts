@@ -24,7 +24,7 @@ export class UploadComponent{
     let options = this.config.getHeaderForFile();
     let formData = new FormData();      
     formData.append('file',newfile);
-    this.http.post("https://yugma-testing.appspot-preview.com/upload-file",formData,options).toPromise().then( res =>{
+    this.http.post("https://yugma-ut.appspot-preview.com/upload-file",formData,options).toPromise().then( res =>{
           console.log(res);
         });
   }
