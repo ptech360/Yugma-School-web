@@ -3,7 +3,7 @@ import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
 import { ComplaintService } from './services/complaint.service';
 
-declare var $;
+declare let $;
 
 @Component({
   selector: 'app',
@@ -33,8 +33,7 @@ export class AppComponent implements AfterViewInit,OnInit {
  
   }
 
-  ngAfterViewInit() {
-    
+  ngAfterViewInit() {  
     
     $('.dropdown-button').dropdown({
       inDuration: 300,

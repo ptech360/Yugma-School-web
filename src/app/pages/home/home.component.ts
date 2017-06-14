@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, NgZone} from '@angular/core';
 import { Router} from '@angular/router';
 
 // import service
@@ -32,9 +32,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public categoryAndStatusChartOptions;
   public complaintByStatusChartOptions;
 
-  constructor(private router: Router,
-    public c: ChartService,
-    public commonService: ComplaintService) {
+  constructor(private router: Router, 
+              private zone: NgZone,
+              public c: ChartService,
+              public commonService: ComplaintService) {
     
   }
 
@@ -79,7 +80,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       case "complaint_chart_by_status":
       case "complaint_chart_by_status1":
         if (parts[0] == "slice") {
-          this.router.navigate(['/complaint/status/' + dataTable.getValue(parseInt(parts[1]), 2)]);
+          this.zone.run(() =>this.router.navigate(['/complaint/status/' + dataTable.getValue(parseInt(parts[1]), 2)]));
         }
         else if (parts[0] == "legendentry")
           console.log("legendentry : " + parts[1]);
@@ -88,14 +89,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       case "chart_by_category_status1":
         if (parts[0] == "vAxis") {
           var categoryId = dataTable.getValue(parseInt(parts[parts.indexOf('label') + 1]), 1);
-          this.router.navigate(['/complaint/category-status/category/' + categoryId]);
+          this.zone.run(() =>this.router.navigate(['/complaint/category-status/category/' + categoryId]));
           console.log("categoryId :" + categoryId);
         }
         else if (parts[0] == "bar") {
           console.log(parts);
           var categoryId = dataTable.getValue(parseInt(parts[2]), 1);
           var statusId = dataTable.getValue(parseInt(parts[2]), (parseInt(parts[1]) + 1) * 2 + 1);
-          this.router.navigate(['complaint/category-status/' + categoryId + '/' + statusId]);
+          this.zone.run(() =>this.router.navigate(['complaint/category-status/' + categoryId + '/' + statusId]));
           console.log("categoryId :" + categoryId + ",statusId :" + statusId);
         }
         else if (parts[0] == "legendentry") {

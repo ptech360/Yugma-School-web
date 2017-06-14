@@ -18,9 +18,18 @@ export class Configuration {
 
   // private url: string = "https://yugmasrgstesting.appspot.com";
   // private url: string = "http://desktop-nj52npk:8080/YUGMASRGSUT";
-  private url: string = "https://yugma-testing.appspot-preview.com";
+  private url: string = "https://yugma.ind-cloud.everdata.com";
   // private url: string = "http://nxtlife:8080/YUGMASRGS";
   // private url : string = "https://yugma-testing";
+
+  getHeaderForLogin(){
+    return new RequestOptions({
+      headers : new Headers({
+        'Content-Type': 'application/json',
+        'Authorization':"Basic Zm9vQ2xpZW50SWRQYXNzd29yZDpzZWNyZXQ="
+      })
+    })
+  }
 
   getHeaderWithWeb() {
     this.headers = new Headers({

@@ -17,7 +17,8 @@ export class UserService {
   }
 
   login(data) {
-    return this.http.post(this.url+"/login", data)
+    let options = this.config.getHeaderForLogin();
+    return this.http.post(this.url+"/oauth/token?grant_type=password&username="+data.username+"&password="+data.password, {}, options)
     .toPromise()
     .then(response => {
       localStorage.setItem('access_token', response.json().access_token);
@@ -44,7 +45,7 @@ export class UserService {
     localStorage.setItem("username", management.username);
     localStorage.setItem("nickName", management.nickName);
     localStorage.setItem('role', management.role);
-    localStorage.setItem('picUrl', management.picUrl);
+    localStorage.setItem('picUrl', management.fileUrl+"/"+management.picTimestamp);
     this.config.buildUrl();
   }
 
